@@ -51,6 +51,40 @@ public class FreeCam : MonoBehaviour
 
     private void Update()
     {
+        var camPosition = transform.position;
+        if (camPosition.x < 0)
+        {
+            transform.position = new Vector3(0f, camPosition.y, camPosition.z);
+            return;
+        } 
+        if (camPosition.x > 100)
+        {
+            transform.position = new Vector3(100f, camPosition.y, camPosition.z);
+            return;
+        }
+
+        if (camPosition.z < 0)
+        {
+            transform.position = new Vector3(camPosition.x, camPosition.y, 0f);
+            return;
+        } 
+        if (camPosition.z > 100)
+        {
+            transform.position = new Vector3(camPosition.x, camPosition.y, 100f);
+            return;
+        }
+        
+        if (camPosition.y < 1)
+        {
+            transform.position = new Vector3(camPosition.x, 1f, camPosition.z);
+            return;
+        } 
+        if (camPosition.y > 50)
+        {
+            transform.position = new Vector3(camPosition.x, 50f, camPosition.z);
+            return;
+        }
+        
         var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         var movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
 
