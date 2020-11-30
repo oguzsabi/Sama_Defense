@@ -37,6 +37,7 @@ public class Tower : MonoBehaviour
     {
         var newProjectile = Instantiate(projectile, projectileStart.position, Quaternion.identity);
         newProjectile.GetComponent<Projectile>().SetProjectileTarget(currentTarget);
+        
 
         yield return new WaitForSeconds(shootingPeriod);
         
