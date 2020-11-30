@@ -23,4 +23,14 @@ public class Enemy : MonoBehaviour
     {
         return moveSpeed;
     }
+
+    public void GetHit(float damage)
+    {
+        health -= damage;
+        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

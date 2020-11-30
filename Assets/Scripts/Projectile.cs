@@ -7,9 +7,11 @@ using Random = UnityEngine.Random;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float projectileSpeed = 5f;
-    [SerializeField] private int accuracy = 55;
+    [SerializeField] private int accuracy = 100;
+   
 
     private GameObject _target;
+    private float damage;
    
     
     
@@ -44,6 +46,8 @@ public class Projectile : MonoBehaviour
         
         if (hit < accuracy)
         {
+            other.gameObject.GetComponent<Enemy>().GetHit(damage);
+            
             print("Hit!");
         }
         else
@@ -52,5 +56,10 @@ public class Projectile : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetDamage(float TowDamage)
+    {
+        damage = TowDamage;
     }
 }

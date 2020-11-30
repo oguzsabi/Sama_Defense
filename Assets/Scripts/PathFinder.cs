@@ -2,23 +2,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PathFinder : MonoBehaviour
 {
-    [SerializeField] private GameObject path;
+    [SerializeField] private GameObject[] paths;
 
     private Transform[] waypoints;
     private int currentWaypointIndex;
     private int waypointsLength;
     private float moveSpeed;
+    private GameObject selectedPath;
     
     // Start is called before the first frame update
     private void Start()
     {
+        selectedPath = paths[Random.Range(0, paths.Length - 1)];
         currentWaypointIndex = 1;
         moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
         
-        waypoints = path.GetComponentsInChildren<Transform>();
+        waypoints = selectedPath.GetComponentsInChildren<Transform>();
         waypointsLength = waypoints.Length;
     }
 

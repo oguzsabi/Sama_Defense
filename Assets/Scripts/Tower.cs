@@ -11,11 +11,12 @@ public class Tower : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
     [SerializeField] private GameObject rangeIndicator;
+    [SerializeField] private float damage = 50;
 
 
     private bool shootAvailable = true;
     private List<GameObject> targets = new List<GameObject>();
-    private GameObject currentTarget;
+    [SerializeField] private GameObject currentTarget;
 
     // Start is called before the first frame update
     private void Start()
@@ -36,8 +37,16 @@ public class Tower : MonoBehaviour
     private IEnumerator Shoot()
     {
         var newProjectile = Instantiate(projectile, projectileStart.position, Quaternion.identity);
-        newProjectile.GetComponent<Projectile>().SetProjectileTarget(currentTarget);
         
+        
+        if (!currentTarget)
+        {
+            FindRandomTarget();
+        }
+       
+        
+        newProjectile.GetComponent<Projectile>().SetProjectileTarget(currentTarget);
+        newProjectile.GetComponent<Projectile>().SetDamage(damage);
 
         yield return new WaitForSeconds(shootingPeriod);
         
@@ -91,5 +100,10 @@ public class Tower : MonoBehaviour
     private void OnMouseExit()
     {
         rangeIndicator.SetActive(false);
+    }
+
+    private float GetDamage()
+    {
+        return damage;
     }
 }
