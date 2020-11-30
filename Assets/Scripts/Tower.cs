@@ -96,7 +96,7 @@ public class Tower : MonoBehaviour
     {
         rangeIndicator.SetActive(true);
     }
-    
+
     private void OnMouseExit()
     {
         rangeIndicator.SetActive(false);
