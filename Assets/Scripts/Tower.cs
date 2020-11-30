@@ -15,7 +15,7 @@ public class Tower : MonoBehaviour
 
 
     private bool shootAvailable = true;
-    private List<GameObject> targets = new List<GameObject>();
+    [SerializeField] private List<GameObject> targets = new List<GameObject>();
     [SerializeField] private GameObject currentTarget;
 
     // Start is called before the first frame update
@@ -30,21 +30,24 @@ public class Tower : MonoBehaviour
         if (!shootAvailable) return;
         
         shootAvailable = false;
-        if (currentTarget) StartCoroutine(Shoot());
-        else shootAvailable = true;
+        if (currentTarget)
+        {
+            StartCoroutine(Shoot());
+        }
+        else
+        {
+            shootAvailable = true;
+            if (targets.Count > 0)
+            {
+                FindRandomTarget();
+            }
+        }
     }
 
     private IEnumerator Shoot()
     {
         var newProjectile = Instantiate(projectile, projectileStart.position, Quaternion.identity);
-        
-        
-        if (!currentTarget)
-        {
-            FindRandomTarget();
-        }
-       
-        
+
         newProjectile.GetComponent<Projectile>().SetProjectileTarget(currentTarget);
         newProjectile.GetComponent<Projectile>().SetDamage(damage);
 
@@ -85,10 +88,15 @@ public class Tower : MonoBehaviour
         try
         {
             currentTarget = targets[randomTargetIndex];
+            if (currentTarget != null) return;
+            
+            targets.RemoveAll(target => target == null);
+            FindRandomTarget();
         }
         catch (Exception e)
         {
             if (targets.Count > 0) FindRandomTarget();
+            print("in catch");
         }
     }
 

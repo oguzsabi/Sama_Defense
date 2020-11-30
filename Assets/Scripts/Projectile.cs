@@ -47,12 +47,6 @@ public class Projectile : MonoBehaviour
         if (hit < accuracy)
         {
             other.gameObject.GetComponent<Enemy>().GetHit(damage);
-            
-            print("Hit!");
-        }
-        else
-        {
-            print("Miss!");
         }
 
         Destroy(gameObject);
