@@ -111,7 +111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &196624808
 Transform:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 5242579938547811854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_Children:
   - {fileID: 1384403939}
   - {fileID: 45822545}
@@ -311,7 +311,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7000015354332542546}
-  m_Layer: 8
+  - component: {fileID: 2602741613088507153}
+  m_Layer: 2
   m_Name: Tower Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,6 +333,19 @@ Transform:
   m_Father: {fileID: 6133745446033276520}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &2602741613088507153
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279256885465124222}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6279904068666101274
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,11 +395,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64490a8152bb2a4284995f60634f6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPeriod: 3
+  shootingPeriod: 2
   projectileSpeed: 1000
   projectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
     type: 3}
   projectileStart: {fileID: 1071573029763472575}
+  rangeIndicator: {fileID: 196624807}
 --- !u!135 &1545205706
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -395,7 +410,7 @@ SphereCollider:
   m_GameObject: {fileID: 6279904068666101274}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}

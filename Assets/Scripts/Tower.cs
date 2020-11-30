@@ -10,6 +10,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private float projectileSpeed = 3f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
+    [SerializeField] private GameObject rangeIndicator;
 
 
     private bool shootAvailable = true;
@@ -44,7 +45,7 @@ public class Tower : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.Equals("Terrain")) return;
+        if (other.name.Equals("Terrain") || other.gameObject.layer == 2) return;
 
         var enemyInRange = other.gameObject;
         if (!currentTarget) currentTarget = enemyInRange;
@@ -79,5 +80,15 @@ public class Tower : MonoBehaviour
         {
             if (targets.Count > 0) FindRandomTarget();
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        rangeIndicator.SetActive(true);
+    }
+    
+    private void OnMouseExit()
+    {
+        rangeIndicator.SetActive(false);
     }
 }

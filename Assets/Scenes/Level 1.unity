@@ -1465,20 +1465,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1029451062, guid: 5b618fd4b45c8e34799279d208442107, type: 3}
-      propertyPath: shootingPeriod
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1431186749667439480, guid: 5b618fd4b45c8e34799279d208442107,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1431186749667439480, guid: 5b618fd4b45c8e34799279d208442107,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.8
-      objectReference: {fileID: 0}
     - target: {fileID: 6133745446033276520, guid: 5b618fd4b45c8e34799279d208442107,
         type: 3}
       propertyPath: m_LocalPosition.x
