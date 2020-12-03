@@ -36,6 +36,7 @@ public class TowerPlacementController : MonoBehaviour
         if (!Input.GetMouseButtonDown(0)) return;
         
         newTower.GetComponent<Tower>().MakeTowerReady();
+        newTower.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         newTower.layer = 8;
         newTower = null;
     }

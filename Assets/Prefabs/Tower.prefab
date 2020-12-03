@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 45822545}
   - component: {fileID: 45822548}
   - component: {fileID: 45822547}
-  - component: {fileID: 45822546}
   m_Layer: 8
   m_Name: Mid
   m_TagString: Untagged
@@ -81,20 +80,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &45822546
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 45822544}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.00000023841858, z: -0.00000008940697}
 --- !u!1 &196624807
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +141,6 @@ GameObject:
   - component: {fileID: 1384403939}
   - component: {fileID: 1384403942}
   - component: {fileID: 1384403941}
-  - component: {fileID: 1384403940}
   m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
@@ -225,20 +209,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1384403940
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384403938}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.00000023841858, z: -0.00000008940697}
 --- !u!1 &258355624819248933
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,7 +410,6 @@ GameObject:
   - component: {fileID: 2104115370383172127}
   - component: {fileID: 8522327252164143696}
   - component: {fileID: 821158244273646715}
-  - component: {fileID: 6040339136872543537}
   m_Layer: 8
   m_Name: Bottom
   m_TagString: Untagged
@@ -509,17 +478,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &6040339136872543537
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8075112670331459476}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.00000023841858, z: -0.00000008940697}
