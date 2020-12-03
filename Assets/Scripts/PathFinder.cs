@@ -7,12 +7,13 @@ using Random = UnityEngine.Random;
 public class PathFinder : MonoBehaviour
 {
     //[SerializeField] private GameObject[] paths;
+    
 
     private Transform[] waypoints;
     private int currentWaypointIndex;
     private int waypointsLength;
     private float moveSpeed;
-    private GameObject selectedPath;
+    [SerializeField] private GameObject selectedPath;
 
     // Start is called before the first frame update
     private void Start()
@@ -51,7 +52,7 @@ public class PathFinder : MonoBehaviour
 
     public void SetEnemyPaths(GameObject[] enemyPaths)
     {
-        selectedPath = enemyPaths[Random.Range(0, enemyPaths.Length - 1)];
+        selectedPath = enemyPaths[Random.Range(0, enemyPaths.Length)];
         currentWaypointIndex = 1;
         moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
         
