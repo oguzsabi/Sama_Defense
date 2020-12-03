@@ -7,15 +7,11 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
-    
-    
-    
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        //health = 100f;
-        //movementSpeed = 10f;
+        
     }
 
     // Update is called once per frame
@@ -38,22 +34,4 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void AddToTowers(GameObject tower)
-    {
-        
-    }
-    
-   
-    public void SetEnemyHp(float hp)
-    {
-        health = hp;
-    }
-
-    public void SetEnemyMovementSpeed(float speed)
-    {
-        movementSpeed = speed;
-    }
-    
-    
 }
