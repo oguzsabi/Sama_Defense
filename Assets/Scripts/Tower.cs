@@ -16,11 +16,14 @@ public class Tower : MonoBehaviour
     private readonly List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
     private bool isReady;
+    
+    public bool isPlaceable;
 
     // Start is called before the first frame update
     private void Start()
     {
         isReady = false;
+        isPlaceable = true;
     }
 
     // Update is called once per frame
@@ -55,6 +58,12 @@ public class Tower : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
+        // if (other.name == "Adjacency Detector")
+        // {
+        //     print(other.gameObject.name);
+        //     other.transform.parent.GetComponent<Tower>().isPlaceable = false;
+        //     
+        // }
         if (other.name.Equals("Terrain") || other.gameObject.layer == 2) return;
 
         var enemyInRange = other.gameObject;
@@ -65,6 +74,10 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        // if (other.name == "Adjacency Detector")
+        // {
+        //     other.GetComponent<Tower>().isPlaceable = true;
+        // }
         if (other.name.Equals("Terrain")) return;
 
         var enemyOutRange = other.gameObject;

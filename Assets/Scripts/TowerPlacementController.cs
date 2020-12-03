@@ -33,7 +33,7 @@ public class TowerPlacementController : MonoBehaviour
 
     private void PlaceNewTowerIfClicked()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (!Input.GetMouseButtonDown(0) || !newTower.GetComponent<Tower>().isPlaceable) return;
         
         newTower.GetComponent<Tower>().MakeTowerReady();
         newTower.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
