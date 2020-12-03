@@ -6,29 +6,31 @@ using Random = UnityEngine.Random;
 
 public class PathFinder : MonoBehaviour
 {
-    [SerializeField] private GameObject[] paths;
+    //[SerializeField] private GameObject[] paths;
 
     private Transform[] waypoints;
     private int currentWaypointIndex;
     private int waypointsLength;
     private float moveSpeed;
     private GameObject selectedPath;
-    
+
     // Start is called before the first frame update
     private void Start()
     {
+        /*
         selectedPath = paths[Random.Range(0, paths.Length - 1)];
         currentWaypointIndex = 1;
         moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
         
         waypoints = selectedPath.GetComponentsInChildren<Transform>();
         waypointsLength = waypoints.Length;
+        */
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (currentWaypointIndex >= waypointsLength) return;
+        if (currentWaypointIndex >= waypointsLength || !selectedPath) return;
         
         GoToNextWaypoint();
     }
@@ -46,4 +48,15 @@ public class PathFinder : MonoBehaviour
             currentWaypointIndex++;
         }
     }
+
+    public void SetEnemyPaths(GameObject[] enemyPaths)
+    {
+        selectedPath = enemyPaths[Random.Range(0, enemyPaths.Length - 1)];
+        currentWaypointIndex = 1;
+        moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
+        
+        waypoints = selectedPath.GetComponentsInChildren<Transform>();
+        waypointsLength = waypoints.Length;
+        
+   }
 }

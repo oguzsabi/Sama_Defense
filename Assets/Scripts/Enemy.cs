@@ -6,13 +6,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float health = 100f;
-    [SerializeField] private float moveSpeed = 10f;
-
+    [SerializeField] private float movementSpeed = 10f;
+    
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        //health = 100f;
+        //movementSpeed = 10f;
     }
 
     // Update is called once per frame
@@ -23,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     public float GetMoveSpeed()
     {
-        return moveSpeed;
+        return movementSpeed;
     }
 
     public void GetHit(float damage)
@@ -40,4 +43,17 @@ public class Enemy : MonoBehaviour
     {
         
     }
+    
+   
+    public void SetEnemyHp(float hp)
+    {
+        health = hp;
+    }
+
+    public void SetEnemyMovementSpeed(float speed)
+    {
+        movementSpeed = speed;
+    }
+    
+    
 }
