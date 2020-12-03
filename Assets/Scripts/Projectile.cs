@@ -8,13 +8,10 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float projectileSpeed = 5f;
     [SerializeField] private int accuracy = 100;
-   
-
+    
     private GameObject _target;
     private float damage;
-   
-    
-    
+
     // Start is called before the first frame update
     private void Start()
     {

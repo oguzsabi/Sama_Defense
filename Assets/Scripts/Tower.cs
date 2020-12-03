@@ -12,22 +12,22 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform projectileStart;
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private float damage = 50;
-
-
+    
     private bool shootAvailable = true;
-    [SerializeField] private List<GameObject> targets = new List<GameObject>();
-    [SerializeField] private GameObject currentTarget;
+    private readonly List<GameObject> targets = new List<GameObject>();
+    private GameObject currentTarget;
+    private bool isReady;
 
     // Start is called before the first frame update
     private void Start()
     {
-        
+        isReady = false;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (!shootAvailable) return;
+        if (!shootAvailable || !isReady) return;
         
         shootAvailable = false;
         if (currentTarget)
@@ -47,9 +47,10 @@ public class Tower : MonoBehaviour
     private IEnumerator Shoot()
     {
         var newProjectile = Instantiate(projectile, projectileStart.position, Quaternion.identity);
+        var projectileComponent = newProjectile.GetComponent<Projectile>();
 
-        newProjectile.GetComponent<Projectile>().SetProjectileTarget(currentTarget);
-        newProjectile.GetComponent<Projectile>().SetDamage(damage);
+        projectileComponent.SetProjectileTarget(currentTarget);
+        projectileComponent.SetDamage(damage);
 
         yield return new WaitForSeconds(shootingPeriod);
         
@@ -88,7 +89,7 @@ public class Tower : MonoBehaviour
         try
         {
             currentTarget = targets[randomTargetIndex];
-            if (currentTarget != null) return;
+            if (currentTarget) return;
             
             targets.RemoveAll(target => target == null);
             FindRandomTarget();
@@ -113,5 +114,10 @@ public class Tower : MonoBehaviour
     private float GetDamage()
     {
         return damage;
+    }
+
+    public void MakeTowerReady()
+    {
+        isReady = true;
     }
 }
