@@ -37,10 +37,7 @@ public class Tower : MonoBehaviour
         else
         {
             shootAvailable = true;
-            if (targets.Count > 0)
-            {
-                FindRandomTarget();
-            }
+            FindRandomTarget();
         }
     }
 
@@ -62,8 +59,8 @@ public class Tower : MonoBehaviour
         if (other.name.Equals("Terrain") || other.gameObject.layer == 2) return;
 
         var enemyInRange = other.gameObject;
+        // If there is no current target then pick one
         if (!currentTarget) currentTarget = enemyInRange;
-        
         targets.Add(enemyInRange);
     }
 
@@ -75,15 +72,13 @@ public class Tower : MonoBehaviour
         if (enemyOutRange == currentTarget) currentTarget = null;
 
         targets.Remove(enemyOutRange);
-
-        if (targets.Count > 0)
-        {
-            FindRandomTarget();
-        }
+        FindRandomTarget();
     }
 
     private void FindRandomTarget()
     {
+        if (targets.Count <= 0) return;
+        
         var randomTargetIndex = Random.Range(0, targets.Count - 1);
 
         try
@@ -96,7 +91,7 @@ public class Tower : MonoBehaviour
         }
         catch (Exception e)
         {
-            if (targets.Count > 0) FindRandomTarget();
+            FindRandomTarget();
             print("in catch");
         }
     }
@@ -109,11 +104,6 @@ public class Tower : MonoBehaviour
     private void OnMouseExit()
     {
         rangeIndicator.SetActive(false);
-    }
-
-    private float GetDamage()
-    {
-        return damage;
     }
 
     public void MakeTowerReady()
