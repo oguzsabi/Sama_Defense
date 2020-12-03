@@ -10,43 +10,73 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int accuracy = 100;
     
     private GameObject _target;
+    private Vector3 _lastKnownTargetPosition;
+    private bool targetLost;
     private float damage;
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
+    private const float forceMultiplier = 50f;
 
     // Update is called once per frame
     private void Update()
     {
-        if (!_target) return;
-        
-        MoveToTarget();
+        if (_target)
+        {
+            MoveToTarget();
+        }
+        else if (!targetLost)
+        {
+            MoveToLastKnownPosition();
+            targetLost = true;
+        }
     }
 
     private void MoveToTarget()
     {
+        _lastKnownTargetPosition = _target.transform.position;
         var step = projectileSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, step);
+        transform.position = Vector3.MoveTowards(transform.position, _lastKnownTargetPosition, step);
     }
 
-    public void SetProjectileTarget(GameObject target)
+    private void MoveToLastKnownPosition()
     {
-        _target = target;
+        var offset = _lastKnownTargetPosition - transform.position;
+        GetComponent<Rigidbody>().AddForce(offset * forceMultiplier);
+    }
+
+    private IEnumerator DisableColliderAndTerminate()
+    {
+        yield return new WaitForSeconds(2f);
+        GameObject o;
+        (o = gameObject).GetComponent<SphereCollider>().enabled = false;
+        Destroy(o, 2f);
+    }
+
+    private void RollForHit(Enemy enemyComponent)
+    {
+        var successfulHit = Random.Range(0, 100) < accuracy;
+
+        if (!successfulHit) return;
+        
+        enemyComponent.GetHit(damage);
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        var hit = Random.Range(0, 100);
+        var enemyComponent = other.gameObject.GetComponent<Enemy>();
         
-        if (hit < accuracy)
+        if (enemyComponent)
         {
-            other.gameObject.GetComponent<Enemy>().GetHit(damage);
+            RollForHit(enemyComponent);
         }
-
-        Destroy(gameObject);
+        else
+        {
+            StartCoroutine(DisableColliderAndTerminate());
+        }
+    }
+    
+    public void SetProjectileTarget(GameObject target)
+    {
+        _target = target;
     }
 
     public void SetDamage(float TowDamage)
