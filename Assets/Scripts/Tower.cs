@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 public class Tower : MonoBehaviour
 {
     [SerializeField] private float shootingPeriod = 3f;
-    [SerializeField] private float projectileSpeed = 3f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
     [SerializeField] private GameObject rangeIndicator;
