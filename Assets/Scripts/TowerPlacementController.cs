@@ -7,8 +7,8 @@ public class TowerPlacementController : MonoBehaviour
     [SerializeField] private GameObject towerPrefab;
     [SerializeField] private KeyCode addTowerHotkey = KeyCode.A;
     [SerializeField] private float rotationMultiplier = 10f;
+    [SerializeField] private LayerMask mask;
     
-
     private GameObject newTower;
     private float mouseWheelDelta;
     private Camera mainCamera;
@@ -35,8 +35,14 @@ public class TowerPlacementController : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(0) || !newTower.GetComponent<Tower>().isPlaceable) return;
         
+        SetupTower();
+    }
+
+    private void SetupTower()
+    {
         newTower.GetComponent<Tower>().MakeTowerReady();
         newTower.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        newTower.GetComponentInChildren<Tower>().adjacencyDetector.SetActive(false);
         newTower.layer = 8;
         newTower = null;
     }
@@ -53,7 +59,7 @@ public class TowerPlacementController : MonoBehaviour
         
         var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out var raycastHit))
+        if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, ~mask))
         {
             // newTower.transform.position = raycastHit.point;
             newTower.transform.position = new Vector3(raycastHit.point.x, newTower.transform.position.y, raycastHit.point.z);

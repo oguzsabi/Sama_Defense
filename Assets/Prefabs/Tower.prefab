@@ -328,7 +328,7 @@ GameObject:
   - component: {fileID: 1029451062}
   - component: {fileID: 800764315702433744}
   - component: {fileID: 1545205707}
-  m_Layer: 2
+  m_Layer: 8
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -372,6 +372,7 @@ MonoBehaviour:
   rangeIndicator: {fileID: 196624807}
   damage: 50
   isPlaceable: 0
+  adjacencyDetector: {fileID: 8000704051731452655}
 --- !u!54 &800764315702433744
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -410,8 +411,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4167285800773045959}
-  - component: {fileID: 8919842753382705859}
-  m_Layer: 2
+  - component: {fileID: 2105736521076096253}
+  - component: {fileID: 907713607290530500}
+  m_Layer: 11
   m_Name: Adjacency Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,8 +434,20 @@ Transform:
   m_Father: {fileID: 6133745446033276520}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8919842753382705859
-CapsuleCollider:
+--- !u!114 &2105736521076096253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000704051731452655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d36d4731caf73d540a862932a2d045fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &907713607290530500
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -442,10 +456,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.93
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.44, z: 0}
+  serializedVersion: 2
+  m_Radius: 1.25
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8075112670331459476
 GameObject:
   m_ObjectHideFlags: 0

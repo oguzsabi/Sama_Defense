@@ -18,6 +18,7 @@ public class Tower : MonoBehaviour
     private bool isReady;
     
     public bool isPlaceable;
+    public GameObject adjacencyDetector;
 
     // Start is called before the first frame update
     private void Start()
@@ -58,13 +59,7 @@ public class Tower : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        // if (other.name == "Adjacency Detector")
-        // {
-        //     print(other.gameObject.name);
-        //     other.transform.parent.GetComponent<Tower>().isPlaceable = false;
-        //     
-        // }
-        if (other.name.Equals("Terrain") || other.gameObject.layer == 2) return;
+        if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyInRange = other.gameObject;
         // If there is no current target then pick one
@@ -74,11 +69,7 @@ public class Tower : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // if (other.name == "Adjacency Detector")
-        // {
-        //     other.GetComponent<Tower>().isPlaceable = true;
-        // }
-        if (other.name.Equals("Terrain")) return;
+        if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyOutRange = other.gameObject;
         if (enemyOutRange == currentTarget) currentTarget = null;
