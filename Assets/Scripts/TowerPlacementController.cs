@@ -61,7 +61,6 @@ public class TowerPlacementController : MonoBehaviour
 
         if (Physics.Raycast(ray, out var raycastHit, Mathf.Infinity, ~mask))
         {
-            // newTower.transform.position = raycastHit.point;
             newTower.transform.position = new Vector3(raycastHit.point.x, newTower.transform.position.y, raycastHit.point.z);
             // This one can be used if we decide to use rough terrain
             // newTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
@@ -76,7 +75,7 @@ public class TowerPlacementController : MonoBehaviour
         {
             newTower = Instantiate(towerPrefab);
             var newTowerPosition = newTower.transform.position;
-            newTower.transform.position = new Vector3(newTowerPosition.x, newTowerPosition.y + 7f, newTowerPosition.z);
+            newTower.transform.position = new Vector3(newTowerPosition.x, newTowerPosition.y + 6.8f, newTowerPosition.z);
         }
         else
         {

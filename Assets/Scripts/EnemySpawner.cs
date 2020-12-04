@@ -9,7 +9,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject[] paths;
     
-    private float spawningPeriod = 3f;
+    private const float spawningPeriod = 1.5f;
     private float HP;
     private float movementSpeed;
     private float nextSpawnTime;

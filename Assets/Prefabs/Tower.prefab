@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 1029451062}
   - component: {fileID: 800764315702433744}
   - component: {fileID: 1545205707}
+  - component: {fileID: 4014089039897233480}
   m_Layer: 8
   m_Name: Tower
   m_TagString: Untagged
@@ -369,10 +370,10 @@ MonoBehaviour:
   projectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
     type: 3}
   projectileStart: {fileID: 1071573029763472575}
-  rangeIndicator: {fileID: 196624807}
-  damage: 50
+  damage: 10
   isPlaceable: 0
   adjacencyDetector: {fileID: 8000704051731452655}
+  rangeIndicator: {fileID: 196624807}
 --- !u!54 &800764315702433744
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -398,10 +399,24 @@ BoxCollider:
   m_GameObject: {fileID: 6279904068666101274}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 2.36, z: 1}
   m_Center: {x: 0, y: 0.2041266, z: 0}
+--- !u!136 &4014089039897233480
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279904068666101274}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.4
+  m_Height: 2.67
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.33, z: 0}
 --- !u!1 &8000704051731452655
 GameObject:
   m_ObjectHideFlags: 0
