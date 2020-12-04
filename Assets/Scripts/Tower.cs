@@ -9,7 +9,6 @@ public class Tower : MonoBehaviour
     [SerializeField] private float shootingPeriod = 3f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
-    [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private float damage = 50;
     
     private bool shootAvailable = true;
@@ -19,6 +18,7 @@ public class Tower : MonoBehaviour
     
     public bool isPlaceable;
     public GameObject adjacencyDetector;
+    public GameObject rangeIndicator;
 
     // Start is called before the first frame update
     private void Start()
