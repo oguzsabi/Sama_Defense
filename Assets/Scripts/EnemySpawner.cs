@@ -10,8 +10,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] paths;
     
     private const float spawningPeriod = 1.5f;
-    private float HP;
-    private float movementSpeed;
     private float nextSpawnTime;
     
     // Start is called before the first frame update
