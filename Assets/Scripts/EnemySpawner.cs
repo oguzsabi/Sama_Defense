@@ -6,36 +6,32 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Header("Spawner Information")]
     [SerializeField] private Transform spawnerLocation;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float[] enemySpawnPeriods;
-    // [SerializeField] private GameObject enemy;
     [SerializeField] private GameObject[] paths;
+    [Header("Wave Information")]
     [SerializeField] private int smallEnemy;
     [SerializeField] private int normalEnemy;
     [SerializeField] private int bigEnemy;
     
-    private int[,] waveArray = new int[1,3];
+    private readonly int[,] waveArray = new int[4,3];
     private float nextSpawnTime;
     private int enemyPrefabsLength;
-    private int waveCounter = 4; // #of waves in LVL1;
-
-
+    private int waveCount = 4; // #of waves in LVL1;
+    private int waveIndex;
+    
     // Start is called before the first frame update
     private void Start()
     {
-        
-        waveArray[0,0] = 5; // Small enemy amount in a single wave at LVL1
-        waveArray[0,1] = 5; // Normal enemy amount in single wave at LVL1
-        waveArray[0,2] = 5; // Big enemy amount in single wave at LVL1
+        waveIndex = 0;
+        waveArray[waveIndex, 0] = smallEnemy; // Small enemy amount in a single wave at LVL1
+        waveArray[waveIndex, 1] = normalEnemy; // Normal enemy amount in single wave at LVL1
+        waveArray[waveIndex, 2] = bigEnemy; // Big enemy amount in single wave at LVL1
 
-        smallEnemy = waveArray[0,0];
-        normalEnemy = waveArray[0,1];
-        bigEnemy = waveArray[0,2];
-      
-        
-        
         enemyPrefabsLength = enemyPrefabs.Length;
+        print("currently in wave " + waveIndex);
     }
 
     // Update is called once per frame
@@ -44,24 +40,23 @@ public class EnemySpawner : MonoBehaviour
         for (var index = 0; index < enemyPrefabsLength; index++)
         {
             var enemy = enemyPrefabs[index];
-            if (waveArray[0, 0] == 0 && waveArray[0, 1] == 0 && waveArray[0, 2] == 0)
+            if (waveIndex < waveCount - 1 && waveArray[waveIndex, 0] == 0 && waveArray[waveIndex, 1] == 0 && waveArray[waveIndex, 2] == 0)
             {
-                waveCounter--;
-                waveArray[0, 0] = 5;
-                waveArray[0, 1] = 5;
-                waveArray[0, 2] = 5;
+                waveIndex++;
+                waveArray[waveIndex, 0] = smallEnemy;
+                waveArray[waveIndex, 1] = normalEnemy;
+                waveArray[waveIndex, 2] = bigEnemy;
+                print("currently in wave " + waveIndex);
             }
             else
             {
-                if (IsSpawnTime(index) && waveArray[0,index] > 0)
+                if (IsSpawnTime(index) && waveArray[waveIndex, index] > 0)
                 {
                     SpawnEnemy(enemy);
-                    waveArray[0,index] -= 1;
-                    print("Enemy Türü: " + index + " Kalan Enemy Sayısı " + waveArray[0,index]);
-                
+                    waveArray[waveIndex, index] -= 1;
+                    // print("Enemy Türü: " + index + " Kalan Enemy Sayısı " + waveArray[0, index]);
                 }
             }
-            
         }
     }
 
