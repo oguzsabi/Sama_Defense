@@ -370,7 +370,7 @@ MonoBehaviour:
   projectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
     type: 3}
   projectileStart: {fileID: 1071573029763472575}
-  damage: 10
+  damage: 20
   isPlaceable: 0
   adjacencyDetector: {fileID: 8000704051731452655}
   rangeIndicator: {fileID: 196624807}
@@ -414,9 +414,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.4
-  m_Height: 2.67
+  m_Height: 2.6325278
   m_Direction: 1
-  m_Center: {x: 0, y: 0.33, z: 0}
+  m_Center: {x: 0, y: 0.34873614, z: 0}
 --- !u!1 &8000704051731452655
 GameObject:
   m_ObjectHideFlags: 0
