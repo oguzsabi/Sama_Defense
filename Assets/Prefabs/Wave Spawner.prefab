@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &796582362331995377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 851524025805868409}
+  - component: {fileID: 2129925584}
+  m_Layer: 0
+  m_Name: Wave Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &851524025805868409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796582362331995377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.732937, y: 16.464836, z: -21.384232}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2129925584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 796582362331995377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca41fc9dc8e364047adaec778e6f17b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsBetweenWaves: 5
+  enemyPrefabs:
+  - {fileID: 2422002395599271569, guid: 97f53232dc5479e43baf79a8926a695f, type: 3}
+  - {fileID: 2422002395599271569, guid: f249ccb3211b8104c9144befddf8bc21, type: 3}
+  - {fileID: 2422002395599271569, guid: 317ff589fffabfe44b95f402cf68465a, type: 3}
+  - {fileID: 2422002395599271569, guid: 2220761e1f2e1f84086ee76021998f29, type: 3}
+  - {fileID: 2422002395599271569, guid: d1fd36dec585bfc478bb49c73bc19829, type: 3}
+  - {fileID: 2422002395599271569, guid: 9b3a6f96daa6f314b8f4fa7e2ab9543f, type: 3}
+  - {fileID: 2422002395599271569, guid: 8f86cbce9bef3e14a8d312bc9928462d, type: 3}
+  - {fileID: 2422002395599271569, guid: ccd82e2691b257a49afd56fedd033464, type: 3}
+  - {fileID: 2422002395599271569, guid: a762c146ce4758641bfe82c5a5f9b3ad, type: 3}
+  - {fileID: 2422002395599271569, guid: 6690a408bce0f734ca95332a636eb9b1, type: 3}
+  - {fileID: 2422002395599271569, guid: a09a14a3415daad4fb1e3682ea5b5151, type: 3}
+  - {fileID: 2422002395599271569, guid: a468456966c7acf40862304455bc7582, type: 3}
+  enemySpawnPeriods:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  firstWaveEnemyCounts: 010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  secondWaveEnemyCounts: 000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  thirdWaveEnemyCounts: 000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000
+  fourthWaveEnemyCounts: 010000000100000001000000000000000000000000000000000000000000000000000000000000000000000000000000
+  paths:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

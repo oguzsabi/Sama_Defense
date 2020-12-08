@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public enum ElementType { Fire, Water, Earth, Wood }
+    
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private ElementType element;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,7 @@ public class Enemy : MonoBehaviour
 
     public void GetHit(float damage)
     {
+        print("Damage Dealt = " + damage);
         health -= damage;
         
         if (health <= 0)
@@ -34,4 +38,6 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public ElementType Element => element;
 }

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class TowerPlacementController : MonoBehaviour
 {
-    [SerializeField] private GameObject towerPrefab;
-    [SerializeField] private KeyCode addTowerHotkey = KeyCode.A;
+    [SerializeField] private GameObject[] towerPrefabs;
+    [SerializeField] private KeyCode addFireTowerHotkey = KeyCode.T;
+    [SerializeField] private KeyCode addWaterTowerHotkey = KeyCode.Y;
+    [SerializeField] private KeyCode addEarthTowerHotkey = KeyCode.U;
+    [SerializeField] private KeyCode addWoodTowerHotkey = KeyCode.I;
     [SerializeField] private float rotationMultiplier = 10f;
     [SerializeField] private LayerMask mask;
     
@@ -69,13 +72,32 @@ public class TowerPlacementController : MonoBehaviour
 
     private void HandleAddTowerHotkey()
     {
-        if (!Input.GetKeyDown(addTowerHotkey)) return;
-        
+        if (Input.GetKeyDown(addFireTowerHotkey))
+        {
+            CreateNewTower(towerPrefabs[0]);
+        }
+        if (Input.GetKeyDown(addWaterTowerHotkey))
+        {
+            CreateNewTower(towerPrefabs[1]);
+        }
+        if (Input.GetKeyDown(addEarthTowerHotkey))
+        {
+            CreateNewTower(towerPrefabs[2]);
+        }
+        if (Input.GetKeyDown(addWoodTowerHotkey))
+        {
+            CreateNewTower(towerPrefabs[3]);
+        }
+    }
+
+    private void CreateNewTower(GameObject towerPrefab) 
+    {
         if (!newTower)
         {
             newTower = Instantiate(towerPrefab);
             var newTowerPosition = newTower.transform.position;
-            newTower.transform.position = new Vector3(newTowerPosition.x, newTowerPosition.y + 6.8f, newTowerPosition.z);
+            newTower.transform.position =
+                new Vector3(newTowerPosition.x, newTowerPosition.y + 6.8f, newTowerPosition.z);
         }
         else
         {

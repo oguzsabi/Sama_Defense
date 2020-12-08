@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2422002395599271575}
   - component: {fileID: 2422002395599271560}
   m_Layer: 10
-  m_Name: Enemy Small
+  m_Name: Enemy Small Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: df2e2da1ce3a817448bc5ba62e05f395, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -138,3 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 40
   movementSpeed: 15
+  element: 0

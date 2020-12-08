@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Effects;
 using Random = UnityEngine.Random;
 
 public class Projectile : MonoBehaviour
 {
+    public enum ElementType { Fire, Water, Earth, Wood }
+    
     [SerializeField] private float projectileSpeed = 5f;
     [SerializeField] private int accuracy = 100;
+    [SerializeField] private ElementType element;
     
     private GameObject _target;
     private Vector3 _lastKnownTargetPosition;
@@ -55,9 +59,38 @@ public class Projectile : MonoBehaviour
         var successfulHit = Random.Range(0, 100) < accuracy;
 
         if (!successfulHit) return;
-        
-        enemyComponent.GetHit(damage);
+
+        var actualDamage = CalculateActualDamage(enemyComponent);
+        enemyComponent.GetHit(actualDamage);
         Destroy(gameObject);
+    }
+
+    private float CalculateActualDamage(Enemy enemyComponent)
+    {
+        var actualDamage = damage;
+        switch (enemyComponent.Element)
+        {
+            case Enemy.ElementType.Fire:
+                if (element == ElementType.Wood) actualDamage *= 0.75f;
+                else if (element == ElementType.Water) actualDamage *= 1.25f;
+                break;
+            case Enemy.ElementType.Water:
+                if (element == ElementType.Fire) actualDamage *= 0.75f;
+                else if (element == ElementType.Earth) actualDamage *= 1.25f;
+                break;
+            case Enemy.ElementType.Earth:
+                if (element == ElementType.Water) actualDamage *= 0.75f;
+                else if (element == ElementType.Wood) actualDamage *= 1.25f;
+                break;
+            case Enemy.ElementType.Wood:
+                if (element == ElementType.Earth) actualDamage *= 0.75f;
+                else if (element == ElementType.Fire) actualDamage *= 1.25f;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        return actualDamage;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -83,4 +116,6 @@ public class Projectile : MonoBehaviour
     {
         damage = TowDamage;
     }
+
+    public ElementType Element => element;
 }
