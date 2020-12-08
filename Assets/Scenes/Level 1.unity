@@ -4351,7 +4351,7 @@ PrefabInstance:
     - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
         type: 3}
       propertyPath: towerLimit
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
         type: 3}
