@@ -19,11 +19,7 @@ public class Currency : MonoBehaviour
     void Update()
     {
         coinUI.GetComponent<Text>().text = coin.ToString();
-        if (coin == 0)
-        {
-            coinUI.GetComponent<Text>().text = "asdasdasdas";
-            
-        }
+        
     }
 
     public bool DecrementCoin(int amount)

@@ -99,25 +99,25 @@ public class TowerPlacementController : MonoBehaviour
         if (Input.GetKeyDown(addFireTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
         {
             CreateNewTower(towerPrefabs[0]);
-            currencyScript.DecrementCoin(towerWorth);
+            currencyScript.coin -= towerWorth;
             towerCount++;
         }
         if (Input.GetKeyDown(addWaterTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
         {
             CreateNewTower(towerPrefabs[1]);
-            currencyScript.DecrementCoin(towerWorth);
+            currencyScript.coin -= towerWorth;
             towerCount++;
         }
         if (Input.GetKeyDown(addEarthTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
         {
             CreateNewTower(towerPrefabs[2]);
-            currencyScript.DecrementCoin(towerWorth);
+            currencyScript.coin -= towerWorth;
             towerCount++;
         }
         if (Input.GetKeyDown(addWoodTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
         {
             CreateNewTower(towerPrefabs[3]);
-            currencyScript.DecrementCoin(towerWorth);
+            currencyScript.coin -= towerWorth;
             towerCount++;
         }
     }
