@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class WaveSpawner : MonoBehaviour
 {
     [SerializeField] private float secondsBetweenWaves = 5f;
+    [SerializeField] private float secondsBetweenSpawns = 0.5f;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float[] enemySpawnPeriods;
     [SerializeField] private int[] firstWaveEnemyCounts;
@@ -22,6 +23,7 @@ public class WaveSpawner : MonoBehaviour
     private int waveCount; // #of waves in LVL1;
     private int currentWaveIndex;
     private bool inWaveBreak = false;
+    private bool inSpawnBreak = false;
     
     // Start is called before the first frame update
     private void Start()
@@ -42,7 +44,7 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (inWaveBreak) return;
+        if (inWaveBreak || inSpawnBreak) return;
         
         for (var enemyIndex = 0; enemyIndex < enemyPrefabsLength; enemyIndex++)
         {
@@ -77,6 +79,8 @@ public class WaveSpawner : MonoBehaviour
 
     private void SpawnEnemy(GameObject enemy)
     {
+        StartCoroutine(TakeASpawnBreak());
+        
         var newEnemy = Instantiate(enemy, spawnerLocation, Quaternion.identity);
         var enemyComponent = newEnemy.GetComponent<Enemy>();
 
@@ -101,6 +105,14 @@ public class WaveSpawner : MonoBehaviour
         yield return new WaitForSeconds(secondsBetweenWaves);
         print("currently in wave " + currentWaveIndex);
         inWaveBreak = false;
+    }
+    
+    private IEnumerator TakeASpawnBreak()
+    {
+        inSpawnBreak = true;
+        yield return new WaitForSeconds(secondsBetweenSpawns);
+        print("taking a spawn break");
+        inSpawnBreak = false;
     }
 
     private bool AreAllEnemiesSpawnedInCurrentWave()

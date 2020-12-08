@@ -35,8 +35,13 @@ public class Enemy : MonoBehaviour
         
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 
     public ElementType Element => element;
