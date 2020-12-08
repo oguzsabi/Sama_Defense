@@ -4,50 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemySpawner : MonoBehaviour
+public class WaveSpawner : MonoBehaviour
 {
-    [Header("Spawner Information")]
-    [SerializeField] private Transform spawnerLocation;
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private float[] enemySpawnPeriods;
-    [SerializeField] private GameObject[] paths;
-    [Header("Wave 1 Enemy Count")]
-    [Header("Wave Information")]
     [SerializeField] private int[] firstWaveEnemyCounts;
-    [Header("Wave 2 Enemy Count")]
     [SerializeField] private int[] secondWaveEnemyCounts;
-    [Header("Wave 3 Enemy Count")]
     [SerializeField] private int[] thirdWaveEnemyCounts;
-    [Header("Wave 4 Enemy Count")]
     [SerializeField] private int[] fourthWaveEnemyCounts;
+    [SerializeField] private GameObject[] paths;
     
-    
-    private int[,] waveArray;
+    private Vector3 spawnerLocation;
+    // private int[,] allWavesEnemyCounts;
     private int[][] waveEnemyCounts;
     private float nextSpawnTime;
     private int enemyPrefabsLength;
     private int waveCount; // #of waves in LVL1;
     private int currentWaveIndex;
-
+    
     // Start is called before the first frame update
     private void Start()
     {
+        spawnerLocation = transform.position;
         enemyPrefabsLength = enemyPrefabs.Length;
         waveCount = 4;
         currentWaveIndex = 0;
-        waveArray = new int[waveCount, enemyPrefabsLength];
+        // allWavesEnemyCounts = new int[waveCount, enemyPrefabsLength];
         waveEnemyCounts = new int[waveCount][];
         waveEnemyCounts[0] = firstWaveEnemyCounts;
         waveEnemyCounts[1] = secondWaveEnemyCounts;
         waveEnemyCounts[2] = thirdWaveEnemyCounts;
         waveEnemyCounts[3] = fourthWaveEnemyCounts;
-        
-        ArrangeWaveEnemyCounts();
 
-        // waveArray[waveIndex, 0] = smallEnemy; // Small enemy amount in a single wave at LVL1
-        // waveArray[waveIndex, 1] = normalEnemy; // Normal enemy amount in single wave at LVL1
-        // waveArray[waveIndex, 2] = bigEnemy; // Big enemy amount in single wave at LVL1
-        
         print("currently in wave " + currentWaveIndex);
     }
 
@@ -61,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
             if (!IsSpawnTime(enemyIndex) || IsReadyForNextWave() || !HasSpawnChance(enemyIndex)) continue;
             
             SpawnEnemy(enemy);
-            waveArray[currentWaveIndex, enemyIndex] -= 1;
+            DecreaseEnemyCount(enemyIndex);
             // print("Enemy Türü: " + index + " Kalan Enemy Sayısı " + waveArray[0, index]);
         }
     }
@@ -75,28 +63,22 @@ public class EnemySpawner : MonoBehaviour
         return Random.value < threshold;
     }
 
+    private void DecreaseEnemyCount(int enemyIndex)
+    {
+        waveEnemyCounts[currentWaveIndex][enemyIndex] -= 1;
+    }
+
     private bool HasSpawnChance(int enemyIndex)
     {
-        return waveArray[currentWaveIndex, enemyIndex] > 0;
+        return waveEnemyCounts[currentWaveIndex][enemyIndex] > 0;
     }
 
     private void SpawnEnemy(GameObject enemy)
     {
-        var newEnemy = Instantiate(enemy, spawnerLocation.position, Quaternion.identity);
+        var newEnemy = Instantiate(enemy, spawnerLocation, Quaternion.identity);
         var enemyComponent = newEnemy.GetComponent<Enemy>();
 
         enemyComponent.GetComponent<PathFinder>().SetEnemyPaths(paths);
-    }
-
-    private void ArrangeWaveEnemyCounts()
-    {
-        for (var waveNumber = 0; waveNumber < waveCount; waveNumber++)
-        {
-            for (var enemyIndex = 0; enemyIndex < enemyPrefabsLength; enemyIndex++)
-            {
-                waveArray[waveNumber, enemyIndex] = waveEnemyCounts[waveNumber][enemyIndex];
-            }
-        }
     }
 
     private bool IsReadyForNextWave()
@@ -115,12 +97,11 @@ public class EnemySpawner : MonoBehaviour
     {
         for (var enemyIndex = 0; enemyIndex < enemyPrefabsLength; enemyIndex++)
         {
-            if (waveArray[currentWaveIndex, enemyIndex] > 0)
+            if (waveEnemyCounts[currentWaveIndex][enemyIndex] > 0)
             {
                 return false;
             }
         }
-
         return true;
     }
 
