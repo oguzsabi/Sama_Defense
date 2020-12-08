@@ -19,12 +19,13 @@ public class Tower : MonoBehaviour
     public bool isPlaceable;
     public GameObject adjacencyDetector;
     public GameObject rangeIndicator;
-
+    
     // Start is called before the first frame update
     private void Start()
     {
         isReady = false;
         isPlaceable = true;
+       
     }
 
     // Update is called once per frame
@@ -52,7 +53,7 @@ public class Tower : MonoBehaviour
         projectileComponent.SetProjectileTarget(currentTarget);
         projectileComponent.SetDamage(damage);
 
-        yield return new WaitForSeconds(shootingPeriod);
+        yield return new WaitForSeconds(1/shootingPeriod);
         
         shootAvailable = true;
     }
@@ -95,7 +96,7 @@ public class Tower : MonoBehaviour
         catch (Exception e)
         {
             FindRandomTarget();
-            print("in catch");
+            
         }
     }
 

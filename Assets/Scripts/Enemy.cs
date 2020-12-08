@@ -10,11 +10,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float health = 100f;
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private ElementType element;
+    [SerializeField] private int worth;
 
+    public Currency currencyScript;
     // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, 45f);
+        currencyScript = GameObject.FindWithTag("GameController").GetComponent<Currency>();
     }
 
     // Update is called once per frame
@@ -30,12 +33,14 @@ public class Enemy : MonoBehaviour
 
     public void GetHit(float damage)
     {
-        print("Damage Dealt = " + damage);
+        //print("Damage Dealt = " + damage);
         health -= damage;
         
         if (health <= 0)
         {
+            currencyScript.coin += worth;
             Destroy(gameObject);
+            
         }
     }
 

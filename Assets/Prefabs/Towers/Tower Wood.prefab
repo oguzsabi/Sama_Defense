@@ -366,11 +366,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64490a8152bb2a4284995f60634f6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPeriod: 2
+  shootingPeriod: 1.25
   projectile: {fileID: 8683729254116240177, guid: 185c942510bf90f4bbfc6349a2a07c5a,
     type: 3}
   projectileStart: {fileID: 1071573029763472575}
-  damage: 20
+  damage: 25
   isPlaceable: 0
   adjacencyDetector: {fileID: 8000704051731452655}
   rangeIndicator: {fileID: 196624807}

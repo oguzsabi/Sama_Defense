@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 800764315702433744}
   - component: {fileID: 1545205707}
   - component: {fileID: 4014089039897233480}
+  - component: {fileID: -1696412823849215399}
   m_Layer: 8
   m_Name: Tower Earth
   m_TagString: Untagged
@@ -366,11 +367,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64490a8152bb2a4284995f60634f6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPeriod: 2
+  shootingPeriod: 1.25
   projectile: {fileID: 8683729254116240177, guid: d28a12d7e975a904c8d4fb31e49099a7,
     type: 3}
   projectileStart: {fileID: 1071573029763472575}
-  damage: 20
+  damage: 25
   isPlaceable: 0
   adjacencyDetector: {fileID: 8000704051731452655}
   rangeIndicator: {fileID: 196624807}
@@ -417,6 +418,20 @@ CapsuleCollider:
   m_Height: 2.6325278
   m_Direction: 1
   m_Center: {x: 0, y: 0.34873614, z: 0}
+--- !u!114 &-1696412823849215399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279904068666101274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f919bc51a576dfd4988b8d7f6b935c31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingBalance: 0
+  balance: 0
 --- !u!1 &8000704051731452655
 GameObject:
   m_ObjectHideFlags: 0
