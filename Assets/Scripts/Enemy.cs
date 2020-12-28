@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int worth;
 
     private GameSession _gameSession;
+    private bool diedBefore = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +45,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        if (diedBefore) return;
+        diedBefore = true;
         WaveSpawner.DecreaseAliveEnemyCount();
         _gameSession.IncrementDiamondAmount();
         Destroy(gameObject);
