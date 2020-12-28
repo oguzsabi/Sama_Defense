@@ -15,7 +15,7 @@ public class Tower : MonoBehaviour
     private readonly List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
     private bool isReady;
-    
+
     public bool isPlaceable;
     public GameObject adjacencyDetector;
     public GameObject rangeIndicator;
@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
     {
         isReady = false;
         isPlaceable = true;
-       
+        
     }
 
     // Update is called once per frame

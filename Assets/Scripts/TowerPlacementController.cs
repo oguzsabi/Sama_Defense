@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,24 +13,17 @@ public class TowerPlacementController : MonoBehaviour
     [SerializeField] private KeyCode addWoodTowerHotkey = KeyCode.I;
     [SerializeField] private float rotationMultiplier = 10f;
     [SerializeField] private LayerMask mask;
-    [SerializeField] private int towerWorth;
-    [SerializeField] private int towerLimit;
-    
+
     private GameObject newTower;
     private float mouseWheelDelta;
     private Camera mainCamera;
-    public Currency currencyScript;
-    private GameObject towerCountUI;
+    private GameSession _gameSession;
 
-    public int towerCount = 0;
-    
     // Start is called before the first frame update
     private void Start()
     {
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         mainCamera = Camera.main;
-        currencyScript = GameObject.FindWithTag("GameController").GetComponent<Currency>();
-
-        towerCountUI = GameObject.Find("TowerCount");
     }
 
     // Update is called once per frame
@@ -42,25 +36,15 @@ public class TowerPlacementController : MonoBehaviour
         MoveNewTowerToMousePosition();
         RotateNewTowerWithMouseWheel();
         PlaceNewTowerIfClicked();
-        
-        towerCountUI.GetComponent<Text>().text = towerCount.ToString();
-        
     }
 
-    private bool towerLimitChecker()
-    {
-        if (towerLimit >= towerCount)
-        {
-            return true;
-        }
-        return false;
-    }
-    
     private void PlaceNewTowerIfClicked()
     {
         if (!Input.GetMouseButtonDown(0) || !newTower.GetComponent<Tower>().isPlaceable) return;
         
         SetupTower();
+        _gameSession.IncrementTowerCount();
+        _gameSession.ChangeCoinAmountBy(-20);
     }
 
     private void SetupTower()
@@ -93,32 +77,30 @@ public class TowerPlacementController : MonoBehaviour
     }
 
     private void HandleAddTowerHotkey()
-    {    
-        print("DecrementCoin: " + currencyScript.DecrementCoin(towerWorth) + "Tower Limit Checker: " + towerLimitChecker());
-        
-        if (Input.GetKeyDown(addFireTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
+    {
+        print("There are enough coins: " + _gameSession.AreThereEnoughCoins(20));
+        print("Tower limit is reached: " + _gameSession.IsTowerLimitReached());
+        if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
         {
-            CreateNewTower(towerPrefabs[0]);
-            currencyScript.coin -= towerWorth;
-            towerCount++;
-        }
-        if (Input.GetKeyDown(addWaterTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
-        {
-            CreateNewTower(towerPrefabs[1]);
-            currencyScript.coin -= towerWorth;
-            towerCount++;
-        }
-        if (Input.GetKeyDown(addEarthTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
-        {
-            CreateNewTower(towerPrefabs[2]);
-            currencyScript.coin -= towerWorth;
-            towerCount++;
-        }
-        if (Input.GetKeyDown(addWoodTowerHotkey) && currencyScript.DecrementCoin(towerWorth) && towerLimitChecker())
-        {
-            CreateNewTower(towerPrefabs[3]);
-            currencyScript.coin -= towerWorth;
-            towerCount++;
+            if (Input.GetKeyDown(addFireTowerHotkey))
+            {
+                CreateNewTower(towerPrefabs[0]);
+            }
+
+            if (Input.GetKeyDown(addWaterTowerHotkey))
+            {
+                CreateNewTower(towerPrefabs[1]);
+            }
+
+            if (Input.GetKeyDown(addEarthTowerHotkey))
+            {
+                CreateNewTower(towerPrefabs[2]);
+            }
+
+            if (Input.GetKeyDown(addWoodTowerHotkey))
+            {
+                CreateNewTower(towerPrefabs[3]);
+            }
         }
     }
 
@@ -130,7 +112,6 @@ public class TowerPlacementController : MonoBehaviour
             var newTowerPosition = newTower.transform.position;
             newTower.transform.position =
                 new Vector3(newTowerPosition.x, newTowerPosition.y + 6.8f, newTowerPosition.z);
-                    
         }
         else
         {

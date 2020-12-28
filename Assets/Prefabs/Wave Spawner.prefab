@@ -43,7 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca41fc9dc8e364047adaec778e6f17b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelLoader: {fileID: 5970914214993546292, guid: 135999f8a8ce5e649ac258c02a16307a,
+    type: 3}
   secondsBetweenWaves: 5
+  secondsBetweenSpawns: 0.5
   enemyPrefabs:
   - {fileID: 2422002395599271569, guid: 97f53232dc5479e43baf79a8926a695f, type: 3}
   - {fileID: 2422002395599271569, guid: f249ccb3211b8104c9144befddf8bc21, type: 3}

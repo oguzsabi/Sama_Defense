@@ -12,12 +12,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ElementType element;
     [SerializeField] private int worth;
 
-    public Currency currencyScript;
+    private GameSession _gameSession;
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(gameObject, 45f);
-        currencyScript = GameObject.FindWithTag("GameController").GetComponent<Currency>();
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
     }
 
     // Update is called once per frame
@@ -38,10 +37,15 @@ public class Enemy : MonoBehaviour
         
         if (health <= 0)
         {
-            currencyScript.coin += worth;
-            Destroy(gameObject);
-            
+            _gameSession.ChangeCoinAmountBy(worth);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        WaveSpawner.DecreaseAliveEnemyCount();
+        Destroy(gameObject);
     }
 
     public ElementType Element => element;
