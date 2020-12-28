@@ -48,10 +48,10 @@ MonoBehaviour:
   - {fileID: 6279904068666101274, guid: e52547e1a49572b4b9e9c4502b4766ba, type: 3}
   - {fileID: 6279904068666101274, guid: e088d026c2b11224eb3b47f031f289e9, type: 3}
   - {fileID: 6279904068666101274, guid: ecd72f35628fe434ba7527c95329f99e, type: 3}
-  addFireTowerHotkey: 116
-  addWaterTowerHotkey: 121
-  addEarthTowerHotkey: 117
-  addWoodTowerHotkey: 105
+  addFireTowerHotkey: 49
+  addWaterTowerHotkey: 50
+  addEarthTowerHotkey: 51
+  addWoodTowerHotkey: 52
   rotationMultiplier: 10
   mask:
     serializedVersion: 2
