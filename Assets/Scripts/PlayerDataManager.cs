@@ -52,13 +52,16 @@ public class PlayerDataManager : MonoBehaviour
 
     public static void SetDiamondAmount(int amount)
     {
-        var oldDiamondAmount = PlayerPrefs.GetInt(DIAMOND_AMOUNT_KEY);
-        var newDiamondAmount = oldDiamondAmount + amount;
-        PlayerPrefs.SetInt(DIAMOND_AMOUNT_KEY, newDiamondAmount);
+        PlayerPrefs.SetInt(DIAMOND_AMOUNT_KEY, amount);
     }
 
     public static int GetDiamondAmount()
     {
         return PlayerPrefs.GetInt(DIAMOND_AMOUNT_KEY);
+    }
+
+    public static void ResetDiamondAmount()
+    {
+        SetDiamondAmount(0);
     }
 }

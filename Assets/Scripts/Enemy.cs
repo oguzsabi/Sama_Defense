@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         WaveSpawner.DecreaseAliveEnemyCount();
+        _gameSession.IncrementDiamondAmount();
         Destroy(gameObject);
     }
 

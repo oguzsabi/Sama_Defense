@@ -8,6 +8,13 @@ public class LevelLoader : MonoBehaviour
 {
     [SerializeField] private float delayTimeInSeconds = 5f;
 
+    private GameSession _gameSession;
+
+    private void Start()
+    {
+        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+    }
+
     public void LoadNextLevel()
     {
         StartCoroutine(LoadLevel());
@@ -15,7 +22,13 @@ public class LevelLoader : MonoBehaviour
 
     private IEnumerator LoadLevel()
     {
+        _gameSession.SaveDiamondAmount();
         yield return new WaitForSeconds(delayTimeInSeconds);
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
+    }
+
+    public static int GetCurrentSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

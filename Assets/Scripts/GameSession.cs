@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,6 +11,15 @@ public class GameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI towerCountText;
     [SerializeField] private TextMeshProUGUI levelNumberText;
     [SerializeField] private TextMeshProUGUI waveNumberText;
+    
+    private const int levelNumberOffset = 1;
+
+    private void Start()
+    {
+        // PlayerDataManager.ResetDiamondAmount();
+        diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
+        levelNumberText.text = (LevelLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
+    }
 
     public void ChangeCoinAmountBy(int amount)
     {
@@ -53,5 +63,16 @@ public class GameSession : MonoBehaviour
         var maxTowerCount = int.Parse(towerCounts[1]);
 
         return newTowerCount > maxTowerCount;
+    }
+
+    public void IncrementDiamondAmount()
+    {
+        var newDiamondAmount = int.Parse(diamondAmountText.text) + 1;
+        diamondAmountText.text = newDiamondAmount.ToString();
+    }
+
+    public void SaveDiamondAmount()
+    {
+        PlayerDataManager.SetDiamondAmount(int.Parse(diamondAmountText.text));
     }
 }

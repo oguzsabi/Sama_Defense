@@ -78,8 +78,6 @@ public class TowerPlacementController : MonoBehaviour
 
     private void HandleAddTowerHotkey()
     {
-        print("There are enough coins: " + _gameSession.AreThereEnoughCoins(20));
-        print("Tower limit is reached: " + _gameSession.IsTowerLimitReached());
         if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
         {
             if (Input.GetKeyDown(addFireTowerHotkey))

@@ -119,7 +119,6 @@ public class WaveSpawner : MonoBehaviour
     {
         inSpawnBreak = true;
         yield return new WaitForSeconds(secondsBetweenSpawns);
-        print("taking a spawn break");
         inSpawnBreak = false;
     }
 
