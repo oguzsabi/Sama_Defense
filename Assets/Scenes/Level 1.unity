@@ -3755,50 +3755,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerPlacementController
       objectReference: {fileID: 0}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerLimit
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerWorth
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerPrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 6279904068666101274, guid: 5b618fd4b45c8e34799279d208442107,
-        type: 3}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 6279904068666101274, guid: e52547e1a49572b4b9e9c4502b4766ba,
-        type: 3}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 6279904068666101274, guid: e088d026c2b11224eb3b47f031f289e9,
-        type: 3}
-    - target: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
-        type: 3}
-      propertyPath: towerPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 6279904068666101274, guid: ecd72f35628fe434ba7527c95329f99e,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47f50d747840a45448613708f3b938a8, type: 3}
 --- !u!1001 &668863345323989820
