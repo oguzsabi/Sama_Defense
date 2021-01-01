@@ -35,19 +35,19 @@ public class TowerPlacementController : MonoBehaviour
         
         MoveNewTowerToMousePosition();
         RotateNewTowerWithMouseWheel();
-        PlaceNewTowerIfClicked();
+        TowerPlacer();
     }
 
-    private void PlaceNewTowerIfClicked()
+    private void TowerPlacer()
     {
         if (!Input.GetMouseButtonDown(0) || !newTower.GetComponent<Tower>().isPlaceable) return;
         
-        SetupTower();
+        PrepareTower();
         _gameSession.IncrementTowerCount();
         _gameSession.ChangeCoinAmountBy(-20);
     }
 
-    private void SetupTower()
+    private void PrepareTower()
     {
         newTower.GetComponent<Tower>().MakeTowerReady();
         newTower.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;

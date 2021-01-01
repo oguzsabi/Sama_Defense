@@ -28,6 +28,15 @@ public class GameSession : MonoBehaviour
 
         coinAmountText.text = newCoinAmount.ToString();
     }
+    
+    public void ChangeDiamondAmountBy(int amount)
+    {
+        var oldDiamondAmount = int.Parse(diamondAmountText.text);
+        var newDiamondAmount = oldDiamondAmount + amount;
+
+        diamondAmountText.text = newDiamondAmount.ToString();
+    }
+    
 
     public void IncrementTowerCount()
     {
@@ -53,6 +62,12 @@ public class GameSession : MonoBehaviour
     {
         var currentCoinAmount = int.Parse(coinAmountText.text);
         return currentCoinAmount - cost >= 0;
+    }
+
+    public bool AreThereEnoughDiamonds(int cost)
+    {
+        var currentDiamondAmount = int.Parse(diamondAmountText.text);
+        return currentDiamondAmount - cost >= 0;
     }
 
     public bool IsTowerLimitReached()

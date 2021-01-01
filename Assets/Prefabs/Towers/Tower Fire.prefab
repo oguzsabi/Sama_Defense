@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 800764315702433744}
   - component: {fileID: 1545205707}
   - component: {fileID: 4014089039897233480}
+  - component: {fileID: -8348695593475108988}
   m_Layer: 8
   m_Name: Tower Fire
   m_TagString: Untagged
@@ -417,6 +418,29 @@ CapsuleCollider:
   m_Height: 2.6325278
   m_Direction: 1
   m_Center: {x: 0, y: 0.34873614, z: 0}
+--- !u!114 &-8348695593475108988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279904068666101274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec61019109c3fa14eacd33c891f48e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterTColliderTransform: {fileID: 6133745446033276520, guid: e52547e1a49572b4b9e9c4502b4766ba,
+    type: 3}
+  fireTColliderTransform: {fileID: 6133745446033276520}
+  earthTColliderTransform: {fileID: 6133745446033276520, guid: e088d026c2b11224eb3b47f031f289e9,
+    type: 3}
+  woodTColliderTransform: {fileID: 6133745446033276520, guid: ecd72f35628fe434ba7527c95329f99e,
+    type: 3}
+  upgradeWater: 117
+  upgradeFire: 105
+  upgradeEarth: 111
+  upgradeWood: 112
 --- !u!1 &8000704051731452655
 GameObject:
   m_ObjectHideFlags: 0
