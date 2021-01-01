@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public enum ElementType { Fire, Water, Earth, Wood }
     
     [SerializeField] private float projectileSpeed = 5f;
-    [SerializeField] private int accuracy = 100;
+    [SerializeField] public int accuracy;
     [SerializeField] private ElementType element;
     
     private GameObject _target;

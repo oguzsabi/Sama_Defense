@@ -437,10 +437,22 @@ MonoBehaviour:
   earthTower: {fileID: 6279904068666101274}
   woodTower: {fileID: 6279904068666101274, guid: ecd72f35628fe434ba7527c95329f99e,
     type: 3}
-  upgradeWater: 117
-  upgradeFire: 105
-  upgradeEarth: 111
-  upgradeWood: 112
+  waterProjectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
+    type: 3}
+  fireProjectile: {fileID: 8683729254116240177, guid: 154c1a994069d19428ed5613b87d26b4,
+    type: 3}
+  earthProjectile: {fileID: 8683729254116240177, guid: d28a12d7e975a904c8d4fb31e49099a7,
+    type: 3}
+  woodProjectile: {fileID: 8683729254116240177, guid: 185c942510bf90f4bbfc6349a2a07c5a,
+    type: 3}
+  AupgradeWater: 117
+  AupgradeFire: 105
+  AupgradeEarth: 111
+  AupgradeWood: 112
+  DupgradeWater: 122
+  DupgradeFire: 120
+  DupgradeEarth: 99
+  DupgradeWood: 118
 --- !u!1 &8000704051731452655
 GameObject:
   m_ObjectHideFlags: 0

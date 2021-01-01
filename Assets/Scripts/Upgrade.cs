@@ -9,10 +9,24 @@ public class Upgrade : MonoBehaviour
     [SerializeField] public GameObject earthTower;
     [SerializeField] public GameObject woodTower;
     
+    [SerializeField] public GameObject waterProjectile;
+    [SerializeField] public GameObject fireProjectile;
+    [SerializeField] public GameObject earthProjectile;
+    [SerializeField] public GameObject woodProjectile;
+   
+    
+    /*
     [SerializeField] public KeyCode RupgradeWater = KeyCode.U;
     [SerializeField] public KeyCode RupgradeFire = KeyCode.I;
     [SerializeField] public KeyCode RupgradeEarth = KeyCode.O;
     [SerializeField] public KeyCode RupgradeWood = KeyCode.P;
+    */
+    
+    [SerializeField] public KeyCode AupgradeWater = KeyCode.U;
+    [SerializeField] public KeyCode AupgradeFire = KeyCode.I;
+    [SerializeField] public KeyCode AupgradeEarth = KeyCode.O;
+    [SerializeField] public KeyCode AupgradeWood = KeyCode.P;
+    
     
     [SerializeField] public KeyCode DupgradeWater = KeyCode.Z;
     [SerializeField] public KeyCode DupgradeFire = KeyCode.X;
@@ -26,6 +40,7 @@ public class Upgrade : MonoBehaviour
     private Transform _earthTColliderTransform;
     private Transform _woodTColliderTransform;
     
+
     void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
@@ -39,8 +54,9 @@ public class Upgrade : MonoBehaviour
     
     void Update()
     {
-        RangeUpgradeHandler();
+        //RangeUpgradeHandler();
         DamageUpgradeHandler();
+        AccuracyUpgradeHandler();
     }
     
     
@@ -58,14 +74,24 @@ public class Upgrade : MonoBehaviour
 
     public void IncreaseDamage(GameObject tower)
     {
-        print("In increase damage");
-        print("Damage before increase " + tower.GetComponent<Tower>().damage);
+       
         tower.GetComponent<Tower>().damage += 5;
-        print("Damage after increase " + tower.GetComponent<Tower>().damage);
+        
         
     }
     
-    public void RangeUpgradeHandler()
+    public void IncreaseProjectileAccuracy(GameObject projectile)
+    {
+        
+        print(projectile.name + "Accuracy before upgrade " + projectile.GetComponent<Projectile>().accuracy );
+        
+        projectile.GetComponent<Projectile>().accuracy += 10;
+        
+        print(projectile.name + "Accuracy after upgrade " + projectile.GetComponent<Projectile>().accuracy);
+    }
+    
+    /*
+    public void RangeUpgradeHandler()"
     {
         if (_gameSession.AreThereEnoughDiamonds(5))
         {
@@ -95,6 +121,7 @@ public class Upgrade : MonoBehaviour
         }
         
     }
+    */
 
     public void DamageUpgradeHandler()
     {
@@ -122,7 +149,32 @@ public class Upgrade : MonoBehaviour
             }
         }
     }
+    
+    public void AccuracyUpgradeHandler()
+    {
+        if (_gameSession.AreThereEnoughDiamonds(0))
+        {
+            if (Input.GetKeyDown(AupgradeWater))
+            {
+                _gameSession.ChangeDiamondAmountBy(-5);
+                IncreaseProjectileAccuracy(waterProjectile);
+            }
+            if (Input.GetKeyDown(AupgradeFire)) 
+            {
+                _gameSession.ChangeDiamondAmountBy(-5);
+                IncreaseProjectileAccuracy(fireProjectile);
+            } 
+            if (Input.GetKeyDown(AupgradeEarth))
+            {
+                _gameSession.ChangeDiamondAmountBy(-5);
+                IncreaseProjectileAccuracy(earthProjectile);
+            } 
+            if (Input.GetKeyDown(AupgradeWood))
+            {
+                _gameSession.ChangeDiamondAmountBy(-5);
+                IncreaseProjectileAccuracy(woodProjectile); 
+            }
+        }
+    }
 
-    
-    
 }
