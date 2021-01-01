@@ -430,12 +430,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec61019109c3fa14eacd33c891f48e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterTColliderTransform: {fileID: 6133745446033276520, guid: e52547e1a49572b4b9e9c4502b4766ba,
+  waterTower: {fileID: 6279904068666101274, guid: e52547e1a49572b4b9e9c4502b4766ba,
     type: 3}
-  fireTColliderTransform: {fileID: 6133745446033276520, guid: 5b618fd4b45c8e34799279d208442107,
+  fireTower: {fileID: 6279904068666101274, guid: 5b618fd4b45c8e34799279d208442107,
     type: 3}
-  earthTColliderTransform: {fileID: 6133745446033276520}
-  woodTColliderTransform: {fileID: 6133745446033276520, guid: ecd72f35628fe434ba7527c95329f99e,
+  earthTower: {fileID: 6279904068666101274}
+  woodTower: {fileID: 6279904068666101274, guid: ecd72f35628fe434ba7527c95329f99e,
     type: 3}
   upgradeWater: 117
   upgradeFire: 105

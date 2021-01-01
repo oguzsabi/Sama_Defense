@@ -9,7 +9,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private float shootingPeriod = 3f;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
-    [SerializeField] private float damage = 50;
+    [SerializeField] public float damage = 50;
     
     private bool shootAvailable = true;
     private readonly List<GameObject> targets = new List<GameObject>();
