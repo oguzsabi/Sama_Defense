@@ -13,8 +13,7 @@ public class Upgrade : MonoBehaviour
     [SerializeField] public GameObject fireProjectile;
     [SerializeField] public GameObject earthProjectile;
     [SerializeField] public GameObject woodProjectile;
-   
-    
+
     /*
     [SerializeField] public KeyCode RupgradeWater = KeyCode.U;
     [SerializeField] public KeyCode RupgradeFire = KeyCode.I;
@@ -39,9 +38,9 @@ public class Upgrade : MonoBehaviour
     private Transform _fireTColliderTransform;
     private Transform _earthTColliderTransform;
     private Transform _woodTColliderTransform;
-    
 
-    void Start()
+
+    private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         
@@ -49,10 +48,9 @@ public class Upgrade : MonoBehaviour
         _fireTColliderTransform = fireTower.transform;
         _earthTColliderTransform = earthTower.transform;
         _woodTColliderTransform = woodTower.transform;
-
     }
-    
-    void Update()
+
+    private void Update()
     {
         //RangeUpgradeHandler();
         DamageUpgradeHandler();
@@ -69,20 +67,15 @@ public class Upgrade : MonoBehaviour
     public void IncreaseRadius(SphereCollider sphereCollider)
     {
        sphereCollider.radius += 1f;
-       
     }
 
     public void IncreaseDamage(GameObject tower)
     {
-       
         tower.GetComponent<Tower>().damage += 5;
-        
-        
     }
     
     public void IncreaseProjectileAccuracy(GameObject projectile)
     {
-        
         print(projectile.name + "Accuracy before upgrade " + projectile.GetComponent<Projectile>().accuracy );
         
         projectile.GetComponent<Projectile>().accuracy += 10;
@@ -176,5 +169,4 @@ public class Upgrade : MonoBehaviour
             }
         }
     }
-
 }

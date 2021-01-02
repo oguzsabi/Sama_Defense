@@ -25,7 +25,6 @@ public class Tower : MonoBehaviour
     {
         isReady = false;
         isPlaceable = true;
-        
     }
 
     // Update is called once per frame
@@ -96,7 +95,6 @@ public class Tower : MonoBehaviour
         catch (Exception e)
         {
             FindRandomTarget();
-            
         }
     }
 

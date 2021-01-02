@@ -12,7 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI levelNumberText;
     [SerializeField] private TextMeshProUGUI waveNumberText;
     
-    private const int levelNumberOffset = 1;
+    private const int levelNumberOffset = -3;
 
     private void Start()
     {

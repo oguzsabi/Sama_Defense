@@ -64,4 +64,6 @@ public class PlayerDataManager : MonoBehaviour
     {
         SetDiamondAmount(0);
     }
+    
+    
 }

@@ -31,4 +31,9 @@ public class LevelLoader : MonoBehaviour
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
+
+    public static void LoadScene(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
+    }
 }
