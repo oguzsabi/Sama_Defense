@@ -7,11 +7,13 @@ public class GamePause : MonoBehaviour
 {
     [SerializeField] private GameObject gameSessionCanvas;
     [SerializeField] private GameObject pauseMenuCanvas;
+    [SerializeField] private GameObject upgradesMenuCanvas;
     private bool isGamePaused = false;
 
     private void Awake()
     {
         pauseMenuCanvas.SetActive(false);
+        upgradesMenuCanvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,6 +21,12 @@ public class GamePause : MonoBehaviour
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
         isGamePaused = !isGamePaused;
+        
+        if (upgradesMenuCanvas.activeSelf)
+        {
+            GoBackToPauseMenu();
+            return;
+        }
 
         if (isGamePaused)
         {
@@ -47,5 +55,17 @@ public class GamePause : MonoBehaviour
     public void GoToMainMenu()
     {
         LevelLoader.LoadScene("Main Menu");
+    }
+
+    public void GoToUpgrades()
+    {
+        pauseMenuCanvas.SetActive(false);
+        upgradesMenuCanvas.SetActive(true);
+    }
+
+    public void GoBackToPauseMenu()
+    {
+        upgradesMenuCanvas.SetActive(false);
+        pauseMenuCanvas.SetActive(true);
     }
 }

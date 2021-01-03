@@ -1,63 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Upgrade : MonoBehaviour
 {
-    [SerializeField] public GameObject waterTower;
-    [SerializeField] public GameObject fireTower;
-    [SerializeField] public GameObject earthTower;
-    [SerializeField] public GameObject woodTower;
+    [SerializeField] private TextMeshProUGUI feedbackText;
     
-    [SerializeField] public GameObject waterProjectile;
-    [SerializeField] public GameObject fireProjectile;
-    [SerializeField] public GameObject earthProjectile;
-    [SerializeField] public GameObject woodProjectile;
-
-    /*
-    [SerializeField] public KeyCode RupgradeWater = KeyCode.U;
-    [SerializeField] public KeyCode RupgradeFire = KeyCode.I;
-    [SerializeField] public KeyCode RupgradeEarth = KeyCode.O;
-    [SerializeField] public KeyCode RupgradeWood = KeyCode.P;
-    */
+    [SerializeField] private GameObject waterTower;
+    [SerializeField] private GameObject fireTower;
+    [SerializeField] private GameObject earthTower;
+    [SerializeField] private GameObject woodTower;
     
-    [SerializeField] public KeyCode AupgradeWater = KeyCode.U;
-    [SerializeField] public KeyCode AupgradeFire = KeyCode.I;
-    [SerializeField] public KeyCode AupgradeEarth = KeyCode.O;
-    [SerializeField] public KeyCode AupgradeWood = KeyCode.P;
-    
-    
-    [SerializeField] public KeyCode DupgradeWater = KeyCode.Z;
-    [SerializeField] public KeyCode DupgradeFire = KeyCode.X;
-    [SerializeField] public KeyCode DupgradeEarth = KeyCode.C;
-    [SerializeField] public KeyCode DupgradeWood = KeyCode.V;
+    [SerializeField] private GameObject waterProjectile;
+    [SerializeField] private GameObject fireProjectile;
+    [SerializeField] private GameObject earthProjectile;
+    [SerializeField] private GameObject woodProjectile;
 
     private GameSession _gameSession;
-    
     private Transform _waterTColliderTransform;
     private Transform _fireTColliderTransform;
     private Transform _earthTColliderTransform;
     private Transform _woodTColliderTransform;
 
-
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
-        
+
         _waterTColliderTransform = waterTower.transform;
         _fireTColliderTransform = fireTower.transform;
         _earthTColliderTransform = earthTower.transform;
         _woodTColliderTransform = woodTower.transform;
+
+        feedbackText.enabled = false;
     }
 
-    private void Update()
-    {
-        //RangeUpgradeHandler();
-        DamageUpgradeHandler();
-        AccuracyUpgradeHandler();
-    }
-    
-    
     public SphereCollider GetChildCollider(Transform Collidertransform)
     {
         var sphereCollider = Collidertransform.GetChild(0).GetComponent<SphereCollider>();
@@ -69,12 +47,12 @@ public class Upgrade : MonoBehaviour
        sphereCollider.radius += 1f;
     }
 
-    public void IncreaseDamage(GameObject tower)
+    private void IncreaseDamage(GameObject tower)
     {
         tower.GetComponent<Tower>().damage += 5;
     }
     
-    public void IncreaseProjectileAccuracy(GameObject projectile)
+    private void IncreaseProjectileAccuracy(GameObject projectile)
     {
         print(projectile.name + "Accuracy before upgrade " + projectile.GetComponent<Projectile>().accuracy );
         
@@ -116,57 +94,95 @@ public class Upgrade : MonoBehaviour
     }
     */
 
-    public void DamageUpgradeHandler()
+    public void UpgradeFireTowerDamage()
     {
-        if (_gameSession.AreThereEnoughDiamonds(5))
-        {
-            if (Input.GetKeyDown(DupgradeWater))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseDamage(waterTower);
-            }
-            if (Input.GetKeyDown(DupgradeFire)) 
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseDamage(fireTower);
-            } 
-            if (Input.GetKeyDown(DupgradeEarth))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseDamage(earthTower);
-            } 
-            if (Input.GetKeyDown(DupgradeWood))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseDamage(woodTower); 
-            }
-        }
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseDamage(fireTower);
+        DisplayMessage("Successful purchase", Color.green);
     }
     
-    public void AccuracyUpgradeHandler()
+    public void UpgradeWaterTowerDamage()
     {
-        if (_gameSession.AreThereEnoughDiamonds(0))
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseDamage(waterTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeEarthTowerDamage()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseDamage(earthTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeWoodTowerDamage()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseDamage(woodTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+
+    public void UpgradeFireTowerAccuracy()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseProjectileAccuracy(fireProjectile);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeWaterTowerAccuracy()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseProjectileAccuracy(waterProjectile);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeEarthTowerAccuracy()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseProjectileAccuracy(earthProjectile);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeWoodTowerAccuracy()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseProjectileAccuracy(woodProjectile);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+
+    private bool CheckForEnoughDiamonds(int cost)
+    {
+        if (_gameSession.AreThereEnoughDiamonds(cost))
         {
-            if (Input.GetKeyDown(AupgradeWater))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseProjectileAccuracy(waterProjectile);
-            }
-            if (Input.GetKeyDown(AupgradeFire)) 
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseProjectileAccuracy(fireProjectile);
-            } 
-            if (Input.GetKeyDown(AupgradeEarth))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseProjectileAccuracy(earthProjectile);
-            } 
-            if (Input.GetKeyDown(AupgradeWood))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseProjectileAccuracy(woodProjectile); 
-            }
+            return true;
         }
+        else
+        {
+            DisplayMessage("Insufficient amount of diamonds", Color.red);
+            return false;
+        }
+    }
+
+    private void DisplayMessage(string message, Color color)
+    {
+        feedbackText.text = message;
+        feedbackText.color = color;
+        feedbackText.enabled = true;
     }
 }

@@ -92,7 +92,7 @@ public class Tower : MonoBehaviour
             targets.RemoveAll(target => target == null);
             FindRandomTarget();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             FindRandomTarget();
         }

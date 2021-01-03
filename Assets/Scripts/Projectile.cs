@@ -58,7 +58,11 @@ public class Projectile : MonoBehaviour
     {
         var successfulHit = Random.Range(0, 100) < accuracy;
 
-        if (!successfulHit) return;
+        if (!successfulHit)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         var actualDamage = CalculateActualDamage(enemyComponent);
         enemyComponent.GetHit(actualDamage);

@@ -78,6 +78,15 @@ public class TowerPlacementController : MonoBehaviour
 
     private void HandleAddTowerHotkey()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (newTower)
+            {
+                Destroy(newTower);
+            }
+            return;
+        }
+        
         if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
         {
             if (Input.GetKeyDown(addFireTowerHotkey))

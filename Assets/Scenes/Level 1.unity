@@ -2356,6 +2356,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1419841031, guid: 94820151cf99f2e4882afc58676d8d05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4019871207609574448, guid: 94820151cf99f2e4882afc58676d8d05,
         type: 3}
       propertyPath: m_Name
@@ -2414,6 +2418,11 @@ PrefabInstance:
     - target: {fileID: 4019871207609574454, guid: 94820151cf99f2e4882afc58676d8d05,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287965665042309097, guid: 94820151cf99f2e4882afc58676d8d05,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4590,7 +4599,12 @@ PrefabInstance:
     - target: {fileID: 8287119155752340452, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
         type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: GameSessionCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287119155752340452, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
