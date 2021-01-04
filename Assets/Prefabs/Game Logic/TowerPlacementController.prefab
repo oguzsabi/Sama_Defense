@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &470962415392866958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 470962415392866952}
+  - component: {fileID: 470962415392866959}
+  m_Layer: 0
+  m_Name: TowerPlacementController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &470962415392866952
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470962415392866958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &470962415392866959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470962415392866958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6581804782f5f24499f6273726378a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefabs:
+  - {fileID: 187918, guid: 8ce14f79e1adc0f46aeff2eb5928fd14, type: 3}
+  - {fileID: 187918, guid: 8a4692c9d136b7b428e4cee1aa615c01, type: 3}
+  - {fileID: 187918, guid: deaf4b93bf3c5fd4abe61ff1e1b291b5, type: 3}
+  - {fileID: 187918, guid: b5ccecccf7f53d445a6ec0c3ca27f35f, type: 3}
+  addFireTowerHotkey: 49
+  addWaterTowerHotkey: 50
+  addEarthTowerHotkey: 51
+  addWoodTowerHotkey: 52
+  rotationMultiplier: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 2308

@@ -110,7 +110,7 @@ public class TowerPlacementController : MonoBehaviour
             }
         }
     }
-
+    
     private void CreateNewTower(GameObject towerPrefab) 
     {
         if (!newTower)
@@ -118,7 +118,7 @@ public class TowerPlacementController : MonoBehaviour
             newTower = Instantiate(towerPrefab);
             var newTowerPosition = newTower.transform.position;
             newTower.transform.position =
-                new Vector3(newTowerPosition.x, newTowerPosition.y + 6.8f, newTowerPosition.z);
+                new Vector3(newTowerPosition.x, newTowerPosition.y, newTowerPosition.z);
         }
         else
         {
