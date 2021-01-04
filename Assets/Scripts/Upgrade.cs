@@ -50,7 +50,7 @@ public class Upgrade : MonoBehaviour
     private void IncreaseDamage(GameObject tower)
     {
         print(tower.name + " damage before upgrade " + tower.GetComponent<Tower>().damage);
-        tower.GetComponent<Tower>().damage += 500;
+        tower.GetComponent<Tower>().damage += 5;
         print(tower.name + " damage after upgrade " + tower.GetComponent<Tower>().damage);
     }
     
