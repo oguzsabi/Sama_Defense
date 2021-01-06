@@ -80,8 +80,7 @@ public class Projectile : MonoBehaviour
         }
 
         var actualDamage = CalculateActualDamage(enemyComponent);
-        _projectileType = GetProjectileType();
-        enemyComponent.GetHit(actualDamage,_projectileType);
+        enemyComponent.GetHit(actualDamage, this.Element);
         Destroy(gameObject);
     }
 
@@ -119,27 +118,6 @@ public class Projectile : MonoBehaviour
         }
 
         return actualDamage;
-    }
-
-    private string GetProjectileType()
-    {
-        switch (element)
-        {
-            case ElementType.Fire:
-                _projectileType = "fire";
-                return _projectileType;
-            case ElementType.Water:
-                _projectileType = "water";
-                return _projectileType;
-            case ElementType.Earth:
-                _projectileType = "earth";
-                return _projectileType;
-            case ElementType.Wood:
-                _projectileType = "wood";
-                return _projectileType;
-            default:
-                return _projectileType;
-        }
     }
 
     private void OnCollisionEnter(Collision other)

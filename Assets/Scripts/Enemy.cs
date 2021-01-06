@@ -37,70 +37,18 @@ public class Enemy : MonoBehaviour
         return movementSpeed;
     }
 
-    public void GetHit(float damage, string projectileType)
+    public void GetHit(float damage, Projectile.ElementType projectileType)
     {
-        
-        //print("Damage Dealt = " + damage);
-        switch (projectileType)
+        health -= damage;
+        if (health <= 0)
         {
-            case "fire":
-            {
-                health -= damage;
-                DoT();
-                _alreadyDotted = true;
-                if (health <= 0)
-                {
-                    _gameSession.ChangeCoinAmountBy(worth);
-                    Die();
-                }
-                return;
-            }
-            case "water":
-            {
-                Slow();
-                health -= damage;
-                if (health <= 0)
-                {
-                    _gameSession.ChangeCoinAmountBy(worth);
-                    Die();
-                }
-                return;
-            }
-            case "earth":
-            {
-                Stun();
-                health -= damage;
-                if (health <= 0)
-                {
-                    _gameSession.ChangeCoinAmountBy(worth);
-                    Die();
-                }
-                return;
-            }
-            case "wood":
-            {
-                KnockBack();
-                health -= damage;
-                if (health <= 0)
-                {
-                    _gameSession.ChangeCoinAmountBy(worth);
-                    Die();
-                }
-                return;
-            }
-            default:
-            {
-                health -= damage;
-                if (health <= 0)
-                {
-                    _gameSession.ChangeCoinAmountBy(worth);
-                    Die();
-                }
-                return;
-            }
-            
+            _gameSession.ChangeCoinAmountBy(worth);
+            Die();
         }
-        
+        else
+        {
+            ApplyElementEffect(projectileType);
+        }
     }
 
     private void Die()
@@ -111,31 +59,59 @@ public class Enemy : MonoBehaviour
         _gameSession.IncrementDiamondAmount();
         Destroy(gameObject);
     }
-    
 
-    public void DoT()
+    private void ApplyElementEffect(Projectile.ElementType projectileType)
+    {
+        switch (projectileType)
+        {
+            case Projectile.ElementType.Fire:
+            {
+                DoT();
+                _alreadyDotted = true;
+                return;
+            }
+            case Projectile.ElementType.Water:
+            {
+                Slow();
+                return;
+            }
+            case Projectile.ElementType.Earth:
+            {
+                Stun();
+                return;
+            }
+            case Projectile.ElementType.Wood:
+            {
+                KnockBack();
+                return;
+            }
+            default:
+                throw new ArgumentOutOfRangeException(nameof(projectileType), projectileType, "Wrong Element Type");
+        }
+    }
+    
+    private void DoT()
     {   
         Debug.Log("Enemy: " + element);
         if(!_alreadyDotted) StartCoroutine(DotTick());
-        
     }
 
-    public void Slow()
+    private void Slow()
     {
         
     }
 
-    public void Stun()
+    private void Stun()
     {
         
     }
 
-    public void KnockBack()
+    private void KnockBack()
     {
         
     }
 
-    IEnumerator DotTick()
+    private IEnumerator DotTick()
     {
         Debug.Log("HP before any ticks");
         while (_ticksElapsed < _dotTickTime)
