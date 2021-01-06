@@ -140,4 +140,6 @@ MonoBehaviour:
   movementSpeed: 15
   element: 3
   worth: 20
-  currencyScript: {fileID: 0}
+  _dotTickTime: 5
+  _ticksElapsed: 0
+  _dotDamage: 1

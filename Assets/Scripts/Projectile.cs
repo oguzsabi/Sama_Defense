@@ -17,14 +17,16 @@ public class Projectile : MonoBehaviour
     
     private GameObject _target;
     private Vector3 _lastKnownTargetPosition;
-    private bool targetLost;
-    private float damage;
-    private Camera mainCamera;
+    private bool _targetLost;
+    private float _damage;
+    private Camera _mainCamera;
     private const float forceMultiplier = 50f;
+    private string _projectileType;
+    
 
     private void Start()
     {
-        mainCamera = Camera.main;
+        _mainCamera = Camera.main;
     }
 
     // Update is called once per frame
@@ -32,17 +34,17 @@ public class Projectile : MonoBehaviour
     {
         if (missText.gameObject.activeSelf)
         {
-            missText.transform.rotation = Quaternion.LookRotation(missText.transform.position - mainCamera.transform.position);
+            missText.transform.rotation = Quaternion.LookRotation(missText.transform.position - _mainCamera.transform.position);
         }
         
         if (_target)
         {
             MoveToTarget();
         }
-        else if (!targetLost)
+        else if (!_targetLost)
         {
             MoveToLastKnownPosition();
-            targetLost = true;
+            _targetLost = true;
         }
     }
 
@@ -62,9 +64,9 @@ public class Projectile : MonoBehaviour
     private IEnumerator DisableColliderAndTerminate()
     {
         yield return new WaitForSeconds(2f);
-        GameObject o;
-        (o = gameObject).GetComponent<SphereCollider>().enabled = false;
-        Destroy(o, 2f);
+        GameObject projectile;
+        (projectile = gameObject).GetComponent<SphereCollider>().enabled = false;
+        Destroy(projectile, 2f);
     }
 
     private void RollForHit(Enemy enemyComponent)
@@ -78,7 +80,8 @@ public class Projectile : MonoBehaviour
         }
 
         var actualDamage = CalculateActualDamage(enemyComponent);
-        enemyComponent.GetHit(actualDamage);
+        _projectileType = GetProjectileType();
+        enemyComponent.GetHit(actualDamage,_projectileType);
         Destroy(gameObject);
     }
 
@@ -92,7 +95,7 @@ public class Projectile : MonoBehaviour
 
     private float CalculateActualDamage(Enemy enemyComponent)
     {
-        var actualDamage = damage;
+        var actualDamage = _damage;
         switch (enemyComponent.Element)
         {
             case Enemy.ElementType.Fire:
@@ -118,6 +121,27 @@ public class Projectile : MonoBehaviour
         return actualDamage;
     }
 
+    private string GetProjectileType()
+    {
+        switch (element)
+        {
+            case ElementType.Fire:
+                _projectileType = "fire";
+                return _projectileType;
+            case ElementType.Water:
+                _projectileType = "water";
+                return _projectileType;
+            case ElementType.Earth:
+                _projectileType = "earth";
+                return _projectileType;
+            case ElementType.Wood:
+                _projectileType = "wood";
+                return _projectileType;
+            default:
+                return _projectileType;
+        }
+    }
+
     private void OnCollisionEnter(Collision other)
     {
         var enemyComponent = other.gameObject.GetComponent<Enemy>();
@@ -139,7 +163,7 @@ public class Projectile : MonoBehaviour
 
     public void SetDamage(float TowDamage)
     {
-        damage = TowDamage;
+        _damage = TowDamage;
     }
 
     public ElementType Element => element;
