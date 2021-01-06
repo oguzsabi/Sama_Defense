@@ -44,7 +44,7 @@ public class Upgrade : MonoBehaviour
 
     public void IncreaseRadius(SphereCollider sphereCollider)
     {
-       sphereCollider.radius += 1f;
+       sphereCollider.radius += 0.1f;
     }
 
     private void IncreaseDamage(GameObject tower)
