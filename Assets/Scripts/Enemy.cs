@@ -7,18 +7,28 @@ public class Enemy : MonoBehaviour
 {
     public enum ElementType { Fire, Water, Earth, Wood }
     
-    [SerializeField] private float health = 100f;
-    [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float health;
+    [SerializeField] private float movementSpeed;
     [SerializeField] private ElementType element;
     [SerializeField] private int worth;
     [SerializeField] private int _dotTickTime;
-    [SerializeField] private int _ticksElapsed;
+    [SerializeField] private int _dotTicksElapsed;
     [SerializeField] private int _dotDamage;
+    [SerializeField] private int _slowTickTime;
+    [SerializeField] private int _slowTickElapsed;
+    [SerializeField] private int _slowAmount;
+    [SerializeField] private int _stunTickTime;
+    [SerializeField] private int _stunTickElapsed;
     
     private GameSession _gameSession;
     private bool _diedBefore = false;
     private bool _alreadyDotted = false;
+    private bool _alreadySlowed = false;
+    private bool _alreadyStunned = false;
+    private bool _slowRemoved = false;
+    private bool _stunRemoved = false;
     private int _counter = 0;
+    private float _movementSpeedStorer;
     
     // Start is called before the first frame update
     void Start()
@@ -73,11 +83,13 @@ public class Enemy : MonoBehaviour
             case Projectile.ElementType.Water:
             {
                 Slow();
+                _alreadySlowed = true;
                 return;
             }
             case Projectile.ElementType.Earth:
             {
                 Stun();
+                _alreadyStunned = true;
                 return;
             }
             case Projectile.ElementType.Wood:
@@ -98,12 +110,16 @@ public class Enemy : MonoBehaviour
 
     private void Slow()
     {
+        if (!_alreadySlowed) StartCoroutine(SlowTick());
+        RemoveSlow();
         
     }
 
     private void Stun()
     {
-        
+        _movementSpeedStorer = movementSpeed;
+        if (!_alreadyStunned) StartCoroutine(StunTick());
+        RemoveStun();
     }
 
     private void KnockBack()
@@ -114,13 +130,13 @@ public class Enemy : MonoBehaviour
     private IEnumerator DotTick()
     {
         Debug.Log("HP before any ticks");
-        while (_ticksElapsed < _dotTickTime)
+        while (_dotTicksElapsed < _dotTickTime)
         {
             
             Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
             health -= _dotDamage;
             _counter++;
-            _ticksElapsed++;
+            _dotTicksElapsed++;
             Debug.Log("Tick number " + _counter + "HP(After tick):" + health);
             
             
@@ -134,5 +150,50 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(1);
         }    
     }
+
+    private IEnumerator SlowTick()
+    {
+        var slowedMovementSpeed = movementSpeed - _slowAmount;
+        _slowRemoved = false;
+        Debug.Log("Slow before any ticks");
+        while (_slowTickElapsed < _slowTickTime)
+        {
+            Debug.Log("Movement speed before slow " + movementSpeed);
+            movementSpeed = slowedMovementSpeed;
+            Debug.Log("Movement speed after slow " + movementSpeed);
+            _slowTickElapsed++;
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void RemoveSlow()
+    {
+        if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
+        {
+            movementSpeed += _slowAmount;
+            _slowRemoved = true;
+        }
+    }
+
+    private IEnumerator StunTick()
+    {
+        _movementSpeedStorer = movementSpeed;
+        while (_stunTickElapsed < _stunTickTime)
+        {
+            movementSpeed = 0;
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    private void RemoveStun()
+    {
+        if (_stunTickElapsed == _stunTickTime || !_stunRemoved)
+        {
+            movementSpeed += _movementSpeedStorer;
+            _stunRemoved = true;
+        }
+    }
+    
     public ElementType Element => element;
 }

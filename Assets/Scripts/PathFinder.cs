@@ -23,6 +23,7 @@ public class PathFinder : MonoBehaviour
     {
         if (currentWaypointIndex >= waypointsLength || !selectedPath) return;
         
+        CheckMoveSpeed();
         GoToNextWaypoint();
     }
 
@@ -48,5 +49,11 @@ public class PathFinder : MonoBehaviour
         
         waypoints = selectedPath.GetComponentsInChildren<Transform>();
         waypointsLength = waypoints.Length;
+    }
+
+    public void CheckMoveSpeed()
+    {
+        moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
+        
     }
 }
