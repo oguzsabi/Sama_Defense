@@ -6,20 +6,25 @@ using Random = UnityEngine.Random;
 
 public class Tower : MonoBehaviour
 {
-    [SerializeField] private float shootingPeriod = 3f;
+    public enum ElementType { Fire, Water, Earth, Wood }
+    
+    [SerializeField] private ElementType element;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
-    [SerializeField] public float damage = 50;
     
+    public float fireRate = 0.35f;
+    public float damage = 50;
+    public bool isPlaceable;
+    public GameObject adjacencyDetector;
+    public GameObject rangeIndicator;
+
     private bool shootAvailable = true;
     private readonly List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
     private bool isReady;
 
-    public bool isPlaceable;
-    public GameObject adjacencyDetector;
-    public GameObject rangeIndicator;
-    
+    // default rangeIndicator size = 15.8, default range radius = 2.15
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,7 +57,7 @@ public class Tower : MonoBehaviour
         projectileComponent.SetProjectileTarget(currentTarget);
         projectileComponent.SetDamage(damage);
 
-        yield return new WaitForSeconds(shootingPeriod);
+        yield return new WaitForSeconds(1/fireRate);
         
         shootAvailable = true;
     }
@@ -112,4 +117,6 @@ public class Tower : MonoBehaviour
     {
         isReady = true;
     }
+    
+    public ElementType Element => element;
 }

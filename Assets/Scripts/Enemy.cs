@@ -148,9 +148,9 @@ public class Enemy : MonoBehaviour
         // Debug.Log("Slow before any ticks");
         while (_slowTickElapsed < _slowTickTime)
         {
-            // Debug.Log("Movement speed before slow " + movementSpeed);
+            Debug.Log("Movement speed before slow " + movementSpeed);
             movementSpeed = slowedMovementSpeed;
-            // Debug.Log("Movement speed after slow " + movementSpeed);
+            Debug.Log("Movement speed after slow " + movementSpeed);
             _slowTickElapsed++;
             yield return new WaitForSeconds(1);
         }

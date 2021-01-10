@@ -18,6 +18,7 @@ public class TowerPlacementController : MonoBehaviour
     private float mouseWheelDelta;
     private Camera mainCamera;
     private GameSession _gameSession;
+    private static List<GameObject> currentTowers = new List<GameObject>();
 
     // Start is called before the first frame update
     private void Start()
@@ -49,6 +50,8 @@ public class TowerPlacementController : MonoBehaviour
 
     private void PrepareTower()
     {
+        currentTowers.Add(newTower);
+        
         newTower.GetComponent<Tower>().MakeTowerReady();
         newTower.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         newTower.GetComponentInChildren<Tower>().adjacencyDetector.SetActive(false);
@@ -125,4 +128,6 @@ public class TowerPlacementController : MonoBehaviour
             Destroy(newTower);
         }
     }
+
+    public static List<GameObject> CurrentTowers => currentTowers;
 }

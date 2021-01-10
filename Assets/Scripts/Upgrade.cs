@@ -19,23 +19,23 @@ public class Upgrade : MonoBehaviour
     [SerializeField] private GameObject woodProjectile;
 
     private GameSession _gameSession;
-    // private Transform _waterTColliderTransform;
-    // private Transform _fireTColliderTransform;
-    // private Transform _earthTColliderTransform;
-    // private Transform _woodTColliderTransform;
 
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
-
-        // _waterTColliderTransform = waterTower.transform;
-        // _fireTColliderTransform = fireTower.transform;
-        // _earthTColliderTransform = earthTower.transform;
-        // _woodTColliderTransform = woodTower.transform;
-
         feedbackText.enabled = false;
     }
 
+    private void IncreaseDamage(GameObject tower)
+    {
+        tower.GetComponent<Tower>().damage += 5;
+    }
+    
+    private void IncreaseProjectileAccuracy(GameObject projectile)
+    {
+        projectile.GetComponent<Projectile>().accuracy += 10;
+    }
+    
     private SphereCollider GetRangeCollider(GameObject tower)
     {
         var rangeCollider = tower.transform.GetChild(0).GetComponent<SphereCollider>();
@@ -45,29 +45,18 @@ public class Upgrade : MonoBehaviour
     private void IncreaseRange(GameObject tower)
     {
         var rangeCollider = GetRangeCollider(tower);
-        print("before range up " + rangeCollider.radius);
-        rangeCollider.radius += 1f;
-        print("after range up " + rangeCollider.radius);
+        rangeCollider.radius += 0.1f;
         AdjustRangeVisuals(tower);
     }
 
     private void AdjustRangeVisuals(GameObject tower)
     {
-        tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 7.35f;
+        tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 0.735f;
     }
 
-    private void IncreaseDamage(GameObject tower)
+    private void IncreaseAttackSpeed(GameObject tower)
     {
-        print(tower.name + " damage before upgrade " + tower.GetComponent<Tower>().damage);
-        tower.GetComponent<Tower>().damage += 5;
-        print(tower.name + " damage after upgrade " + tower.GetComponent<Tower>().damage);
-    }
-    
-    private void IncreaseProjectileAccuracy(GameObject projectile)
-    {
-        print(projectile.name + " accuracy before upgrade " + projectile.GetComponent<Projectile>().accuracy );
-        projectile.GetComponent<Projectile>().accuracy += 10;
-        print(projectile.name + " accuracy after upgrade " + projectile.GetComponent<Projectile>().accuracy);
+        tower.GetComponent<Tower>().fireRate += 1f;
     }
 
     public void UpgradeFireTowerDamage()
@@ -76,6 +65,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseDamage(fireTower);
+        ApplyForExistingTowers(Tower.ElementType.Fire, 1);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -85,6 +75,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseDamage(waterTower);
+        ApplyForExistingTowers(Tower.ElementType.Water, 1);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -94,6 +85,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseDamage(earthTower);
+        ApplyForExistingTowers(Tower.ElementType.Earth, 1);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -103,6 +95,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseDamage(woodTower);
+        ApplyForExistingTowers(Tower.ElementType.Wood, 1);
         DisplayMessage("Successful purchase", Color.green);
     }
 
@@ -148,6 +141,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseRange(fireTower);
+        ApplyForExistingTowers(Tower.ElementType.Fire, 2);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -157,6 +151,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseRange(waterTower);
+        ApplyForExistingTowers(Tower.ElementType.Water, 2);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -166,6 +161,7 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseRange(earthTower);
+        ApplyForExistingTowers(Tower.ElementType.Earth, 2);
         DisplayMessage("Successful purchase", Color.green);
     }
     
@@ -175,27 +171,48 @@ public class Upgrade : MonoBehaviour
         
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseRange(woodTower);
+        ApplyForExistingTowers(Tower.ElementType.Wood, 2);
         DisplayMessage("Successful purchase", Color.green);
     }
 
     public void UpgradeFireTowerSpeed()
     {
+        if (!CheckForEnoughDiamonds(5)) return;
         
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseAttackSpeed(fireTower);
+        ApplyForExistingTowers(Tower.ElementType.Fire, 3);
+        DisplayMessage("Successful purchase", Color.green);
     }
     
     public void UpgradeWaterTowerSpeed()
     {
+        if (!CheckForEnoughDiamonds(5)) return;
         
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseAttackSpeed(waterTower);
+        ApplyForExistingTowers(Tower.ElementType.Water, 3);
+        DisplayMessage("Successful purchase", Color.green);
     }
     
     public void UpgradeEarthTowerSpeed()
     {
+        if (!CheckForEnoughDiamonds(5)) return;
         
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseAttackSpeed(earthTower);
+        ApplyForExistingTowers(Tower.ElementType.Earth, 3);
+        DisplayMessage("Successful purchase", Color.green);
     }
     
     public void UpgradeWoodTowerSpeed()
     {
+        if (!CheckForEnoughDiamonds(5)) return;
         
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseAttackSpeed(woodTower);
+        ApplyForExistingTowers(Tower.ElementType.Wood, 3);
+        DisplayMessage("Successful purchase", Color.green);
     }
 
     private bool CheckForEnoughDiamonds(int cost)
@@ -216,5 +233,29 @@ public class Upgrade : MonoBehaviour
         feedbackText.text = message;
         feedbackText.color = color;
         feedbackText.enabled = true;
+    }
+
+    private void ApplyForExistingTowers(Tower.ElementType element, int upgradeIndex)
+    {
+        foreach (var tower in TowerPlacementController.CurrentTowers)
+        {
+            var towerElement = tower.GetComponent<Tower>().Element;
+            if (towerElement == element)
+            {
+                switch (upgradeIndex)
+                {
+                    // Case 1 = Damage, Case 2 = Range, Case 3 = Speed
+                    case 1:
+                        IncreaseDamage(tower);
+                        break;
+                    case 2:
+                        IncreaseRange(tower);
+                        break;
+                    case 3:
+                        IncreaseAttackSpeed(tower);
+                        break;
+                }
+            }
+        }
     }
 }
