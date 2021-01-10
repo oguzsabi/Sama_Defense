@@ -45,7 +45,9 @@ public class Upgrade : MonoBehaviour
     private void IncreaseRange(GameObject tower)
     {
         var rangeCollider = GetRangeCollider(tower);
+        print("before range up " + rangeCollider.radius);
         rangeCollider.radius += 1f;
+        print("after range up " + rangeCollider.radius);
         AdjustRangeVisuals(tower);
     }
 

@@ -52,7 +52,7 @@ public class Tower : MonoBehaviour
         projectileComponent.SetProjectileTarget(currentTarget);
         projectileComponent.SetDamage(damage);
 
-        yield return new WaitForSeconds(1/shootingPeriod);
+        yield return new WaitForSeconds(shootingPeriod);
         
         shootAvailable = true;
     }

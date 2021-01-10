@@ -3221,14 +3221,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 4757855637191037408}
-  waterTower: {fileID: 6279904068666101274, guid: e52547e1a49572b4b9e9c4502b4766ba,
-    type: 3}
-  fireTower: {fileID: 6279904068666101274, guid: 5b618fd4b45c8e34799279d208442107,
-    type: 3}
-  earthTower: {fileID: 6279904068666101274, guid: e088d026c2b11224eb3b47f031f289e9,
-    type: 3}
-  woodTower: {fileID: 6279904068666101274, guid: ecd72f35628fe434ba7527c95329f99e,
-    type: 3}
+  waterTower: {fileID: 187918, guid: 8a4692c9d136b7b428e4cee1aa615c01, type: 3}
+  fireTower: {fileID: 187918, guid: 8ce14f79e1adc0f46aeff2eb5928fd14, type: 3}
+  earthTower: {fileID: 187918, guid: deaf4b93bf3c5fd4abe61ff1e1b291b5, type: 3}
+  woodTower: {fileID: 187918, guid: b5ccecccf7f53d445a6ec0c3ca27f35f, type: 3}
   waterProjectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
     type: 3}
   fireProjectile: {fileID: 8683729254116240177, guid: 154c1a994069d19428ed5613b87d26b4,

@@ -544,11 +544,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64490a8152bb2a4284995f60634f6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPeriod: 1.25
+  shootingPeriod: 3
   projectile: {fileID: 8683729254116240177, guid: 3bca02c038bc81a4fbebb5694a4cb8c8,
     type: 3}
   projectileStart: {fileID: 929333309455822772}
-  damage: 25
+  damage: 1
   isPlaceable: 0
   adjacencyDetector: {fileID: 420106708283499389}
   rangeIndicator: {fileID: 5612636649645345755}

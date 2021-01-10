@@ -51,9 +51,8 @@ public class PathFinder : MonoBehaviour
         waypointsLength = waypoints.Length;
     }
 
-    public void CheckMoveSpeed()
+    private void CheckMoveSpeed()
     {
         moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
-        
     }
 }

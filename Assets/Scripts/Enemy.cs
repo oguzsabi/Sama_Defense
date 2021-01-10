@@ -36,12 +36,6 @@ public class Enemy : MonoBehaviour
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public float GetMoveSpeed()
     {
         return movementSpeed;
@@ -104,7 +98,7 @@ public class Enemy : MonoBehaviour
     
     private void DoT()
     {   
-        Debug.Log("Enemy: " + element);
+        // Debug.Log("Enemy: " + element);
         if(!_alreadyDotted) StartCoroutine(DotTick());
     }
 
@@ -116,7 +110,6 @@ public class Enemy : MonoBehaviour
 
     private void Stun()
     {
-        _movementSpeedStorer = movementSpeed;
         if (!_alreadyStunned) StartCoroutine(StunTick());
         RemoveStun();
     }
@@ -128,16 +121,15 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DotTick()
     {
-        Debug.Log("HP before any ticks");
+        // Debug.Log("HP before any ticks");
         while (_dotTicksElapsed < _dotTickTime)
         {
-            Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
+            // Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
             health -= _dotDamage;
             _counter++;
             _dotTicksElapsed++;
-            Debug.Log("Tick number " + _counter + "HP(After tick):" + health);
-            
-            
+            // Debug.Log("Tick number " + _counter + "HP(After tick):" + health);
+
             if (health <= 0)
             {
                 _gameSession.ChangeCoinAmountBy(worth);
@@ -153,23 +145,14 @@ public class Enemy : MonoBehaviour
     {
         var slowedMovementSpeed = movementSpeed - _slowAmount;
         _slowRemoved = false;
-        Debug.Log("Slow before any ticks");
+        // Debug.Log("Slow before any ticks");
         while (_slowTickElapsed < _slowTickTime)
         {
-            Debug.Log("Movement speed before slow " + movementSpeed);
+            // Debug.Log("Movement speed before slow " + movementSpeed);
             movementSpeed = slowedMovementSpeed;
-            Debug.Log("Movement speed after slow " + movementSpeed);
+            // Debug.Log("Movement speed after slow " + movementSpeed);
             _slowTickElapsed++;
             yield return new WaitForSeconds(1);
-        }
-    }
-
-    private void RemoveSlow()
-    {
-        if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
-        {
-            movementSpeed += _slowAmount;
-            _slowRemoved = true;
         }
     }
 
@@ -179,8 +162,18 @@ public class Enemy : MonoBehaviour
         while (_stunTickElapsed < _stunTickTime)
         {
             movementSpeed = 0;
-
+            _stunTickElapsed++;
             yield return new WaitForSeconds(1);
+        }
+    }
+    
+    private void RemoveSlow()
+    {
+        if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
+        {
+            movementSpeed += _slowAmount;
+            _slowRemoved = true;
+            _alreadySlowed = false;
         }
     }
 
@@ -190,6 +183,7 @@ public class Enemy : MonoBehaviour
         {
             movementSpeed += _movementSpeedStorer;
             _stunRemoved = true;
+            _alreadyStunned = false;
         }
     }
     
