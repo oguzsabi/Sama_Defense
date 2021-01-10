@@ -112,7 +112,6 @@ public class Enemy : MonoBehaviour
     {
         if (!_alreadySlowed) StartCoroutine(SlowTick());
         RemoveSlow();
-        
     }
 
     private void Stun()
@@ -132,7 +131,6 @@ public class Enemy : MonoBehaviour
         Debug.Log("HP before any ticks");
         while (_dotTicksElapsed < _dotTickTime)
         {
-            
             Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
             health -= _dotDamage;
             _counter++;

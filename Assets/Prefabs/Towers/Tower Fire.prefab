@@ -125,7 +125,7 @@ Projector:
   m_FieldOfView: 60
   m_AspectRatio: 1
   m_Orthographic: 1
-  m_OrthographicSize: 15.8
+  m_OrthographicSize: 148.30003
   m_Material: {fileID: 2100000, guid: 1b0e9c2f0f3fed94190a7923dd2554f4, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
@@ -314,7 +314,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 28
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6279904068666101274
 GameObject:

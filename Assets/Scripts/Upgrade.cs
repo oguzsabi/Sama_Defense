@@ -19,32 +19,39 @@ public class Upgrade : MonoBehaviour
     [SerializeField] private GameObject woodProjectile;
 
     private GameSession _gameSession;
-    private Transform _waterTColliderTransform;
-    private Transform _fireTColliderTransform;
-    private Transform _earthTColliderTransform;
-    private Transform _woodTColliderTransform;
+    // private Transform _waterTColliderTransform;
+    // private Transform _fireTColliderTransform;
+    // private Transform _earthTColliderTransform;
+    // private Transform _woodTColliderTransform;
 
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
 
-        _waterTColliderTransform = waterTower.transform;
-        _fireTColliderTransform = fireTower.transform;
-        _earthTColliderTransform = earthTower.transform;
-        _woodTColliderTransform = woodTower.transform;
+        // _waterTColliderTransform = waterTower.transform;
+        // _fireTColliderTransform = fireTower.transform;
+        // _earthTColliderTransform = earthTower.transform;
+        // _woodTColliderTransform = woodTower.transform;
 
         feedbackText.enabled = false;
     }
 
-    public SphereCollider GetChildCollider(Transform Collidertransform)
+    private SphereCollider GetRangeCollider(GameObject tower)
     {
-        var sphereCollider = Collidertransform.GetChild(0).GetComponent<SphereCollider>();
-        return sphereCollider;
+        var rangeCollider = tower.transform.GetChild(0).GetComponent<SphereCollider>();
+        return rangeCollider;
     }
 
-    public void IncreaseRadius(SphereCollider sphereCollider)
+    private void IncreaseRange(GameObject tower)
     {
-       sphereCollider.radius += 0.1f;
+        var rangeCollider = GetRangeCollider(tower);
+        rangeCollider.radius += 1f;
+        AdjustRangeVisuals(tower);
+    }
+
+    private void AdjustRangeVisuals(GameObject tower)
+    {
+        tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 7.35f;
     }
 
     private void IncreaseDamage(GameObject tower)
@@ -60,39 +67,6 @@ public class Upgrade : MonoBehaviour
         projectile.GetComponent<Projectile>().accuracy += 10;
         print(projectile.name + " accuracy after upgrade " + projectile.GetComponent<Projectile>().accuracy);
     }
-    
-    /*
-    public void RangeUpgradeHandler()"
-    {
-        if (_gameSession.AreThereEnoughDiamonds(5))
-        {
-            
-            if (Input.GetKeyDown(RupgradeWater))
-            { 
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseRadius(GetChildCollider(_waterTColliderTransform)); 
-            }
-            if (Input.GetKeyDown(RupgradeFire))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseRadius(GetChildCollider(_fireTColliderTransform)); 
-            }
-
-            if (Input.GetKeyDown(RupgradeEarth))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseRadius(GetChildCollider(_earthTColliderTransform)); 
-            }
-
-            if (Input.GetKeyDown(RupgradeWood))
-            {
-                _gameSession.ChangeDiamondAmountBy(-5);
-                IncreaseRadius(GetChildCollider(_woodTColliderTransform)); 
-            }
-        }
-        
-    }
-    */
 
     public void UpgradeFireTowerDamage()
     {
@@ -164,6 +138,62 @@ public class Upgrade : MonoBehaviour
         _gameSession.ChangeDiamondAmountBy(-5);
         IncreaseProjectileAccuracy(woodProjectile);
         DisplayMessage("Successful purchase", Color.green);
+    }
+
+    public void UpgradeFireTowerRange()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseRange(fireTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeWaterTowerRange()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseRange(waterTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeEarthTowerRange()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseRange(earthTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+    
+    public void UpgradeWoodTowerRange()
+    {
+        if (!CheckForEnoughDiamonds(5)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-5);
+        IncreaseRange(woodTower);
+        DisplayMessage("Successful purchase", Color.green);
+    }
+
+    public void UpgradeFireTowerSpeed()
+    {
+        
+    }
+    
+    public void UpgradeWaterTowerSpeed()
+    {
+        
+    }
+    
+    public void UpgradeEarthTowerSpeed()
+    {
+        
+    }
+    
+    public void UpgradeWoodTowerSpeed()
+    {
+        
     }
 
     private bool CheckForEnoughDiamonds(int cost)

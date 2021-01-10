@@ -548,7 +548,7 @@ MonoBehaviour:
   projectile: {fileID: 8683729254116240177, guid: d28a12d7e975a904c8d4fb31e49099a7,
     type: 3}
   projectileStart: {fileID: 929333309455822772}
-  damage: 25
+  damage: 2
   isPlaceable: 0
   adjacencyDetector: {fileID: 420106708283499389}
   rangeIndicator: {fileID: 5612636649645345755}
@@ -797,5 +797,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2.15
   m_Center: {x: 0, y: 0, z: 0}
