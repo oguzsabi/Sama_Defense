@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
     private bool _alreadyStunned = false;
     private bool _slowRemoved = false;
     private bool _stunRemoved = false;
+    private bool _dotRemoved = false;
     private int _counter = 0;
     private float _movementSpeedStorer;
     
@@ -51,6 +52,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            Debug.Log(("Before ApplyElementEffect "));
             ApplyElementEffect(projectileType);
         }
     }
@@ -66,10 +68,12 @@ public class Enemy : MonoBehaviour
 
     private void ApplyElementEffect(Projectile.ElementType projectileType)
     {
+        Debug.Log(("In ApplyElementEffects "));
         switch (projectileType)
         {
             case Projectile.ElementType.Fire:
             {
+                Debug.Log("Before Dot() ");
                 DoT();
                 _alreadyDotted = true;
                 return;
@@ -97,21 +101,19 @@ public class Enemy : MonoBehaviour
     }
     
     private void DoT()
-    {   
-        // Debug.Log("Enemy: " + element);
+    {
         if(!_alreadyDotted) StartCoroutine(DotTick());
     }
 
     private void Slow()
     {
         if (!_alreadySlowed) StartCoroutine(SlowTick());
-        RemoveSlow();
+        
     }
 
     private void Stun()
     {
         if (!_alreadyStunned) StartCoroutine(StunTick());
-        RemoveStun();
     }
 
     private void KnockBack()
@@ -121,15 +123,15 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DotTick()
     {
+        
         // Debug.Log("HP before any ticks");
-        while (_dotTicksElapsed < _dotTickTime)
+        while (_dotTicksElapsed <= _dotTickTime)
         {
             // Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
             health -= _dotDamage;
             _counter++;
             _dotTicksElapsed++;
             // Debug.Log("Tick number " + _counter + "HP(After tick):" + health);
-
             if (health <= 0)
             {
                 _gameSession.ChangeCoinAmountBy(worth);
@@ -138,7 +140,8 @@ public class Enemy : MonoBehaviour
             }
 
             yield return new WaitForSeconds(1);
-        }    
+        }
+        RemoveDot();
     }
 
     private IEnumerator SlowTick()
@@ -154,6 +157,7 @@ public class Enemy : MonoBehaviour
             _slowTickElapsed++;
             yield return new WaitForSeconds(1);
         }
+        RemoveSlow();
     }
 
     private IEnumerator StunTick()
@@ -165,6 +169,7 @@ public class Enemy : MonoBehaviour
             _stunTickElapsed++;
             yield return new WaitForSeconds(1);
         }
+        RemoveStun();
     }
     
     private void RemoveSlow()
@@ -172,6 +177,7 @@ public class Enemy : MonoBehaviour
         if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
         {
             movementSpeed += _slowAmount;
+            _slowTickElapsed = 0;
             _slowRemoved = true;
             _alreadySlowed = false;
         }
@@ -182,8 +188,18 @@ public class Enemy : MonoBehaviour
         if (_stunTickElapsed == _stunTickTime || !_stunRemoved)
         {
             movementSpeed += _movementSpeedStorer;
+            _stunTickElapsed = 0;
             _stunRemoved = true;
             _alreadyStunned = false;
+        }
+    }
+
+    private void RemoveDot()
+    {
+        if (_dotTicksElapsed == _dotTickTime || !_dotRemoved)
+        {
+            _dotTicksElapsed = 0;
+            _dotRemoved = true;
         }
     }
     
