@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,13 +13,18 @@ public class LevelsManager : MonoBehaviour
 
     private Button[] levelButtons;
 
+    private void Awake()
+    {
+        // this is done here to prevent buttons from getting disabled after scene is loaded.
+        levelButtons = levelsCanvas.GetComponentsInChildren<Button>();
+        ArrangeLevelAvailability();
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
         // PlayerDataManager.LockAllLevels(numberOfLevels);
         PlayerDataManager.UnlockLevel(1);
-        levelButtons = levelsCanvas.GetComponentsInChildren<Button>();
-        ArrangeLevelAvailability();
     }
 
     private void ArrangeLevelAvailability()
