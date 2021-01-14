@@ -64,6 +64,14 @@ public class PlayerDataManager : MonoBehaviour
     {
         SetDiamondAmount(0);
     }
-    
-    
+
+    public static void IncrementMaximumTowerCount()
+    {
+        PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY) + 1);
+    }
+
+    public static int GetMaximumTowerCount()
+    {
+        return PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY);
+    }
 }

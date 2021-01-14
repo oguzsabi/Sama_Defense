@@ -215,6 +215,16 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
 
+    public void IncrementMaximumTowerCount()
+    {
+        if (!CheckForEnoughDiamonds(20)) return;
+        
+        _gameSession.ChangeDiamondAmountBy(-20);
+        PlayerDataManager.IncrementMaximumTowerCount();
+        _gameSession.ChangeMaxTowerCount();
+        DisplayMessage("Successful purchase", Color.green);
+    }
+
     private bool CheckForEnoughDiamonds(int cost)
     {
         if (_gameSession.AreThereEnoughDiamonds(cost))
@@ -233,6 +243,7 @@ public class Upgrade : MonoBehaviour
         feedbackText.text = message;
         feedbackText.color = color;
         feedbackText.enabled = true;
+        _gameSession.SaveDiamondAmount();
     }
 
     private void ApplyForExistingTowers(Tower.ElementType element, int upgradeIndex)

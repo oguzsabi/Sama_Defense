@@ -19,6 +19,7 @@ public class GameSession : MonoBehaviour
         // PlayerDataManager.ResetDiamondAmount();
         diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
         levelNumberText.text = (LevelLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
+        towerCountText.text = 0.ToString() + "/" + PlayerDataManager.GetMaximumTowerCount();
     }
 
     public void ChangeCoinAmountBy(int amount)
@@ -36,7 +37,6 @@ public class GameSession : MonoBehaviour
 
         diamondAmountText.text = newDiamondAmount.ToString();
     }
-    
 
     public void IncrementTowerCount()
     {
@@ -46,6 +46,15 @@ public class GameSession : MonoBehaviour
         var maxTowerCount = int.Parse(towerCounts[1]);
 
         towerCountText.text = newTowerCount.ToString() + "/" + maxTowerCount;
+    }
+
+    public void ChangeMaxTowerCount()
+    {
+        var towerCounts = towerCountText.text.Split('/');
+        var oldTowerCount = int.Parse(towerCounts[0]);
+        var maxTowerCount = int.Parse(towerCounts[1]) + 1;
+
+        towerCountText.text = oldTowerCount.ToString() + "/" + maxTowerCount;
     }
 
     public void IncrementWaveNumber()
