@@ -18,7 +18,7 @@ public class GameSession : MonoBehaviour
     {
         // PlayerDataManager.ResetDiamondAmount();
         diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
-        levelNumberText.text = (LevelLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
+        levelNumberText.text = (SceneLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
         towerCountText.text = 0.ToString() + "/" + PlayerDataManager.GetMaximumTowerCount();
     }
 

@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void PlayButtonClicked()
     {
-        LevelLoader.LoadScene("Level 1");
+        SceneLoader.LoadScene("Level 1");
+    }
+
+    public void GoToLevelsMenu()
+    {
+        SceneLoader.LoadScene("Levels");
     }
 }

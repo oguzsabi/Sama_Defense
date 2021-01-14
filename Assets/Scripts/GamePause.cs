@@ -54,7 +54,7 @@ public class GamePause : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        LevelLoader.LoadScene("Main Menu");
+        SceneLoader.LoadScene("Main Menu");
         Time.timeScale = 1;
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelLoader : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private float delayTimeInSeconds = 5f;
 
@@ -32,8 +32,8 @@ public class LevelLoader : MonoBehaviour
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    public static void LoadScene(string levelName)
+    public static void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(sceneName);
     }
 }

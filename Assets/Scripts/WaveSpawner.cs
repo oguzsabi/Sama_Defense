@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] private LevelLoader _levelLoader;
+    [SerializeField] private SceneLoader sceneLoader;
     [SerializeField] private float secondsBetweenWaves = 5f;
     [SerializeField] private float secondsBetweenSpawns = 0.5f;
     [SerializeField] private GameObject[] enemyPrefabs;
@@ -51,7 +51,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (IsTheLevelOver())
         {
-            _levelLoader.LoadNextLevel();
+            sceneLoader.LoadNextLevel();
         }
         
         for (var enemyIndex = 0; enemyIndex < enemyPrefabsLength; enemyIndex++)

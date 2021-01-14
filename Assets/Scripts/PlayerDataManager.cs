@@ -50,6 +50,14 @@ public class PlayerDataManager : MonoBehaviour
         return false;
     }
 
+    public static void LockAllLevels(int numberOfLevels)
+    {
+        for (var i = 0; i < numberOfLevels; i++)
+        {
+            PlayerPrefs.SetInt(LEVEL_KEY + i, 0); // 1 is true
+        }
+    }
+
     public static void SetDiamondAmount(int amount)
     {
         PlayerPrefs.SetInt(DIAMOND_AMOUNT_KEY, amount);
