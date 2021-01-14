@@ -3933,7 +3933,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 494.14, y: 456}
+  m_AnchoredPosition: {x: 428, y: -439.76}
   m_SizeDelta: {x: 465.86108, y: 129.594}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7713392306830064432
@@ -3963,9 +3963,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '+1
+  m_text: '+1 Max. Tower Count
 
-    Max. Tower Count'
+    (20 Diamonds)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8070489f085b35d4aa2e59ca8b6930c7, type: 2}
   m_sharedMaterial: {fileID: -3382002344756838303, guid: 8070489f085b35d4aa2e59ca8b6930c7,
