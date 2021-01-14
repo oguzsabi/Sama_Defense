@@ -29,17 +29,18 @@ public class Enemy : MonoBehaviour
     private bool _stunRemoved = false;
     private bool _dotRemoved = false;
     private int _counter = 0;
-    private float _movementSpeedStorer;
+    private float _currentMovementSpeed;
     
     // Start is called before the first frame update
     void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        _currentMovementSpeed = movementSpeed;
     }
 
     public float GetMoveSpeed()
     {
-        return movementSpeed;
+        return _currentMovementSpeed;
     }
 
     public void GetHit(float damage, Projectile.ElementType projectileType)
@@ -102,18 +103,30 @@ public class Enemy : MonoBehaviour
     
     private void DoT()
     {
-        if(!_alreadyDotted) StartCoroutine(DotTick());
+        if (!_alreadyDotted)
+        {
+            StartCoroutine(DotTick());
+        }
     }
 
     private void Slow()
     {
-        if (!_alreadySlowed) StartCoroutine(SlowTick());
+        if (_alreadySlowed) return;
         
+        var slowedMovementSpeed = movementSpeed - _slowAmount;
+        if (slowedMovementSpeed < 0.1f)
+            slowedMovementSpeed = 1f;
+        _currentMovementSpeed = slowedMovementSpeed;
+        StartCoroutine(SlowTick());
+
     }
 
     private void Stun()
     {
-        if (!_alreadyStunned) StartCoroutine(StunTick());
+        if (_alreadyStunned) return;
+        
+        _currentMovementSpeed = 0;
+        StartCoroutine(StunTick());
     }
 
     private void KnockBack()
@@ -123,7 +136,6 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator DotTick()
     {
-        
         // Debug.Log("HP before any ticks");
         while (_dotTicksElapsed <= _dotTickTime)
         {
@@ -138,7 +150,6 @@ public class Enemy : MonoBehaviour
                 Die();
                 break;
             }
-
             yield return new WaitForSeconds(1);
         }
         RemoveDot();
@@ -146,13 +157,13 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator SlowTick()
     {
-        var slowedMovementSpeed = movementSpeed - _slowAmount;
+        // var slowedMovementSpeed = movementSpeed - _slowAmount;
         _slowRemoved = false;
         // Debug.Log("Slow before any ticks");
         while (_slowTickElapsed < _slowTickTime)
         {
             Debug.Log("Movement speed before slow " + movementSpeed);
-            movementSpeed = slowedMovementSpeed;
+            // movementSpeed = slowedMovementSpeed;
             Debug.Log("Movement speed after slow " + movementSpeed);
             _slowTickElapsed++;
             yield return new WaitForSeconds(1);
@@ -162,10 +173,10 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator StunTick()
     {
-        _movementSpeedStorer = movementSpeed;
+        // _movementSpeedStorer = movementSpeed;
         while (_stunTickElapsed < _stunTickTime)
         {
-            movementSpeed = 0;
+            // movementSpeed = 0;
             _stunTickElapsed++;
             yield return new WaitForSeconds(1);
         }
@@ -176,7 +187,7 @@ public class Enemy : MonoBehaviour
     {
         if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
         {
-            movementSpeed += _slowAmount;
+            _currentMovementSpeed = movementSpeed;
             _slowTickElapsed = 0;
             _slowRemoved = true;
             _alreadySlowed = false;
@@ -187,7 +198,7 @@ public class Enemy : MonoBehaviour
     {
         if (_stunTickElapsed == _stunTickTime || !_stunRemoved)
         {
-            movementSpeed += _movementSpeedStorer;
+            _currentMovementSpeed = movementSpeed;
             _stunTickElapsed = 0;
             _stunRemoved = true;
             _alreadyStunned = false;

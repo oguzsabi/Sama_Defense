@@ -549,7 +549,7 @@ MonoBehaviour:
     type: 3}
   projectileStart: {fileID: 929333309455822772}
   fireRate: 0.1
-  damage: 5
+  damage: 25
   isPlaceable: 0
   adjacencyDetector: {fileID: 420106708283499389}
   rangeIndicator: {fileID: 5612636649645345755}

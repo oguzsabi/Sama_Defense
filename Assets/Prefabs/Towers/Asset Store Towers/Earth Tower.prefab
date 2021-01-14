@@ -545,11 +545,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   element: 2
-  fireRate: 0.35
   projectile: {fileID: 8683729254116240177, guid: d28a12d7e975a904c8d4fb31e49099a7,
     type: 3}
   projectileStart: {fileID: 929333309455822772}
-  damage: 1
+  fireRate: 0.35
+  damage: 25
   isPlaceable: 0
   adjacencyDetector: {fileID: 420106708283499389}
   rangeIndicator: {fileID: 5612636649645345755}
