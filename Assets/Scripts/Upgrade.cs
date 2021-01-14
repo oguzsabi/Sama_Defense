@@ -56,7 +56,7 @@ public class Upgrade : MonoBehaviour
 
     private void IncreaseAttackSpeed(GameObject tower)
     {
-        tower.GetComponent<Tower>().fireRate += 1f;
+        tower.GetComponent<Tower>().fireRate += 0.1f;
     }
 
     public void UpgradeFireTowerDamage()
