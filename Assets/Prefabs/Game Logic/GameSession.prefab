@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489b4d4011def564a85546ce0a25899f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneLoader: {fileID: 0}
   diamondAmountText: {fileID: 0}
   coinAmountText: {fileID: 0}
   towerCountText: {fileID: 0}

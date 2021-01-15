@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour
 {
-    [SerializeField] private SceneLoader sceneLoader;
     [SerializeField] private float secondsBetweenWaves = 5f;
     [SerializeField] private float secondsBetweenSpawns = 0.5f;
     [SerializeField] private GameObject[] enemyPrefabs;
@@ -26,6 +25,7 @@ public class WaveSpawner : MonoBehaviour
     private int currentWaveIndex;
     private bool inWaveBreak = false;
     private bool inSpawnBreak = false;
+    private bool loadingNextLevel = false;
     private static int enemiesAlive = 0;
     private GameSession _gameSession;
     
@@ -49,9 +49,10 @@ public class WaveSpawner : MonoBehaviour
     {
         if (inWaveBreak || inSpawnBreak) return;
 
-        if (IsTheLevelOver())
+        if (IsTheLevelOver() && !loadingNextLevel)
         {
-            sceneLoader.LoadNextLevel();
+            loadingNextLevel = true;
+            _gameSession.LoadNextLevel();
         }
         
         for (var enemyIndex = 0; enemyIndex < enemyPrefabsLength; enemyIndex++)

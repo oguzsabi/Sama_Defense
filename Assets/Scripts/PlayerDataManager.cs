@@ -82,4 +82,12 @@ public class PlayerDataManager : MonoBehaviour
     {
         return PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY);
     }
+
+    public static void SetDefaultMaxTowerCount()
+    {
+        if (PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY) < 5)
+        {
+            PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, 5);
+        }
+    }
 }

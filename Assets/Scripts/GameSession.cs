@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
+    [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private TextMeshProUGUI diamondAmountText;
     [SerializeField] private TextMeshProUGUI coinAmountText;
     [SerializeField] private TextMeshProUGUI towerCountText;
@@ -14,12 +16,17 @@ public class GameSession : MonoBehaviour
     
     private const int levelNumberOffset = -3;
 
+    private void Awake()
+    {
+        CheckDefaultMaxTowerCount();
+    }
+
     private void Start()
     {
         // PlayerDataManager.ResetDiamondAmount();
         diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
         levelNumberText.text = (SceneLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
-        towerCountText.text = 0.ToString() + "/" + PlayerDataManager.GetMaximumTowerCount();
+        towerCountText.text = 0 + "/" + PlayerDataManager.GetMaximumTowerCount();
     }
 
     public void ChangeCoinAmountBy(int amount)
@@ -98,5 +105,23 @@ public class GameSession : MonoBehaviour
     public void SaveDiamondAmount()
     {
         PlayerDataManager.SetDiamondAmount(int.Parse(diamondAmountText.text));
+    }
+
+    public void LoadNextLevel()
+    {
+        UnlockNextLevel();
+        _sceneLoader.LoadNextLevel();
+    }
+
+    private void UnlockNextLevel()
+    {
+        var currentSceneName = SceneManager.GetActiveScene().name;
+        var levelNumber = int.Parse(currentSceneName.Substring(6, currentSceneName.Length - 6)) + 1;
+        PlayerDataManager.UnlockLevel(levelNumber);
+    }
+
+    private void CheckDefaultMaxTowerCount()
+    {
+        PlayerDataManager.SetDefaultMaxTowerCount();
     }
 }

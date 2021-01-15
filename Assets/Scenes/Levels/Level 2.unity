@@ -688,6 +688,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
         type: 3}
+      propertyPath: _sceneLoader
+      value: 
+      objectReference: {fileID: 1014336367}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
       propertyPath: coinAmountText
       value: 
       objectReference: {fileID: 1937904623}
@@ -2055,7 +2060,7 @@ PrefabInstance:
     - target: {fileID: 5970914214993546293, guid: 135999f8a8ce5e649ac258c02a16307a,
         type: 3}
       propertyPath: m_Name
-      value: LevelLoader
+      value: SceneLoader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 135999f8a8ce5e649ac258c02a16307a, type: 3}

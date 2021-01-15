@@ -48,7 +48,6 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            _gameSession.ChangeCoinAmountBy(worth);
             Die();
         }
         else
@@ -61,8 +60,10 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         if (_diedBefore) return;
+        
         _diedBefore = true;
         WaveSpawner.DecreaseAliveEnemyCount();
+        _gameSession.ChangeCoinAmountBy(worth);
         _gameSession.IncrementDiamondAmount();
         Destroy(gameObject);
     }

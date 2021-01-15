@@ -8,8 +8,6 @@ public class LevelsManager : MonoBehaviour
 {
     [SerializeField] private int numberOfLevels = 10;
     [SerializeField] private GameObject levelsCanvas;
-    [SerializeField] private Color lockedColor;
-    [SerializeField] private Color unlockedColor;
 
     private Button[] levelButtons;
 
@@ -29,7 +27,7 @@ public class LevelsManager : MonoBehaviour
 
     private void ArrangeLevelAvailability()
     {
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < numberOfLevels; i++)
         {
             if (!PlayerDataManager.IsLevelUnlocked(i + 1))
             {
