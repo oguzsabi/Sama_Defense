@@ -6,41 +6,52 @@ using UnityEngine.UI;
 
 public class LevelsManager : MonoBehaviour
 {
-    [SerializeField] private int numberOfLevels = 10;
-    [SerializeField] private GameObject levelsCanvas;
+    [SerializeField] private int _numberOfLevels = 10;
+    [SerializeField] private GameObject _levelsCanvas;
 
-    private Button[] levelButtons;
-
+    private Button[] _levelButtons;
+    
+    /// <summary>
+    /// Level buttons are assigned here to prevent buttons from getting disabled after scene is loaded.
+    /// </summary>
     private void Awake()
     {
-        // this is done here to prevent buttons from getting disabled after scene is loaded.
-        levelButtons = levelsCanvas.GetComponentsInChildren<Button>();
+        _levelButtons = _levelsCanvas.GetComponentsInChildren<Button>();
         ArrangeLevelAvailability();
     }
-
-    // Start is called before the first frame update
+    
     private void Start()
     {
         // PlayerDataManager.LockAllLevels(numberOfLevels);
         PlayerDataManager.UnlockLevel(1);
     }
-
+    
+    /// <summary>
+    /// Prevents clicking to levels that are not unlocked yet.
+    /// </summary>
     private void ArrangeLevelAvailability()
     {
-        for (var i = 0; i < numberOfLevels; i++)
+        for (var i = 0; i < _numberOfLevels; i++)
         {
             if (!PlayerDataManager.IsLevelUnlocked(i + 1))
             {
-                levelButtons[i].interactable = false;
+                _levelButtons[i].interactable = false;
             }
         }
     }
-
+    
+    /// <summary>
+    /// Loads the corresponding level
+    /// </summary>
+    /// <param name="levelNumber"></param>
     public void LoadLevel(int levelNumber)
     {
         SceneLoader.LoadScene("Level " + levelNumber);
     }
-
+    
+    /// <summary>
+    /// Redirects to main menu
+    /// </summary>
     public void GoToMainMenu()
     {
         SceneLoader.LoadScene("Main Menu");

@@ -6,13 +6,12 @@ using Random = UnityEngine.Random;
 
 public class PathFinder : MonoBehaviour
 {
-    private Transform[] waypoints;
-    private int currentWaypointIndex;
-    private int waypointsLength;
-    private float moveSpeed;
-    private GameObject selectedPath;
-
-    // Start is called before the first frame update
+    private Transform[] _waypoints;
+    private int _currentWaypointIndex;
+    private int _waypointsLength;
+    private float _moveSpeed;
+    private GameObject _selectedPath;
+    
     private void Start()
     {
         
@@ -21,38 +20,48 @@ public class PathFinder : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (currentWaypointIndex >= waypointsLength || !selectedPath) return;
+        if (_currentWaypointIndex >= _waypointsLength || !_selectedPath) return;
         
         CheckMoveSpeed();
         GoToNextWaypoint();
     }
-
+    
+    /// <summary>
+    /// Directs the enemy unit to next waypoint in _waypoints array
+    /// </summary>
     private void GoToNextWaypoint()
     {
-        var currentWaypoint = waypoints[currentWaypointIndex];
+        var currentWaypoint = _waypoints[_currentWaypointIndex];
         
-        var step = moveSpeed * Time.deltaTime;
+        var step = _moveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, step);
         
         if (Math.Abs(transform.position.x - currentWaypoint.position.x) < 0.1f &&
             Math.Abs(transform.position.z - currentWaypoint.position.z) < 0.1f)
         {
-            currentWaypointIndex++;
+            _currentWaypointIndex++;
         }
     }
-
+    
+    /// <summary>
+    /// The path that enemy unit will follow is being assigned
+    /// </summary>
+    /// <param name="enemyPaths"></param>
     public void SetEnemyPaths(GameObject[] enemyPaths)
     {
-        selectedPath = enemyPaths[Random.Range(0, enemyPaths.Length)];
-        currentWaypointIndex = 1;
-        moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
+        _selectedPath = enemyPaths[Random.Range(0, enemyPaths.Length)];
+        _currentWaypointIndex = 1;
+        _moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
         
-        waypoints = selectedPath.GetComponentsInChildren<Transform>();
-        waypointsLength = waypoints.Length;
+        _waypoints = _selectedPath.GetComponentsInChildren<Transform>();
+        _waypointsLength = _waypoints.Length;
     }
-
+    
+    /// <summary>
+    /// Checks movement speed for any slow or stun effect
+    /// </summary>
     private void CheckMoveSpeed()
     {
-        moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
+        _moveSpeed = gameObject.GetComponent<Enemy>().GetMoveSpeed();
     }
 }

@@ -23,6 +23,7 @@ public class Upgrade : MonoBehaviour
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
+        _gameSession.ChangeDiamondAmountBy(100);
         feedbackText.enabled = false;
     }
 

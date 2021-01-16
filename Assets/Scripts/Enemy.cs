@@ -28,21 +28,28 @@ public class Enemy : MonoBehaviour
     private bool _slowRemoved = false;
     private bool _stunRemoved = false;
     private bool _dotRemoved = false;
-    private int _counter = 0;
     private float _currentMovementSpeed;
     
-    // Start is called before the first frame update
+    
     void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         _currentMovementSpeed = movementSpeed;
     }
-
+    /// <summary>
+    /// Gets the movement speed of enemy unit
+    /// </summary>
+    /// <returns>float currentMovementSpeed</returns>
     public float GetMoveSpeed()
     {
         return _currentMovementSpeed;
     }
-
+    
+    /// <summary>
+    /// Deals damage to enemy unit and either kills unit or apply elemental effects to unit
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="projectileType"></param>
     public void GetHit(float damage, Projectile.ElementType projectileType)
     {
         health -= damage;
@@ -56,7 +63,11 @@ public class Enemy : MonoBehaviour
             ApplyElementEffect(projectileType);
         }
     }
-
+    
+    /// <summary>
+    /// Destroys enemy unit
+    /// Increases currencies and decreases alive enemy count
+    /// </summary>
     private void Die()
     {
         if (_diedBefore) return;
@@ -67,15 +78,22 @@ public class Enemy : MonoBehaviour
         _gameSession.IncrementDiamondAmount();
         Destroy(gameObject);
     }
-
+    
+    /// <summary>
+    /// Applies elemental effects to enemy unit
+    /// Fire: Deals damage over time
+    /// Water: Slows enemy units
+    /// Earth: Stuns enemy units
+    /// Wood: Knocks enemy units back
+    /// </summary>
+    /// <param name="projectileType"></param>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     private void ApplyElementEffect(Projectile.ElementType projectileType)
     {
-        Debug.Log(("In ApplyElementEffects "));
         switch (projectileType)
         {
             case Projectile.ElementType.Fire:
             {
-                Debug.Log("Before Dot() ");
                 DoT();
                 _alreadyDotted = true;
                 return;
@@ -102,49 +120,67 @@ public class Enemy : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Starts a coroutine for damage over time(DoT) effect on enemy unit
+    /// </summary>
     private void DoT()
     {
+        // Only apply DoT effect if unit does not have a DoT already
         if (!_alreadyDotted)
         {
             StartCoroutine(DotTick());
         }
     }
-
+    
+    /// <summary>
+    /// Starts a coroutine for slow effect on enemy unit and slows the enemy for _slowAmount
+    /// </summary>
     private void Slow()
     {
-        if (_alreadySlowed) return;
-        
-        var slowedMovementSpeed = movementSpeed - _slowAmount;
-        if (slowedMovementSpeed < 0.1f)
-            slowedMovementSpeed = 1f;
-        _currentMovementSpeed = slowedMovementSpeed;
-        StartCoroutine(SlowTick());
+        // Only apply slow effect if unit does not have a slow already
+        if (!_alreadySlowed)
+        {
+
+            var slowedMovementSpeed = movementSpeed - _slowAmount;
+            if (slowedMovementSpeed < 0.1f)
+                slowedMovementSpeed = 1f;
+            _currentMovementSpeed = slowedMovementSpeed;
+            StartCoroutine(SlowTick());
+        }
 
     }
-
+    
+    /// <summary>
+    /// Starts a coroutine for stun effect on enemy unit
+    /// Reduces the movement speed to 0
+    /// </summary>
     private void Stun()
     {
-        if (_alreadyStunned) return;
-        
-        _currentMovementSpeed = 0;
-        StartCoroutine(StunTick());
+        // Only apply stun effect if unit does not stunned already
+        if (!_alreadyStunned)
+        {
+            _currentMovementSpeed = 0;
+            StartCoroutine(StunTick());
+        }
     }
 
     private void KnockBack()
     {
         
     }
-
+    
+    /// <summary>
+    /// Loops for _dotTickTime times and deals _dotDamage in every iteration
+    /// Removes the DoT effect once the loop is over
+    /// </summary>
+    /// <returns>IEnumerator WaitForSeconds</returns>
     private IEnumerator DotTick()
     {
-        // Debug.Log("HP before any ticks");
         while (_dotTicksElapsed <= _dotTickTime)
         {
-            // Debug.Log("Tick number " + _counter + "HP(Before tick):" + health);
             health -= _dotDamage;
-            _counter++;
             _dotTicksElapsed++;
-            // Debug.Log("Tick number " + _counter + "HP(After tick):" + health);
+            
             if (health <= 0)
             {
                 _gameSession.ChangeCoinAmountBy(worth);
@@ -155,35 +191,42 @@ public class Enemy : MonoBehaviour
         }
         RemoveDot();
     }
-
+    
+    /// <summary>
+    /// Loops for _slowTickTime times
+    /// Removes the slow effect once the loop is over
+    /// </summary>
+    /// <returns>IEnumerator WaitForSeconds</returns>
     private IEnumerator SlowTick()
     {
-        // var slowedMovementSpeed = movementSpeed - _slowAmount;
         _slowRemoved = false;
-        // Debug.Log("Slow before any ticks");
         while (_slowTickElapsed < _slowTickTime)
         {
-            Debug.Log("Movement speed before slow " + movementSpeed);
-            // movementSpeed = slowedMovementSpeed;
-            Debug.Log("Movement speed after slow " + movementSpeed);
             _slowTickElapsed++;
             yield return new WaitForSeconds(1);
         }
         RemoveSlow();
     }
-
+    
+    /// <summary>
+    /// Loops for _stunTickTime times
+    /// Removes the stun effect once the loop is over
+    /// </summary>
+    /// <returns>IEnumerator WaitForSeconds</returns>
     private IEnumerator StunTick()
     {
-        // _movementSpeedStorer = movementSpeed;
         while (_stunTickElapsed < _stunTickTime)
         {
-            // movementSpeed = 0;
             _stunTickElapsed++;
             yield return new WaitForSeconds(1);
         }
         RemoveStun();
     }
     
+    /// <summary>
+    /// Returns movement speed to its normal value
+    /// Resets _slowTickElapsed for future slow effects
+    /// </summary>
     private void RemoveSlow()
     {
         if (_slowTickElapsed == _slowTickTime || !_slowRemoved)
@@ -194,7 +237,11 @@ public class Enemy : MonoBehaviour
             _alreadySlowed = false;
         }
     }
-
+    
+    /// <summary>
+    /// Returns movement speed to its normal value
+    /// Resets _stunTickElapsed for future stun effects
+    /// </summary>
     private void RemoveStun()
     {
         if (_stunTickElapsed == _stunTickTime || !_stunRemoved)
@@ -205,7 +252,10 @@ public class Enemy : MonoBehaviour
             _alreadyStunned = false;
         }
     }
-
+    
+    /// <summary>
+    /// Resets _dotTickElapsed for future DoT effects
+    /// </summary>
     private void RemoveDot()
     {
         if (_dotTicksElapsed == _dotTickTime || !_dotRemoved)

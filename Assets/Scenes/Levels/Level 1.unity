@@ -4323,12 +4323,37 @@ PrefabInstance:
       objectReference: {fileID: 952394628}
     - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
         type: 3}
+      propertyPath: _coinAmountText
+      value: 
+      objectReference: {fileID: 1637508626}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
+      propertyPath: _towerCountText
+      value: 
+      objectReference: {fileID: 1787199790}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
+      propertyPath: _waveNumberText
+      value: 
+      objectReference: {fileID: 952394628}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
       propertyPath: levelNumberText
       value: 
       objectReference: {fileID: 1777956592}
     - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
         type: 3}
+      propertyPath: _levelNumberText
+      value: 
+      objectReference: {fileID: 1777956592}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
       propertyPath: diamondAmountText
+      value: 
+      objectReference: {fileID: 994939748}
+    - target: {fileID: 3990489753256439070, guid: fe56567138021524b9c0670696afc637,
+        type: 3}
+      propertyPath: _diamondAmountText
       value: 
       objectReference: {fileID: 994939748}
     - target: {fileID: 3990489753256439071, guid: fe56567138021524b9c0670696afc637,

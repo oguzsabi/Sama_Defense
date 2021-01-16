@@ -16,7 +16,6 @@ public class GamePause : MonoBehaviour
         upgradesMenuCanvas.SetActive(false);
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
@@ -37,33 +36,45 @@ public class GamePause : MonoBehaviour
             UnpauseGame();
         }
     }
-
+    /// <summary>
+    /// Pauses the game by setting time scale to 0
+    /// </summary>
     private void PauseGame()
     {
         Time.timeScale = 0;
         gameSessionCanvas.SetActive(false);
         pauseMenuCanvas.SetActive(true);
     }
-
+    
+    /// <summary>
+    /// Resumes the game by setting time scale to 1
+    /// </summary>
     public void UnpauseGame()
     {
         Time.timeScale = 1;
         gameSessionCanvas.SetActive(true);
         pauseMenuCanvas.SetActive(false);
     }
-
+    
+    /// <summary>
+    /// Redirects to the main menu 
+    /// </summary>
     public void GoToMainMenu()
     {
         SceneLoader.LoadScene("Main Menu");
         Time.timeScale = 1;
     }
-
+    /// <summary>
+    /// Redirects to the upgrades menu 
+    /// </summary>
     public void GoToUpgrades()
     {
         pauseMenuCanvas.SetActive(false);
         upgradesMenuCanvas.SetActive(true);
     }
-
+    /// <summary>
+    /// Redirects to pause menu
+    /// </summary>
     public void GoBackToPauseMenu()
     {
         upgradesMenuCanvas.SetActive(false);
