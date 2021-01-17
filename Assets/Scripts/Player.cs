@@ -6,20 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private int health = 10;
-    
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
-    
-    
     private void DecreasePlayerHealth()
     {
         health--;
@@ -39,10 +26,10 @@ public class Player : MonoBehaviour
     {
         var enemyComponent = other.GetComponent<Enemy>();
 
-        if (enemyComponent)
-        {
-            Destroy(other.gameObject);
-            DecreasePlayerHealth();
-        }
+        if (!enemyComponent) return;
+        
+        Destroy(other.gameObject);
+        WaveSpawner.DecreaseAliveEnemyCount();
+        DecreasePlayerHealth();
     }
 }
