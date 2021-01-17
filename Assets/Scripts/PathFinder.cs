@@ -11,11 +11,6 @@ public class PathFinder : MonoBehaviour
     private int _waypointsLength;
     private float _moveSpeed;
     private GameObject _selectedPath;
-    
-    private void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     private void Update()
@@ -31,13 +26,16 @@ public class PathFinder : MonoBehaviour
     /// </summary>
     private void GoToNextWaypoint()
     {
-        var currentWaypoint = _waypoints[_currentWaypointIndex];
-        
+        var currentWaypointPosition = _waypoints[_currentWaypointIndex].position;
+
         var step = _moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint.position, step);
-        
-        if (Math.Abs(transform.position.x - currentWaypoint.position.x) < 0.1f &&
-            Math.Abs(transform.position.z - currentWaypoint.position.z) < 0.1f)
+        var position = transform.position;
+        var targetPosition = new Vector3(currentWaypointPosition.x, position.y, currentWaypointPosition.z);
+        position = Vector3.MoveTowards(position, targetPosition, step);
+        transform.position = position;
+
+        if (Math.Abs(transform.position.x - targetPosition.x) < 0.5f &&
+            Math.Abs(transform.position.z - targetPosition.z) < 0.5f)
         {
             _currentWaypointIndex++;
         }

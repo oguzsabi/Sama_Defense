@@ -21,20 +21,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _stunTickElapsed;
     
     private GameSession _gameSession;
+    private Rigidbody _rigidbody;
     private bool _diedBefore = false;
     private bool _alreadyDotted = false;
     private bool _alreadySlowed = false;
     private bool _alreadyStunned = false;
+    private bool _alreadyKnockedBack = false;
     private bool _slowRemoved = false;
     private bool _stunRemoved = false;
     private bool _dotRemoved = false;
     private float _currentMovementSpeed;
-    
-    
+
+
     void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         _currentMovementSpeed = movementSpeed;
+        _rigidbody = GetComponent<Rigidbody>();
     }
     /// <summary>
     /// Gets the movement speed of enemy unit
@@ -113,6 +116,7 @@ public class Enemy : MonoBehaviour
             case Projectile.ElementType.Wood:
             {
                 KnockBack();
+                _alreadyKnockedBack = true;
                 return;
             }
             default:
@@ -126,10 +130,10 @@ public class Enemy : MonoBehaviour
     private void DoT()
     {
         // Only apply DoT effect if unit does not have a DoT already
-        if (!_alreadyDotted)
-        {
-            StartCoroutine(DotTick());
-        }
+        if (_alreadyDotted) return;
+
+        StartCoroutine(DotTick());
+
     }
     
     /// <summary>
@@ -138,16 +142,13 @@ public class Enemy : MonoBehaviour
     private void Slow()
     {
         // Only apply slow effect if unit does not have a slow already
-        if (!_alreadySlowed)
-        {
-
-            var slowedMovementSpeed = movementSpeed - _slowAmount;
-            if (slowedMovementSpeed < 0.1f)
-                slowedMovementSpeed = 1f;
-            _currentMovementSpeed = slowedMovementSpeed;
-            StartCoroutine(SlowTick());
-        }
-
+        if (_alreadySlowed) return;
+        
+        var slowedMovementSpeed = movementSpeed - _slowAmount;
+        if (slowedMovementSpeed < 0.1f)
+            slowedMovementSpeed = 1f;
+        _currentMovementSpeed = slowedMovementSpeed;
+        StartCoroutine(SlowTick());
     }
     
     /// <summary>
@@ -157,16 +158,18 @@ public class Enemy : MonoBehaviour
     private void Stun()
     {
         // Only apply stun effect if unit does not stunned already
-        if (!_alreadyStunned)
-        {
-            _currentMovementSpeed = 0;
-            StartCoroutine(StunTick());
-        }
+        if (_alreadyStunned) return;
+        
+        _currentMovementSpeed = 0;
+        StartCoroutine(StunTick());
     }
 
     private void KnockBack()
     {
+        if (_alreadyKnockedBack) return;
         
+        _rigidbody.AddForce(0, 0, 800);
+        StartCoroutine(KnockBackTick());
     }
     
     /// <summary>
@@ -223,6 +226,24 @@ public class Enemy : MonoBehaviour
         RemoveStun();
     }
     
+    private IEnumerator KnockBackTick()
+    {
+        yield return new WaitForSeconds(3f);
+        _alreadyKnockedBack = false;
+    }
+    
+    /// <summary>
+    /// Resets _dotTickElapsed for future DoT effects
+    /// </summary>
+    private void RemoveDot()
+    {
+        if (_dotTicksElapsed == _dotTickTime || !_dotRemoved)
+        {
+            _dotTicksElapsed = 0;
+            _dotRemoved = true;
+        }
+    }
+    
     /// <summary>
     /// Returns movement speed to its normal value
     /// Resets _slowTickElapsed for future slow effects
@@ -252,18 +273,6 @@ public class Enemy : MonoBehaviour
             _alreadyStunned = false;
         }
     }
-    
-    /// <summary>
-    /// Resets _dotTickElapsed for future DoT effects
-    /// </summary>
-    private void RemoveDot()
-    {
-        if (_dotTicksElapsed == _dotTickTime || !_dotRemoved)
-        {
-            _dotTicksElapsed = 0;
-            _dotRemoved = true;
-        }
-    }
-    
+
     public ElementType Element => element;
 }

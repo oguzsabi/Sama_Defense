@@ -60,15 +60,7 @@ public class Projectile : MonoBehaviour
         var offset = _lastKnownTargetPosition - transform.position;
         GetComponent<Rigidbody>().AddForce(offset * forceMultiplier);
     }
-
-    private IEnumerator DisableColliderAndTerminate()
-    {
-        yield return new WaitForSeconds(2f);
-        GameObject projectile;
-        (projectile = gameObject).GetComponent<SphereCollider>().enabled = false;
-        Destroy(projectile, 2f);
-    }
-
+    
     private void RollForHit(Enemy enemyComponent)
     {
         var successfulHit = Random.Range(0, 100) < accuracy;
@@ -120,7 +112,7 @@ public class Projectile : MonoBehaviour
         return actualDamage;
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         var enemyComponent = other.gameObject.GetComponent<Enemy>();
         
@@ -130,7 +122,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            StartCoroutine(DisableColliderAndTerminate());
+            Destroy(gameObject, 0.5f);
         }
     }
     

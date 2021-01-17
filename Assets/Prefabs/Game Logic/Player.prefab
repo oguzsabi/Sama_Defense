@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3990489753256439071
+--- !u!1 &4352813435848155897
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3990489753256439069}
-  - component: {fileID: 3990489753256439070}
+  - component: {fileID: 4352813435848155899}
+  - component: {fileID: 4352813435848155898}
+  - component: {fileID: 4352813435848155780}
   m_Layer: 0
-  m_Name: GameSession
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3990489753256439069
+--- !u!4 &4352813435848155899
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3990489753256439071}
+  m_GameObject: {fileID: 4352813435848155897}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.928547, y: -5.60408, z: 48.97494}
+  m_LocalPosition: {x: 32.82, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3990489753256439070
+--- !u!114 &4352813435848155898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3990489753256439071}
+  m_GameObject: {fileID: 4352813435848155897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 489b4d4011def564a85546ce0a25899f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8475c3195c31fa8409309e40027f104e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneLoader: {fileID: 5970914214993546292, guid: 135999f8a8ce5e649ac258c02a16307a,
-    type: 3}
-  _diamondAmountText: {fileID: 0}
-  _coinAmountText: {fileID: 0}
-  _towerCountText: {fileID: 0}
-  _levelNumberText: {fileID: 0}
-  _waveNumberText: {fileID: 0}
+  health: 10
+--- !u!65 &4352813435848155780
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352813435848155897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.89, y: 2.24, z: 2}
+  m_Center: {x: 0, y: 1, z: 1}
