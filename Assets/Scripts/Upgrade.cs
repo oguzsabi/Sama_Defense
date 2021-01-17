@@ -23,43 +23,71 @@ public class Upgrade : MonoBehaviour
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
-        _gameSession.ChangeDiamondAmountBy(100);
         feedbackText.enabled = false;
     }
-
+    
+    /// <summary>
+    /// Increases the damage of tower by 5
+    /// </summary>
+    /// <param name="tower"></param>
     private void IncreaseDamage(GameObject tower)
     {
         tower.GetComponent<Tower>().damage += 5;
     }
     
+    /// <summary>
+    /// Increases the accuracy value of projectile by 10
+    /// </summary>
+    /// <param name="projectile"></param>
     private void IncreaseProjectileAccuracy(GameObject projectile)
     {
         projectile.GetComponent<Projectile>().accuracy += 10;
     }
     
+    /// <summary>
+    /// Gets the range collider of tower
+    /// </summary>
+    /// <param name="tower"></param>
+    /// <returns>SphereCollider rangeCollider</returns>
     private SphereCollider GetRangeCollider(GameObject tower)
     {
         var rangeCollider = tower.transform.GetChild(0).GetComponent<SphereCollider>();
         return rangeCollider;
     }
-
+    
+    /// <summary>
+    /// Increases the range of the tower by 0.1
+    /// </summary>
+    /// <param name="tower"></param>
     private void IncreaseRange(GameObject tower)
     {
         var rangeCollider = GetRangeCollider(tower);
         rangeCollider.radius += 0.1f;
         AdjustRangeVisuals(tower);
     }
-
+    
+    /// <summary>
+    /// Increase range projections radius
+    /// </summary>
+    /// <param name="tower"></param>
     private void AdjustRangeVisuals(GameObject tower)
     {
         tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 0.735f;
     }
-
+    
+    /// <summary>
+    /// Increase attack speed of tower by 0.1 per second
+    /// </summary>
+    /// <param name="tower"></param>
     private void IncreaseAttackSpeed(GameObject tower)
     {
         tower.GetComponent<Tower>().fireRate += 0.1f;
     }
-
+    
+    /// <summary>
+    /// Upgrades fire tower's damage
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeFireTowerDamage()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -70,6 +98,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades water tower's damage
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWaterTowerDamage()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -80,6 +112,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades earth tower's damage
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeEarthTowerDamage()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -90,6 +126,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades wood tower's damage
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWoodTowerDamage()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -99,7 +139,11 @@ public class Upgrade : MonoBehaviour
         ApplyForExistingTowers(Tower.ElementType.Wood, 1);
         DisplayMessage("Successful purchase", Color.green);
     }
-
+    
+    /// <summary>
+    /// Upgrades fire tower's accuracy
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeFireTowerAccuracy()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -109,6 +153,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades water tower's accuracy
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWaterTowerAccuracy()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -117,7 +165,10 @@ public class Upgrade : MonoBehaviour
         IncreaseProjectileAccuracy(waterProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
-    
+    /// <summary>
+    /// Upgrades earth tower's accuracy
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeEarthTowerAccuracy()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -127,6 +178,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades wood tower's accuracy
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWoodTowerAccuracy()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -135,7 +190,11 @@ public class Upgrade : MonoBehaviour
         IncreaseProjectileAccuracy(woodProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
-
+    
+    /// <summary>
+    /// Upgrades fire tower's range
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeFireTowerRange()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -146,6 +205,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades water tower's range
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWaterTowerRange()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -156,6 +219,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades earth tower's range
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeEarthTowerRange()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -166,6 +233,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades wood tower's range
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWoodTowerRange()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -175,7 +246,11 @@ public class Upgrade : MonoBehaviour
         ApplyForExistingTowers(Tower.ElementType.Wood, 2);
         DisplayMessage("Successful purchase", Color.green);
     }
-
+    
+    /// <summary>
+    /// Upgrades fire tower's attack speed
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeFireTowerSpeed()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -186,6 +261,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades water tower's attack speed
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWaterTowerSpeed()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -196,6 +275,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades earth tower's attack speed
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeEarthTowerSpeed()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -206,6 +289,10 @@ public class Upgrade : MonoBehaviour
         DisplayMessage("Successful purchase", Color.green);
     }
     
+    /// <summary>
+    /// Upgrades wood tower's attack speed
+    /// Decrements diamonds by 5
+    /// </summary>
     public void UpgradeWoodTowerSpeed()
     {
         if (!CheckForEnoughDiamonds(5)) return;
@@ -215,7 +302,11 @@ public class Upgrade : MonoBehaviour
         ApplyForExistingTowers(Tower.ElementType.Wood, 3);
         DisplayMessage("Successful purchase", Color.green);
     }
-
+    
+    /// <summary>
+    /// Upgrades the number of towers that can be placed,
+    /// Decrements diamonds by 20
+    /// </summary>
     public void IncrementMaximumTowerCount()
     {
         if (!CheckForEnoughDiamonds(20)) return;
@@ -225,7 +316,12 @@ public class Upgrade : MonoBehaviour
         _gameSession.ChangeMaxTowerCount();
         DisplayMessage("Successful purchase", Color.green);
     }
-
+    
+    /// <summary>
+    /// Checks if the transaction can be done with current diamond amount
+    /// </summary>
+    /// <param name="cost"></param>
+    /// <returns></returns>
     private bool CheckForEnoughDiamonds(int cost)
     {
         if (_gameSession.AreThereEnoughDiamonds(cost))
@@ -238,7 +334,12 @@ public class Upgrade : MonoBehaviour
             return false;
         }
     }
-
+    
+    /// <summary>
+    /// Prompts user with messages
+    /// </summary>
+    /// <param name="message"></param>
+    /// <param name="color"></param>
     private void DisplayMessage(string message, Color color)
     {
         feedbackText.text = message;
@@ -247,6 +348,11 @@ public class Upgrade : MonoBehaviour
         _gameSession.SaveDiamondAmount();
     }
 
+    /// <summary>
+    /// Applies upgrades to already placed towers
+    /// </summary>
+    /// <param name="element"></param>
+    /// <param name="upgradeIndex"></param>
     private void ApplyForExistingTowers(Tower.ElementType element, int upgradeIndex)
     {
         foreach (var tower in TowerPlacementController.CurrentTowers)

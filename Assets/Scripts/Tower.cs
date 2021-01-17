@@ -18,83 +18,98 @@ public class Tower : MonoBehaviour
     public GameObject adjacencyDetector;
     public GameObject rangeIndicator;
 
-    private bool shootAvailable = true;
-    private readonly List<GameObject> targets = new List<GameObject>();
-    private GameObject currentTarget;
-    private bool isReady;
+    private bool _shootAvailable = true;
+    private readonly List<GameObject> _targets = new List<GameObject>();
+    private GameObject _currentTarget;
+    private bool _isReady;
 
     // default rangeIndicator size = 15.8, default range radius = 2.15
 
     // Start is called before the first frame update
     private void Start()
     {
-        isReady = false;
+        _isReady = false;
         isPlaceable = true;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        if (!shootAvailable || !isReady) return;
+        if (!_shootAvailable || !_isReady) return;
         
-        shootAvailable = false;
-        if (currentTarget)
+        _shootAvailable = false;
+        if (_currentTarget)
         {
             StartCoroutine(Shoot());
         }
         else
         {
-            shootAvailable = true;
+            _shootAvailable = true;
             FindRandomTarget();
         }
     }
-
+    /// <summary>
+    /// Creates a new instance of a projectile and sets projectile's values
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Shoot()
     {
         var newProjectile = Instantiate(projectile, projectileStart.position, Quaternion.identity);
         var projectileComponent = newProjectile.GetComponent<Projectile>();
 
-        projectileComponent.SetProjectileTarget(currentTarget);
+        projectileComponent.SetProjectileTarget(_currentTarget);
         projectileComponent.SetDamage(damage);
 
         yield return new WaitForSeconds(1/fireRate);
         
-        shootAvailable = true;
+        _shootAvailable = true;
     }
     
+    /// <summary>
+    /// Adds enemy units to _target array which enters the range of tower
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
+        // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
         if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyInRange = other.gameObject;
         // If there is no current target then pick one
-        if (!currentTarget) currentTarget = enemyInRange;
-        targets.Add(enemyInRange);
+        if (!_currentTarget) _currentTarget = enemyInRange;
+        _targets.Add(enemyInRange);
     }
-
+    
+    /// <summary>
+    /// Removes the enemy unit from _targets that lefts the range of tower 
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
+        // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
         if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyOutRange = other.gameObject;
-        if (enemyOutRange == currentTarget) currentTarget = null;
+        if (enemyOutRange == _currentTarget) _currentTarget = null;
 
-        targets.Remove(enemyOutRange);
+        _targets.Remove(enemyOutRange);
         FindRandomTarget();
     }
-
+    /// <summary>
+    /// Randomly picks a target that is in range of the tower
+    /// </summary>
     private void FindRandomTarget()
     {
-        if (targets.Count <= 0) return;
+        if (_targets.Count <= 0) return;
         
-        var randomTargetIndex = Random.Range(0, targets.Count - 1);
+        var randomTargetIndex = Random.Range(0, _targets.Count - 1);
 
         try
         {
-            currentTarget = targets[randomTargetIndex];
-            if (currentTarget) return;
+            _currentTarget = _targets[randomTargetIndex];
+            if (_currentTarget) return;
             
-            targets.RemoveAll(target => target == null);
+            _targets.RemoveAll(target => target == null);
             FindRandomTarget();
         }
         catch (Exception)
@@ -102,20 +117,29 @@ public class Tower : MonoBehaviour
             FindRandomTarget();
         }
     }
-
+    
+    /// <summary>
+    /// Activates green range indicator on mouse enter
+    /// </summary>
     private void OnMouseEnter()
     {
         rangeIndicator.SetActive(true);
     }
-
+    
+    /// <summary>
+    /// Deactivates green range indicator on mouse enter
+    /// </summary>
     private void OnMouseExit()
     {
         rangeIndicator.SetActive(false);
     }
-
+    
+    /// <summary>
+    /// Makes tower ready for shoot
+    /// </summary>
     public void MakeTowerReady()
     {
-        isReady = true;
+        _isReady = true;
     }
     
     public ElementType Element => element;
