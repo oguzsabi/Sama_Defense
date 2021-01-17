@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -121,5 +122,20 @@ public class PlayerDataManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, 5);
         }
+    }
+
+    public static void GiveMaxDiamond()
+    {
+        SetDiamondAmount(999);
+    }
+    
+    public static void GiveMaxTowerCount()
+    {
+        PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, 10);
+    }
+
+    public static void ResetMaxTowerCount()
+    {
+        PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, 5);
     }
 }

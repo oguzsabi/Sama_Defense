@@ -8,26 +8,33 @@ using UnityEngine.SceneManagement;
 public class GameSession : MonoBehaviour
 {
     [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private TextMeshProUGUI _healthAmountText;
     [SerializeField] private TextMeshProUGUI _diamondAmountText;
     [SerializeField] private TextMeshProUGUI _coinAmountText;
     [SerializeField] private TextMeshProUGUI _towerCountText;
     [SerializeField] private TextMeshProUGUI _levelNumberText;
     [SerializeField] private TextMeshProUGUI _waveNumberText;
+    [SerializeField] private bool _isSandboxLevel = false;
     
-    private const int levelNumberOffset = -4;
+    private const int LEVEL_NUMBER_OFFSET = -4;
 
     private void Awake()
     {
         CheckDefaultMaxTowerCount();
-        
     }
 
     private void Start()
     {
-        ChangeDiamondAmountBy(100);
+        if (_isSandboxLevel)
+        {
+            PlayerDataManager.GiveMaxDiamond();
+            PlayerDataManager.GiveMaxTowerCount();
+            ChangeCoinAmountBy(1000);
+        }
+        
         // PlayerDataManager.ResetDiamondAmount();
         _diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
-        _levelNumberText.text = (SceneLoader.GetCurrentSceneIndex() + levelNumberOffset).ToString();
+        _levelNumberText.text = (SceneLoader.GetCurrentSceneIndex() + LEVEL_NUMBER_OFFSET).ToString();
         _towerCountText.text = 0 + "/" + PlayerDataManager.GetMaximumTowerCount();
     }
     
@@ -144,6 +151,14 @@ public class GameSession : MonoBehaviour
     public void SaveDiamondAmount()
     {
         PlayerDataManager.SetDiamondAmount(int.Parse(_diamondAmountText.text));
+    }
+
+    public void DecreasePlayerHealthBy(int amount)
+    {
+        var oldHealthAmount = int.Parse(_healthAmountText.text);
+        var newHealthAmount = oldHealthAmount - amount;
+
+        _healthAmountText.text = newHealthAmount.ToString();
     }
     
     /// <summary>

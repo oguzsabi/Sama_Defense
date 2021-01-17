@@ -35,7 +35,6 @@ public class TowerPlacementController : MonoBehaviour
         if (!_newTower) return;
         
         MoveNewTowerToMousePosition();
-        RotateNewTowerWithMouseWheel();
         TowerPlacer();
     }
     
@@ -65,14 +64,6 @@ public class TowerPlacementController : MonoBehaviour
         _newTower.GetComponentInChildren<Tower>().adjacencyDetector.SetActive(false);
         _newTower.layer = 8;
         _newTower = null;
-    }
-    /// <summary>
-    /// Rotates the tower with mousewheel
-    /// </summary>
-    private void RotateNewTowerWithMouseWheel()
-    {
-        _mouseWheelDelta += Input.mouseScrollDelta.y;
-        _newTower.transform.Rotate(Vector3.up, _mouseWheelDelta * rotationMultiplier);
     }
     
     /// <summary>

@@ -22,8 +22,9 @@ public class LevelsManager : MonoBehaviour
     
     private void Start()
     {
-        // PlayerDataManager.LockAllLevels(numberOfLevels);
+        // PlayerDataManager.LockAllLevels(_numberOfLevels);
         PlayerDataManager.UnlockLevel(1);
+        PlayerDataManager.UnlockLevel(11);
     }
     
     /// <summary>

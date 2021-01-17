@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private int health = 10;
-
+    [SerializeField] private int health = 100;
+    [SerializeField] private GameSession _gameSession;
+    
     private void DecreasePlayerHealth()
     {
-        health--;
+        health -= 10;
+        _gameSession.DecreasePlayerHealthBy(10);
 
         if (health <= 0)
         {

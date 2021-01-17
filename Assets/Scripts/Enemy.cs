@@ -62,7 +62,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log(("Before ApplyElementEffect "));
             ApplyElementEffect(projectileType);
         }
     }
