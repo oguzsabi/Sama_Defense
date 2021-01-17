@@ -163,7 +163,9 @@ public class Enemy : MonoBehaviour
         _currentMovementSpeed = 0;
         StartCoroutine(StunTick());
     }
-
+    /// <summary>
+    /// 
+    /// </summary>
     private void KnockBack()
     {
         if (_alreadyKnockedBack) return;

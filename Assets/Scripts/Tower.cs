@@ -24,15 +24,14 @@ public class Tower : MonoBehaviour
     private bool _isReady;
 
     // default rangeIndicator size = 15.8, default range radius = 2.15
-
-    // Start is called before the first frame update
+    
     private void Start()
     {
         _isReady = false;
         isPlaceable = true;
     }
 
-    // Update is called once per frame
+    
     private void Update()
     {
         if (!_shootAvailable || !_isReady) return;

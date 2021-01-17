@@ -10,6 +10,10 @@ public class PlayerDataManager : MonoBehaviour
     private const string DIAMOND_AMOUNT_KEY = "diamond_amount";
     private const string MAX_TOWER_COUNT_KEY = "max_tower_count";
     
+    /// <summary>
+    /// Sets master volume to given volume value
+    /// </summary>
+    /// <param name="volume"></param>
     public static void SetMasterVolume(float volume)
     {
         if (volume >= 0f && volume <= 1f)
@@ -21,12 +25,18 @@ public class PlayerDataManager : MonoBehaviour
             Debug.LogError("Master volume out of range");
         }
     }
-
+    /// <summary>
+    /// Gets the master volume value
+    /// </summary>
+    /// <returns></returns>
     public static float GetMasterVolume()
     {
         return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
     }
-    
+    /// <summary>
+    /// Unlocks next level
+    /// </summary>
+    /// <param name="level"></param>
     public static void UnlockLevel(int level)
     {
         if (level < SceneManager.sceneCountInBuildSettings)
@@ -38,7 +48,11 @@ public class PlayerDataManager : MonoBehaviour
             Debug.LogError("Level index out of range");
         }
     }
-
+    /// <summary>
+    /// Checks if the next level is unlocked
+    /// </summary>
+    /// <param name="level"></param>
+    /// <returns></returns>
     public static bool IsLevelUnlocked(int level)
     {
         if (level < SceneManager.sceneCountInBuildSettings)
@@ -49,7 +63,10 @@ public class PlayerDataManager : MonoBehaviour
         Debug.LogError("Level index out of range");
         return false;
     }
-
+    /// <summary>
+    /// Locks all levels
+    /// </summary>
+    /// <param name="numberOfLevels"></param>
     public static void LockAllLevels(int numberOfLevels)
     {
         for (var i = 0; i < numberOfLevels; i++)
@@ -57,32 +74,47 @@ public class PlayerDataManager : MonoBehaviour
             PlayerPrefs.SetInt(LEVEL_KEY + i, 0); // 1 is true
         }
     }
-
+    /// <summary>
+    /// Sets diamond amount to given value
+    /// </summary>
+    /// <param name="amount"></param>
     public static void SetDiamondAmount(int amount)
     {
         PlayerPrefs.SetInt(DIAMOND_AMOUNT_KEY, amount);
     }
-
+    /// <summary>
+    /// Gets diamond amount
+    /// </summary>
+    /// <returns></returns>
     public static int GetDiamondAmount()
     {
         return PlayerPrefs.GetInt(DIAMOND_AMOUNT_KEY);
     }
-
+    /// <summary>
+    /// Resets diamond amount
+    /// </summary>
     public static void ResetDiamondAmount()
     {
         SetDiamondAmount(0);
     }
-
+    /// <summary>
+    /// Increases the maximum tower that can be placed
+    /// </summary>
     public static void IncrementMaximumTowerCount()
     {
         PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY) + 1);
     }
-
+    /// <summary>
+    /// Gets the maximum towers that can be placed
+    /// </summary>
+    /// <returns></returns>
     public static int GetMaximumTowerCount()
     {
         return PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY);
     }
-
+    /// <summary>
+    /// Sets a default value to maximum towers that can be placed
+    /// </summary>
     public static void SetDefaultMaxTowerCount()
     {
         if (PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY) < 5)

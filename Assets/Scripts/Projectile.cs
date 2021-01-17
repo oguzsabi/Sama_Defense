@@ -28,8 +28,7 @@ public class Projectile : MonoBehaviour
     {
         _mainCamera = Camera.main;
     }
-
-    // Update is called once per frame
+    
     private void Update()
     {
         if (missText.gameObject.activeSelf)
@@ -48,20 +47,30 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the projectile to target enemy unit
+    /// </summary>
     private void MoveToTarget()
     {
         _lastKnownTargetPosition = _target.transform.position;
         var step = projectileSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, _lastKnownTargetPosition, step);
     }
-
+    
+    /// <summary>
+    /// In the case of target enemy unit dies and projectile is in mid air projectiles directed to last know position of enemy unit
+    /// </summary>
     private void MoveToLastKnownPosition()
     {
         var offset = _lastKnownTargetPosition - transform.position;
         GetComponent<Rigidbody>().AddForce(offset * forceMultiplier);
     }
     
-    private void RollForHit(Enemy enemyComponent)
+    /// <summary>
+    /// Checks if project will hit the target or not if it is not a hit then destroys the projectile
+    /// </summary>
+    /// <param name="enemy"></param>
+    private void RollForHit(Enemy enemy)
     {
         var successfulHit = Random.Range(0, 100) < accuracy;
 
@@ -71,11 +80,15 @@ public class Projectile : MonoBehaviour
             return;
         }
 
-        var actualDamage = CalculateActualDamage(enemyComponent);
-        enemyComponent.GetHit(actualDamage, this.Element);
+        var actualDamage = CalculateActualDamage(enemy);
+        enemy.GetHit(actualDamage, this.Element);
         Destroy(gameObject);
     }
-
+    
+    /// <summary>
+    /// Disables the mesh renderer
+    /// Destroys the game object
+    /// </summary>
     private void MissAndDestroyProjectile()
     {
         var _projectile = gameObject;
@@ -83,7 +96,13 @@ public class Projectile : MonoBehaviour
         _projectile.GetComponent<MeshRenderer>().enabled = false;
         Destroy(_projectile, 0.3f);
     }
-
+    
+    /// <summary>
+    /// Calculates actual damage with respect to damage relation between element relations
+    /// </summary>
+    /// <param name="enemyComponent"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentOutOfRangeException"></exception>
     private float CalculateActualDamage(Enemy enemyComponent)
     {
         var actualDamage = _damage;
@@ -111,7 +130,11 @@ public class Projectile : MonoBehaviour
 
         return actualDamage;
     }
-
+    
+    /// <summary>
+    /// Trigger event between projectile and enemy unit
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         var enemyComponent = other.gameObject.GetComponent<Enemy>();
@@ -126,11 +149,18 @@ public class Projectile : MonoBehaviour
         }
     }
     
+    /// <summary>
+    /// Sets a enemy unit for the projectile
+    /// </summary>
+    /// <param name="target"></param>
     public void SetProjectileTarget(GameObject target)
     {
         _target = target;
     }
-
+    /// <summary>
+    /// Sets a damage value to projectile 
+    /// </summary>
+    /// <param name="TowDamage"></param>
     public void SetDamage(float TowDamage)
     {
         _damage = TowDamage;
