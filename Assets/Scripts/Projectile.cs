@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour
     private bool _targetLost;
     private float _damage;
     private Camera _mainCamera;
-    private const float forceMultiplier = 50f;
+    private const float FORCE_MULTIPLIER = 50f;
     private string _projectileType;
     
 
@@ -63,7 +63,7 @@ public class Projectile : MonoBehaviour
     private void MoveToLastKnownPosition()
     {
         var offset = _lastKnownTargetPosition - transform.position;
-        GetComponent<Rigidbody>().AddForce(offset * forceMultiplier);
+        GetComponent<Rigidbody>().AddForce(offset * FORCE_MULTIPLIER);
     }
     
     /// <summary>
