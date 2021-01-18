@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void PlayButtonClicked()
     {
-        SceneLoader.LoadScene("Level 1");
+        SceneLoader.LoadScene("Level 11");
     }
     /// <summary>
     /// Redirects to levels screen

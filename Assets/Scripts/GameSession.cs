@@ -14,7 +14,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _towerCountText;
     [SerializeField] private TextMeshProUGUI _levelNumberText;
     [SerializeField] private TextMeshProUGUI _waveNumberText;
-    [SerializeField] private bool _isSandboxLevel = false;
+    [SerializeField] private bool _isDemoLevel = false;
     
     private const int LEVEL_NUMBER_OFFSET = -4;
 
@@ -25,7 +25,7 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-        if (_isSandboxLevel)
+        if (_isDemoLevel)
         {
             PlayerDataManager.GiveMaxDiamond();
             PlayerDataManager.GiveMaxTowerCount();
