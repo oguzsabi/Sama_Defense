@@ -67,7 +67,7 @@ public class Projectile : MonoBehaviour
     }
     
     /// <summary>
-    /// Checks if project will hit the target or not if it is not a hit then destroys the projectile
+    /// Checks if projectile will hit the target or not if it is not a hit then destroys the projectile
     /// </summary>
     /// <param name="enemy"></param>
     private void RollForHit(Enemy enemy)
