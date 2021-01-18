@@ -41,7 +41,7 @@ public class Upgrade : MonoBehaviour
     /// <param name="projectile"></param>
     private void IncreaseProjectileAccuracy(GameObject projectile)
     {
-        projectile.GetComponent<Projectile>().accuracy += 10;
+        projectile.GetComponent<Projectile>().accuracy += 1;
     }
     
     /// <summary>
