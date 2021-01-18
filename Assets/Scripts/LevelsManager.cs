@@ -24,7 +24,7 @@ public class LevelsManager : MonoBehaviour
     {
         // PlayerDataManager.LockAllLevels(_numberOfLevels);
         PlayerDataManager.UnlockLevel(1);
-        PlayerDataManager.UnlockLevel(11);
+        PlayerDataManager.UnlockLevel(11); // This is the demo level
     }
     
     /// <summary>
