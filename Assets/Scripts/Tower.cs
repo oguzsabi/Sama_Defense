@@ -13,7 +13,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private Transform projectileStart;
     
     public float fireRate = 0.35f;
-    public float damage = 50;
+    public float damage = 25;
     public bool isPlaceable;
     public GameObject adjacencyDetector;
     public GameObject rangeIndicator;
