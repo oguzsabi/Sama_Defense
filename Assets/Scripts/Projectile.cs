@@ -72,7 +72,7 @@ public class Projectile : MonoBehaviour
     /// <param name="enemy"></param>
     private void RollForHit(Enemy enemy)
     {
-        var successfulHit = Random.Range(0, 100) < accuracy;
+        var successfulHit = Random.Range(1, 100) < accuracy;
 
         if (!successfulHit)
         {
