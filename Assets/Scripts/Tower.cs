@@ -75,8 +75,8 @@ public class Tower : MonoBehaviour
 
         var enemyInRange = other.gameObject;
         // If there is no current target then pick one
-        if (!_currentTarget) _currentTarget = enemyInRange;
         _targets.Add(enemyInRange);
+        if (!_currentTarget) FindRandomTarget();
     }
     
     /// <summary>
@@ -101,7 +101,15 @@ public class Tower : MonoBehaviour
     {
         if (_targets.Count <= 0) return;
         
-        var randomTargetIndex = Random.Range(0, _targets.Count - 1);
+        int randomTargetIndex;
+        if (element == ElementType.Earth)
+        {
+            randomTargetIndex = 0;
+        }
+        else
+        {
+            randomTargetIndex = Random.Range(0, _targets.Count - 1);
+        }
 
         try
         {
