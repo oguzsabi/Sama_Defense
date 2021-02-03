@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,7 @@ public class TowerPlacementController : MonoBehaviour
     private Camera _mainCamera;
     private GameSession _gameSession;
     private static List<GameObject> _currentTowers = new List<GameObject>();
+    private bool _isSelectingTower;
 
     // Start is called before the first frame update
     private void Start()
@@ -36,6 +38,7 @@ public class TowerPlacementController : MonoBehaviour
         
         MoveNewTowerToMousePosition();
         TowerPlacer();
+        DestroyTower();
     }
     
     /// <summary>
@@ -45,11 +48,18 @@ public class TowerPlacementController : MonoBehaviour
     /// </summary>
     private void TowerPlacer()
     {
-        if (!Input.GetMouseButtonDown(0) || !_newTower.GetComponent<Tower>().isPlaceable) return;
+        if (!Input.GetMouseButtonDown(0) || !_newTower.GetComponent<Tower>().isPlaceable || _isSelectingTower) return;
         
         PrepareTower();
         _gameSession.IncrementTowerCount();
         _gameSession.ChangeCoinAmountBy(-20);
+    }
+
+    private void DestroyTower()
+    {
+        if (!Input.GetMouseButtonDown(1)) return;
+        
+        Destroy(_newTower);
     }
     
     /// <summary>
@@ -121,6 +131,48 @@ public class TowerPlacementController : MonoBehaviour
             }
         }
     }
+
+    public void SelectingTower()
+    {
+        _isSelectingTower = true;
+    }
+    
+    public void NotSelectingTower()
+    {
+        _isSelectingTower = false;
+    }
+
+    public void FireTowerButtonClicked()
+    {
+        if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
+        {
+            CreateNewTower(towerPrefabs[0]);
+        }
+    }
+    
+    public void WaterTowerButtonClicked()
+    {
+        if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
+        {
+            CreateNewTower(towerPrefabs[1]);
+        }
+    }
+    
+    public void EarthTowerButtonClicked()
+    {
+        if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
+        {
+            CreateNewTower(towerPrefabs[2]);
+        }
+    }
+    
+    public void WoodTowerButtonClicked()
+    {
+        if (_gameSession.AreThereEnoughCoins(20) && !_gameSession.IsTowerLimitReached())
+        {
+            CreateNewTower(towerPrefabs[3]);
+        }
+    }
     
     /// <summary>
     /// Creates a new tower from tower prefab
@@ -128,17 +180,12 @@ public class TowerPlacementController : MonoBehaviour
     /// <param name="towerPrefab"></param>
     private void CreateNewTower(GameObject towerPrefab) 
     {
-        if (!_newTower)
-        {
-            _newTower = Instantiate(towerPrefab);
-            var newTowerPosition = _newTower.transform.position;
-            _newTower.transform.position =
-                new Vector3(newTowerPosition.x, newTowerPosition.y, newTowerPosition.z);
-        }
-        else
-        {
-            Destroy(_newTower);
-        }
+        if (_newTower) Destroy(_newTower);
+        
+        _newTower = Instantiate(towerPrefab);
+        var newTowerPosition = _newTower.transform.position;
+        _newTower.transform.position =
+            new Vector3(newTowerPosition.x, newTowerPosition.y, newTowerPosition.z);
     }
 
     public static List<GameObject> CurrentTowers => _currentTowers;
