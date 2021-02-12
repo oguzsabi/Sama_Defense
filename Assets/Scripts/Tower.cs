@@ -71,7 +71,7 @@ public class Tower : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
-        if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
+        if (other.name.Contains("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyInRange = other.gameObject;
         // If there is no current target then pick one
@@ -86,7 +86,7 @@ public class Tower : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
-        if (other.name.Equals("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
+        if (other.name.Contains("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
 
         var enemyOutRange = other.gameObject;
         if (enemyOutRange == _currentTarget) _currentTarget = null;
