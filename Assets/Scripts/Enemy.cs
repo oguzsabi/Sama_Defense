@@ -9,16 +9,16 @@ public class Enemy : MonoBehaviour
     
     [SerializeField] private float health;
     [SerializeField] private float movementSpeed;
+    [SerializeField] private int damage;
     [SerializeField] private ElementType element;
     [SerializeField] private int worth;
     [SerializeField] private int _dotTickTime;
-    [SerializeField] private int _dotTicksElapsed;
     [SerializeField] private int _dotDamage;
     [SerializeField] private int _slowTickTime;
-    [SerializeField] private int _slowTickElapsed;
     [SerializeField] private int _slowAmount;
     [SerializeField] private int _stunTickTime;
-    [SerializeField] private int _stunTickElapsed;
+    [SerializeField] private int _knockBackForce = 1000;
+    
     
     private GameSession _gameSession;
     private Rigidbody _rigidbody;
@@ -27,9 +27,13 @@ public class Enemy : MonoBehaviour
     private bool _alreadySlowed = false;
     private bool _alreadyStunned = false;
     private bool _alreadyKnockedBack = false;
+    private bool _dotRemoved = false;
     private bool _slowRemoved = false;
     private bool _stunRemoved = false;
-    private bool _dotRemoved = false;
+    private int _dotTicksElapsed;
+    private int _slowTickElapsed;
+    private int _stunTickElapsed;
+    
     private float _currentMovementSpeed;
 
 
@@ -169,7 +173,7 @@ public class Enemy : MonoBehaviour
     {
         if (_alreadyKnockedBack) return;
         
-        _rigidbody.AddForce(0, 0, 800);
+        _rigidbody.AddForce(0, 0, _knockBackForce);
         StartCoroutine(KnockBackTick());
     }
     
@@ -274,6 +278,8 @@ public class Enemy : MonoBehaviour
             _alreadyStunned = false;
         }
     }
+
+    public int Damage => damage;
 
     public ElementType Element => element;
 }

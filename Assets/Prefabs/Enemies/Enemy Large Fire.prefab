@@ -138,13 +138,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   movementSpeed: 5
+  damage: 15
   element: 0
   worth: 20
   _dotTickTime: 5
-  _dotTicksElapsed: 0
   _dotDamage: 1
   _slowTickTime: 5
-  _slowTickElapsed: 0
   _slowAmount: 15
   _stunTickTime: 2
-  _stunTickElapsed: 0
+  _knockBackForce: 1000

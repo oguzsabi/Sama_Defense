@@ -8,10 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int health = 100;
     [SerializeField] private GameSession _gameSession;
     
-    private void DecreasePlayerHealth()
+    private void DecreasePlayerHealth(int damageAmount)
     {
-        health -= 10;
-        _gameSession.DecreasePlayerHealthBy(10);
+        health -= damageAmount;
+        _gameSession.DecreasePlayerHealthBy(damageAmount);
 
         if (health <= 0)
         {
@@ -30,8 +30,8 @@ public class Player : MonoBehaviour
 
         if (!enemyComponent) return;
         
+        DecreasePlayerHealth(enemyComponent.Damage);
         Destroy(other.gameObject);
         WaveSpawner.DecreaseAliveEnemyCount();
-        DecreasePlayerHealth();
     }
 }
