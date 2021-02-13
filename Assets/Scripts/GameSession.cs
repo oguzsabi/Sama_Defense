@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameSession : MonoBehaviour
 {
-    [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private GameObject _gameSessionCanvas;
+    [SerializeField] private GameObject _successCanvas;
     [SerializeField] private TextMeshProUGUI _healthAmountText;
     [SerializeField] private TextMeshProUGUI _diamondAmountText;
     [SerializeField] private TextMeshProUGUI _coinAmountText;
@@ -21,6 +22,7 @@ public class GameSession : MonoBehaviour
     private void Awake()
     {
         CheckDefaultMaxTowerCount();
+        _gameSessionCanvas.SetActive(true);
     }
 
     private void Start()
@@ -168,7 +170,7 @@ public class GameSession : MonoBehaviour
     public void LoadNextLevel()
     {
         UnlockNextLevel();
-        _sceneLoader.LoadNextLevel();
+        _successCanvas.SetActive(true);
     }
     
     /// <summary>
