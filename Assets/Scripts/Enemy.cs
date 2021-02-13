@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -172,8 +173,8 @@ public class Enemy : MonoBehaviour
     private void KnockBack()
     {
         if (_alreadyKnockedBack) return;
-        
-        _rigidbody.AddForce(0, 0, _knockBackForce);
+
+        _rigidbody.AddRelativeForce(Random.Range(-_knockBackForce/2, _knockBackForce/2), 0, Random.Range(_knockBackForce/1.5f, _knockBackForce));
         StartCoroutine(KnockBackTick());
     }
     
