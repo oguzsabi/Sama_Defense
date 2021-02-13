@@ -43,10 +43,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 489b4d4011def564a85546ce0a25899f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneLoader: {fileID: 5970914214993546292, guid: 135999f8a8ce5e649ac258c02a16307a,
-    type: 3}
+  _gameSessionCanvas: {fileID: 0}
+  _successCanvas: {fileID: 0}
+  _healthAmountText: {fileID: 0}
   _diamondAmountText: {fileID: 0}
   _coinAmountText: {fileID: 0}
   _towerCountText: {fileID: 0}
   _levelNumberText: {fileID: 0}
   _waveNumberText: {fileID: 0}
+  _isDemoLevel: 0
