@@ -136,14 +136,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ac0a618538a43f478904de6adc15ba2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 25
-  movementSpeed: 15
-  damage: 5
+  health: 30
+  movementSpeed: 10
+  damage: 6
   element: 2
-  worth: 20
+  worth: 4
   _dotTickTime: 5
   _dotDamage: 1
   _slowTickTime: 5
-  _slowAmount: 10
+  _slowAmount: 5
   _stunTickTime: 2
   _knockBackForce: 1000

@@ -548,7 +548,7 @@ MonoBehaviour:
   projectile: {fileID: 8683729254116240177, guid: 185c942510bf90f4bbfc6349a2a07c5a,
     type: 3}
   projectileStart: {fileID: 929333309455822772}
-  fireRate: 0.35
+  fireRate: 0.375
   damage: 25
   isPlaceable: 0
   adjacencyDetector: {fileID: 420106708283499389}

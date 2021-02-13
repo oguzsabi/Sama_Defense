@@ -301,6 +301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileSpeed: 30
-  accuracy: 90
+  accuracy: 100
   element: 0
   missText: {fileID: 1991666602296798317}
