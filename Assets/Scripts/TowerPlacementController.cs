@@ -12,7 +12,6 @@ public class TowerPlacementController : MonoBehaviour
     [SerializeField] private KeyCode addWaterTowerHotkey;
     [SerializeField] private KeyCode addEarthTowerHotkey;
     [SerializeField] private KeyCode addWoodTowerHotkey;
-    [SerializeField] private float rotationMultiplier = 10f;
     [SerializeField] private LayerMask mask;
 
     private GameObject _newTower;

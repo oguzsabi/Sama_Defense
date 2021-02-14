@@ -70,12 +70,14 @@ public class Tower : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
-        if (other.name.Contains("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
+        // if (other.name.Contains("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
+        // If other is not in the Enemy layer it returns
+        if (other.gameObject.layer != 10) return;
 
         var enemyInRange = other.gameObject;
         // If there is no current target then pick one
         _targets.Add(enemyInRange);
+        // print("target in: " + _targets.Count);
         if (!_currentTarget) FindRandomTarget();
     }
     
@@ -85,9 +87,9 @@ public class Tower : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-        // If it is not terrain or IgnoreRaycast or Placement then it is an enemy unit
-        if (other.name.Contains("Terrain") || other.gameObject.layer == 2 || other.gameObject.layer == 11) return;
-
+        // If other is not in the Enemy layer it returns
+        if (other.gameObject.layer != 10) return;
+        
         var enemyOutRange = other.gameObject;
         if (enemyOutRange == _currentTarget) _currentTarget = null;
 
@@ -116,13 +118,18 @@ public class Tower : MonoBehaviour
             _currentTarget = _targets[randomTargetIndex];
             if (_currentTarget) return;
             
-            _targets.RemoveAll(target => target == null);
+            RemoveNullTargets();
             FindRandomTarget();
         }
         catch (Exception)
         {
             FindRandomTarget();
         }
+    }
+
+    private void RemoveNullTargets()
+    {
+        _targets.RemoveAll(target => target == null);
     }
     
     /// <summary>

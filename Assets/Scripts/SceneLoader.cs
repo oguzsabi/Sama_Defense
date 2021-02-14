@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] private float delayTimeInSeconds = 5f;
-
     private GameSession _gameSession;
 
     private void Start()
