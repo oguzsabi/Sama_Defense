@@ -62,7 +62,7 @@ public class Upgrade : MonoBehaviour
     private void IncreaseRange(GameObject tower)
     {
         var rangeCollider = GetRangeCollider(tower);
-        rangeCollider.radius += 1f;
+        rangeCollider.radius += 0.1f;
         AdjustRangeVisuals(tower);
     }
     
@@ -72,7 +72,7 @@ public class Upgrade : MonoBehaviour
     /// <param name="tower"></param>
     private void AdjustRangeVisuals(GameObject tower)
     {
-        tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 7.35f;
+        tower.transform.GetChild(1).GetComponent<Projector>().orthographicSize += 0.735f;
     }
     
     /// <summary>
