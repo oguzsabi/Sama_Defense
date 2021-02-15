@@ -17,7 +17,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _waveNumberText;
     [SerializeField] private bool _isDemoLevel = false;
     
-    private const int LEVEL_NUMBER_OFFSET = -4;
+    private const int LEVEL_NUMBER_OFFSET = -3;
 
     private void Awake()
     {

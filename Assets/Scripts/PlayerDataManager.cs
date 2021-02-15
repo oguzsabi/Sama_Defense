@@ -6,34 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerDataManager : MonoBehaviour
 {
-    private const string MASTER_VOLUME_KEY = "master_volume";
     private const string LEVEL_KEY = "level_unlocked_";
     private const string DIAMOND_AMOUNT_KEY = "diamond_amount";
     private const string MAX_TOWER_COUNT_KEY = "max_tower_count";
     
-    /// <summary>
-    /// Sets master volume to given volume value
-    /// </summary>
-    /// <param name="volume"></param>
-    public static void SetMasterVolume(float volume)
-    {
-        if (volume >= 0f && volume <= 1f)
-        {
-            PlayerPrefs.SetFloat(MASTER_VOLUME_KEY, volume);
-        }
-        else
-        {
-            Debug.LogError("Master volume out of range");
-        }
-    }
-    /// <summary>
-    /// Gets the master volume value
-    /// </summary>
-    /// <returns></returns>
-    public static float GetMasterVolume()
-    {
-        return PlayerPrefs.GetFloat(MASTER_VOLUME_KEY);
-    }
     /// <summary>
     /// Unlocks next level
     /// </summary>
