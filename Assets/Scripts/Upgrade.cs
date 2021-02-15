@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.EventSystems;
 public class Upgrade : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI feedbackText;
-    
+
     [SerializeField] private GameObject waterTower;
     [SerializeField] private GameObject fireTower;
     [SerializeField] private GameObject earthTower;
@@ -18,12 +19,44 @@ public class Upgrade : MonoBehaviour
     [SerializeField] private GameObject earthProjectile;
     [SerializeField] private GameObject woodProjectile;
 
+    // Order is: fire damage, fire accuracy, fire range, fire speed, water..., earth, wood
+    [SerializeField] private TextMeshProUGUI[] upgradeTexts;
+
     private GameSession _gameSession;
+
+    private void Awake()
+    {
+        TowerDataManager.ResetAllCosts();
+        CheckTextDiamondValues();
+    }
 
     private void Start()
     {
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         feedbackText.enabled = false;
+    }
+
+    private void CheckTextDiamondValues()
+    {
+        upgradeTexts[0].text = "Fire Tower ↑ +5\n(" + TowerDataManager.GetFireCosts()[0] + " Diamonds)";
+        upgradeTexts[1].text = "Fire Tower ↑ +5\n(" + TowerDataManager.GetFireCosts()[1] + " Diamonds)";
+        upgradeTexts[2].text = "Fire Tower ↑ +5\n(" + TowerDataManager.GetFireCosts()[2] + " Diamonds)";
+        upgradeTexts[3].text = "Fire Tower ↑ +5\n(" + TowerDataManager.GetFireCosts()[3] + " Diamonds)";
+        
+        upgradeTexts[4].text = "Water Tower ↑ +5\n(" + TowerDataManager.GetWaterCosts()[0] + " Diamonds)";
+        upgradeTexts[5].text = "Water Tower ↑ +5\n(" + TowerDataManager.GetWaterCosts()[1] + " Diamonds)";
+        upgradeTexts[6].text = "Water Tower ↑ +5\n(" + TowerDataManager.GetWaterCosts()[2] + " Diamonds)";
+        upgradeTexts[7].text = "Water Tower ↑ +5\n(" + TowerDataManager.GetWaterCosts()[3] + " Diamonds)";
+        
+        upgradeTexts[8].text = "Earth Tower ↑ +5\n(" + TowerDataManager.GetEarthCosts()[0] + " Diamonds)";
+        upgradeTexts[9].text = "Earth Tower ↑ +5\n(" + TowerDataManager.GetEarthCosts()[1] + " Diamonds)";
+        upgradeTexts[10].text = "Earth Tower ↑ +5\n(" + TowerDataManager.GetEarthCosts()[2] + " Diamonds)";
+        upgradeTexts[11].text = "Earth Tower ↑ +5\n(" + TowerDataManager.GetEarthCosts()[3] + " Diamonds)";
+        
+        upgradeTexts[12].text = "Wood Tower ↑ +5\n(" + TowerDataManager.GetWoodCosts()[0] + " Diamonds)";
+        upgradeTexts[13].text = "Wood Tower ↑ +5\n(" + TowerDataManager.GetWoodCosts()[1] + " Diamonds)";
+        upgradeTexts[14].text = "Wood Tower ↑ +5\n(" + TowerDataManager.GetWoodCosts()[2] + " Diamonds)";
+        upgradeTexts[15].text = "Wood Tower ↑ +5\n(" + TowerDataManager.GetWoodCosts()[3] + " Diamonds)";
     }
     
     /// <summary>
@@ -90,9 +123,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeFireTowerDamage()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetFireCosts()[0];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveDamageCost(Tower.ElementType.Fire);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseDamage(fireTower);
         ApplyForExistingTowers(Tower.ElementType.Fire, 1);
         DisplayMessage("Successful purchase", Color.green);
@@ -104,9 +140,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWaterTowerDamage()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWaterCosts()[0];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveDamageCost(Tower.ElementType.Water);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseDamage(waterTower);
         ApplyForExistingTowers(Tower.ElementType.Water, 1);
         DisplayMessage("Successful purchase", Color.green);
@@ -118,9 +157,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeEarthTowerDamage()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetEarthCosts()[0];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveDamageCost(Tower.ElementType.Earth);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseDamage(earthTower);
         ApplyForExistingTowers(Tower.ElementType.Earth, 1);
         DisplayMessage("Successful purchase", Color.green);
@@ -132,9 +174,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWoodTowerDamage()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWoodCosts()[0];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveDamageCost(Tower.ElementType.Wood);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseDamage(woodTower);
         ApplyForExistingTowers(Tower.ElementType.Wood, 1);
         DisplayMessage("Successful purchase", Color.green);
@@ -146,9 +191,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeFireTowerAccuracy()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetFireCosts()[1];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveAccuracyCost(Tower.ElementType.Fire);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseProjectileAccuracy(fireProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
@@ -159,9 +207,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWaterTowerAccuracy()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWaterCosts()[1];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveAccuracyCost(Tower.ElementType.Water);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseProjectileAccuracy(waterProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
@@ -171,9 +222,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeEarthTowerAccuracy()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetEarthCosts()[1];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveAccuracyCost(Tower.ElementType.Earth);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseProjectileAccuracy(earthProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
@@ -184,9 +238,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWoodTowerAccuracy()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWoodCosts()[1];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveAccuracyCost(Tower.ElementType.Wood);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseProjectileAccuracy(woodProjectile);
         DisplayMessage("Successful purchase", Color.green);
     }
@@ -197,9 +254,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeFireTowerRange()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetFireCosts()[2];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveRangeCost(Tower.ElementType.Fire);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseRange(fireTower);
         ApplyForExistingTowers(Tower.ElementType.Fire, 2);
         DisplayMessage("Successful purchase", Color.green);
@@ -211,9 +271,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWaterTowerRange()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWaterCosts()[2];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveRangeCost(Tower.ElementType.Water);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseRange(waterTower);
         ApplyForExistingTowers(Tower.ElementType.Water, 2);
         DisplayMessage("Successful purchase", Color.green);
@@ -225,9 +288,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeEarthTowerRange()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetEarthCosts()[2];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveRangeCost(Tower.ElementType.Earth);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseRange(earthTower);
         ApplyForExistingTowers(Tower.ElementType.Earth, 2);
         DisplayMessage("Successful purchase", Color.green);
@@ -239,9 +305,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWoodTowerRange()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWoodCosts()[2];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveRangeCost(Tower.ElementType.Wood);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseRange(woodTower);
         ApplyForExistingTowers(Tower.ElementType.Wood, 2);
         DisplayMessage("Successful purchase", Color.green);
@@ -253,9 +322,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeFireTowerSpeed()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetFireCosts()[3];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveSpeedCost(Tower.ElementType.Fire);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseAttackSpeed(fireTower);
         ApplyForExistingTowers(Tower.ElementType.Fire, 3);
         DisplayMessage("Successful purchase", Color.green);
@@ -267,9 +339,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWaterTowerSpeed()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWaterCosts()[3];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveSpeedCost(Tower.ElementType.Water);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseAttackSpeed(waterTower);
         ApplyForExistingTowers(Tower.ElementType.Water, 3);
         DisplayMessage("Successful purchase", Color.green);
@@ -281,9 +356,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeEarthTowerSpeed()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetEarthCosts()[3];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveSpeedCost(Tower.ElementType.Earth);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseAttackSpeed(earthTower);
         ApplyForExistingTowers(Tower.ElementType.Earth, 3);
         DisplayMessage("Successful purchase", Color.green);
@@ -295,9 +373,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void UpgradeWoodTowerSpeed()
     {
-        if (!CheckForEnoughDiamonds(5)) return;
+        var cost = TowerDataManager.GetWoodCosts()[3];
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-5);
+        TowerDataManager.IncreaseAndSaveSpeedCost(Tower.ElementType.Wood);
+        CheckTextDiamondValues();
+        _gameSession.ChangeDiamondAmountBy(-cost);
         IncreaseAttackSpeed(woodTower);
         ApplyForExistingTowers(Tower.ElementType.Wood, 3);
         DisplayMessage("Successful purchase", Color.green);

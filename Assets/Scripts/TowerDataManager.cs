@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TowerDataManager : MonoBehaviour
 {
+    private const int costIncreaseAmount = 5;
+
     private const string FIRE_DAMAGE_KEY = "fire_damage_cost";
     private const string FIRE_ACCURACY_KEY = "fire_accuracy_cost";
     private const string FIRE_RANGE_KEY = "fire_range_cost";
@@ -23,16 +25,164 @@ public class TowerDataManager : MonoBehaviour
     private const string WOOD_ACCURACY_KEY = "wood_accuracy_cost";
     private const string WOOD_RANGE_KEY = "wood_range_cost";
     private const string WOOD_SPEED_KEY = "wood_speed_cost";
+
     
-    // Start is called before the first frame update
-    void Start()
+    public static void IncreaseAndSaveDamageCost(Tower.ElementType elementType)
     {
+        int oldCost;
         
+        switch (elementType)
+        {
+            case Tower.ElementType.Fire:
+                oldCost = PlayerPrefs.GetInt(FIRE_DAMAGE_KEY);
+                PlayerPrefs.SetInt(FIRE_DAMAGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Water:
+                oldCost = PlayerPrefs.GetInt(WATER_DAMAGE_KEY);
+                PlayerPrefs.SetInt(WATER_DAMAGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Earth:
+                oldCost = PlayerPrefs.GetInt(EARTH_DAMAGE_KEY);
+                PlayerPrefs.SetInt(EARTH_DAMAGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Wood:
+                oldCost = PlayerPrefs.GetInt(WOOD_DAMAGE_KEY);
+                PlayerPrefs.SetInt(WOOD_DAMAGE_KEY, oldCost + costIncreaseAmount);
+                break;
+        }
+    }
+    
+    public static void IncreaseAndSaveAccuracyCost(Tower.ElementType elementType)
+    {
+        int oldCost;
+        
+        switch (elementType)
+        {
+            case Tower.ElementType.Fire:
+                oldCost = PlayerPrefs.GetInt(FIRE_ACCURACY_KEY);
+                PlayerPrefs.SetInt(FIRE_ACCURACY_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Water:
+                oldCost = PlayerPrefs.GetInt(WATER_ACCURACY_KEY);
+                PlayerPrefs.SetInt(WATER_ACCURACY_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Earth:
+                oldCost = PlayerPrefs.GetInt(EARTH_ACCURACY_KEY);
+                PlayerPrefs.SetInt(EARTH_ACCURACY_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Wood:
+                oldCost = PlayerPrefs.GetInt(WOOD_ACCURACY_KEY);
+                PlayerPrefs.SetInt(WOOD_ACCURACY_KEY, oldCost + costIncreaseAmount);
+                break;
+        }
+    }
+    
+    public static void IncreaseAndSaveRangeCost(Tower.ElementType elementType)
+    {
+        int oldCost;
+        
+        switch (elementType)
+        {
+            case Tower.ElementType.Fire:
+                oldCost = PlayerPrefs.GetInt(FIRE_RANGE_KEY);
+                PlayerPrefs.SetInt(FIRE_RANGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Water:
+                oldCost = PlayerPrefs.GetInt(WATER_RANGE_KEY);
+                PlayerPrefs.SetInt(WATER_RANGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Earth:
+                oldCost = PlayerPrefs.GetInt(EARTH_RANGE_KEY);
+                PlayerPrefs.SetInt(EARTH_RANGE_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Wood:
+                oldCost = PlayerPrefs.GetInt(WOOD_RANGE_KEY);
+                PlayerPrefs.SetInt(WOOD_DAMAGE_KEY, oldCost + costIncreaseAmount);
+                break;
+        }
+    }
+    
+    public static void IncreaseAndSaveSpeedCost(Tower.ElementType elementType)
+    {
+        int oldCost;
+        
+        switch (elementType)
+        {
+            case Tower.ElementType.Fire:
+                oldCost = PlayerPrefs.GetInt(FIRE_SPEED_KEY);
+                PlayerPrefs.SetInt(FIRE_SPEED_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Water:
+                oldCost = PlayerPrefs.GetInt(WATER_SPEED_KEY);
+                PlayerPrefs.SetInt(WATER_SPEED_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Earth:
+                oldCost = PlayerPrefs.GetInt(EARTH_SPEED_KEY);
+                PlayerPrefs.SetInt(EARTH_SPEED_KEY, oldCost + costIncreaseAmount);
+                break;
+            case Tower.ElementType.Wood:
+                oldCost = PlayerPrefs.GetInt(WOOD_SPEED_KEY);
+                PlayerPrefs.SetInt(WOOD_SPEED_KEY, oldCost + costIncreaseAmount);
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public static int[] GetFireCosts()
     {
+        return new[]
+        {
+            PlayerPrefs.GetInt(FIRE_DAMAGE_KEY, 5), PlayerPrefs.GetInt(FIRE_ACCURACY_KEY, 5),
+            PlayerPrefs.GetInt(FIRE_RANGE_KEY, 5), PlayerPrefs.GetInt(FIRE_SPEED_KEY, 5)
+        };
+    }
+    
+    public static int[] GetWaterCosts()
+    {
+        return new[]
+        {
+            PlayerPrefs.GetInt(WATER_DAMAGE_KEY, 5), PlayerPrefs.GetInt(WATER_ACCURACY_KEY, 5),
+            PlayerPrefs.GetInt(WATER_RANGE_KEY, 5), PlayerPrefs.GetInt(WATER_SPEED_KEY, 5)
+        };
+    }
+    
+    public static int[] GetEarthCosts()
+    {
+        return new[]
+        {
+            PlayerPrefs.GetInt(EARTH_DAMAGE_KEY, 5), PlayerPrefs.GetInt(EARTH_ACCURACY_KEY, 5),
+            PlayerPrefs.GetInt(EARTH_RANGE_KEY, 5), PlayerPrefs.GetInt(EARTH_SPEED_KEY, 5)
+        };
+    }
+    
+    public static int[] GetWoodCosts()
+    {
+        return new[]
+        {
+            PlayerPrefs.GetInt(WOOD_DAMAGE_KEY, 5), PlayerPrefs.GetInt(WOOD_ACCURACY_KEY, 5),
+            PlayerPrefs.GetInt(WOOD_RANGE_KEY, 5), PlayerPrefs.GetInt(WOOD_SPEED_KEY, 5)
+        };
+    }
+
+    public static void ResetAllCosts()
+    {
+        PlayerPrefs.SetInt(FIRE_DAMAGE_KEY, 5);
+        PlayerPrefs.SetInt(WATER_DAMAGE_KEY, 5);
+        PlayerPrefs.SetInt(EARTH_DAMAGE_KEY, 5);
+        PlayerPrefs.SetInt(WOOD_DAMAGE_KEY, 5);
         
+        PlayerPrefs.SetInt(FIRE_ACCURACY_KEY, 5);
+        PlayerPrefs.SetInt(WATER_ACCURACY_KEY, 5);
+        PlayerPrefs.SetInt(EARTH_ACCURACY_KEY, 5);
+        PlayerPrefs.SetInt(WOOD_ACCURACY_KEY, 5);
+        
+        PlayerPrefs.SetInt(FIRE_RANGE_KEY, 5);
+        PlayerPrefs.SetInt(WATER_RANGE_KEY, 5);
+        PlayerPrefs.SetInt(EARTH_RANGE_KEY, 5);
+        PlayerPrefs.SetInt(WOOD_DAMAGE_KEY, 5);
+        
+        PlayerPrefs.SetInt(FIRE_SPEED_KEY, 5);
+        PlayerPrefs.SetInt(WATER_SPEED_KEY, 5);
+        PlayerPrefs.SetInt(EARTH_SPEED_KEY, 5);
+        PlayerPrefs.SetInt(WOOD_SPEED_KEY, 5);
     }
 }

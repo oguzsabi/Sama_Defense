@@ -61,8 +61,8 @@ public class GamePause : MonoBehaviour
     /// </summary>
     public void GoToMainMenu()
     {
-        SceneLoader.LoadScene("Main Menu");
         Time.timeScale = 1;
+        SceneLoader.LoadScene("Main Menu");
     }
     /// <summary>
     /// Redirects to the upgrades menu 
