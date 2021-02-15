@@ -94,7 +94,7 @@ public class Tower : MonoBehaviour
         if (enemyOutRange == _currentTarget) _currentTarget = null;
 
         _targets.Remove(enemyOutRange);
-        FindRandomTarget();
+        if (!_currentTarget) FindRandomTarget();
     }
     /// <summary>
     /// Randomly picks a target that is in range of the tower
