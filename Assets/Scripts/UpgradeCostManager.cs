@@ -37,19 +37,19 @@ public class UpgradeCostManager : MonoBehaviour
         switch (elementType)
         {
             case Tower.ElementType.Fire:
-                oldCost = PlayerPrefs.GetInt(FIRE_DAMAGE_KEY);
+                oldCost = PlayerPrefs.GetInt(FIRE_DAMAGE_KEY, 5);
                 PlayerPrefs.SetInt(FIRE_DAMAGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Water:
-                oldCost = PlayerPrefs.GetInt(WATER_DAMAGE_KEY);
+                oldCost = PlayerPrefs.GetInt(WATER_DAMAGE_KEY, 5);
                 PlayerPrefs.SetInt(WATER_DAMAGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Earth:
-                oldCost = PlayerPrefs.GetInt(EARTH_DAMAGE_KEY);
+                oldCost = PlayerPrefs.GetInt(EARTH_DAMAGE_KEY, 5);
                 PlayerPrefs.SetInt(EARTH_DAMAGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Wood:
-                oldCost = PlayerPrefs.GetInt(WOOD_DAMAGE_KEY);
+                oldCost = PlayerPrefs.GetInt(WOOD_DAMAGE_KEY, 5);
                 PlayerPrefs.SetInt(WOOD_DAMAGE_KEY, oldCost + costIncreaseAmount);
                 break;
         }
@@ -62,19 +62,19 @@ public class UpgradeCostManager : MonoBehaviour
         switch (elementType)
         {
             case Tower.ElementType.Fire:
-                oldCost = PlayerPrefs.GetInt(FIRE_ACCURACY_KEY);
+                oldCost = PlayerPrefs.GetInt(FIRE_ACCURACY_KEY, 5);
                 PlayerPrefs.SetInt(FIRE_ACCURACY_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Water:
-                oldCost = PlayerPrefs.GetInt(WATER_ACCURACY_KEY);
+                oldCost = PlayerPrefs.GetInt(WATER_ACCURACY_KEY, 5);
                 PlayerPrefs.SetInt(WATER_ACCURACY_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Earth:
-                oldCost = PlayerPrefs.GetInt(EARTH_ACCURACY_KEY);
+                oldCost = PlayerPrefs.GetInt(EARTH_ACCURACY_KEY, 5);
                 PlayerPrefs.SetInt(EARTH_ACCURACY_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Wood:
-                oldCost = PlayerPrefs.GetInt(WOOD_ACCURACY_KEY);
+                oldCost = PlayerPrefs.GetInt(WOOD_ACCURACY_KEY, 5);
                 PlayerPrefs.SetInt(WOOD_ACCURACY_KEY, oldCost + costIncreaseAmount);
                 break;
         }
@@ -87,19 +87,19 @@ public class UpgradeCostManager : MonoBehaviour
         switch (elementType)
         {
             case Tower.ElementType.Fire:
-                oldCost = PlayerPrefs.GetInt(FIRE_RANGE_KEY);
+                oldCost = PlayerPrefs.GetInt(FIRE_RANGE_KEY, 5);
                 PlayerPrefs.SetInt(FIRE_RANGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Water:
-                oldCost = PlayerPrefs.GetInt(WATER_RANGE_KEY);
+                oldCost = PlayerPrefs.GetInt(WATER_RANGE_KEY, 5);
                 PlayerPrefs.SetInt(WATER_RANGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Earth:
-                oldCost = PlayerPrefs.GetInt(EARTH_RANGE_KEY);
+                oldCost = PlayerPrefs.GetInt(EARTH_RANGE_KEY, 5);
                 PlayerPrefs.SetInt(EARTH_RANGE_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Wood:
-                oldCost = PlayerPrefs.GetInt(WOOD_RANGE_KEY);
+                oldCost = PlayerPrefs.GetInt(WOOD_RANGE_KEY, 5);
                 PlayerPrefs.SetInt(WOOD_RANGE_KEY, oldCost + costIncreaseAmount);
                 break;
         }
@@ -112,19 +112,19 @@ public class UpgradeCostManager : MonoBehaviour
         switch (elementType)
         {
             case Tower.ElementType.Fire:
-                oldCost = PlayerPrefs.GetInt(FIRE_SPEED_KEY);
+                oldCost = PlayerPrefs.GetInt(FIRE_SPEED_KEY, 5);
                 PlayerPrefs.SetInt(FIRE_SPEED_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Water:
-                oldCost = PlayerPrefs.GetInt(WATER_SPEED_KEY);
+                oldCost = PlayerPrefs.GetInt(WATER_SPEED_KEY, 5);
                 PlayerPrefs.SetInt(WATER_SPEED_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Earth:
-                oldCost = PlayerPrefs.GetInt(EARTH_SPEED_KEY);
+                oldCost = PlayerPrefs.GetInt(EARTH_SPEED_KEY, 5);
                 PlayerPrefs.SetInt(EARTH_SPEED_KEY, oldCost + costIncreaseAmount);
                 break;
             case Tower.ElementType.Wood:
-                oldCost = PlayerPrefs.GetInt(WOOD_SPEED_KEY);
+                oldCost = PlayerPrefs.GetInt(WOOD_SPEED_KEY, 5);
                 PlayerPrefs.SetInt(WOOD_SPEED_KEY, oldCost + costIncreaseAmount);
                 break;
         }
@@ -174,7 +174,7 @@ public class UpgradeCostManager : MonoBehaviour
 
     public static int GetMaxTowerCost()
     {
-        return PlayerPrefs.GetInt(TOWER_COUNT_KEY, 5);
+        return PlayerPrefs.GetInt(TOWER_COUNT_KEY, 20);
     }
 
     public static void ResetAllCosts()

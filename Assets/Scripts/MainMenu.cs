@@ -18,4 +18,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneLoader.LoadScene("Levels");
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

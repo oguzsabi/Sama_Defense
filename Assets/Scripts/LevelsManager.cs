@@ -16,17 +16,11 @@ public class LevelsManager : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        PlayerDataManager.UnlockLevel(1);
         _levelButtons = _levelsCanvas.GetComponentsInChildren<Button>();
         ArrangeLevelAvailability();
     }
-    
-    private void Start()
-    {
-        // PlayerDataManager.LockAllLevels(_numberOfLevels);
-        PlayerDataManager.UnlockLevel(1);
-        // PlayerDataManager.UnlockLevel(11); // This is the demo level
-    }
-    
+
     /// <summary>
     /// Prevents clicking to levels that are not unlocked yet.
     /// </summary>

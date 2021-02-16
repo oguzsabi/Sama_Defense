@@ -87,7 +87,7 @@ public class PlayerDataManager : MonoBehaviour
     /// <returns></returns>
     public static int GetMaximumTowerCount()
     {
-        return PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY);
+        return PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY, 5);
     }
     /// <summary>
     /// Sets a default value to maximum towers that can be placed
