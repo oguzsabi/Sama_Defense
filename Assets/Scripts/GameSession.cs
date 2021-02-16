@@ -167,6 +167,7 @@ public class GameSession : MonoBehaviour
     /// </summary>
     public void LoadNextLevel()
     {
+        SaveDiamondAmount();
         UnlockNextLevel();
         _successCanvas.SetActive(true);
     }

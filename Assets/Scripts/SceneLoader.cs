@@ -6,19 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private GameSession _gameSession;
-
-    private void Start()
-    {
-        _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
-    }
-    
     /// <summary>
     /// Starts the coroutine for loading next level
     /// </summary>
     public void LoadNextLevel()
     {
-        _gameSession.SaveDiamondAmount();
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
         // StartCoroutine(LoadLevel());
     }
