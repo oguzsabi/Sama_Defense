@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -31,6 +29,7 @@ public class WaveSpawner : MonoBehaviour
     
     private void Start()
     {
+        _enemiesAlive = 0;
         _spawnerLocation = transform.position;
         _enemyPrefabsLength = enemyPrefabs.Length;
         _waveCount = 4;

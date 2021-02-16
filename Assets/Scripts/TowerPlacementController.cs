@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class TowerPlacementController : MonoBehaviour
 {
@@ -24,6 +20,7 @@ public class TowerPlacementController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        _currentTowers.Clear();
         _gameSession = GameObject.Find("GameSession").GetComponent<GameSession>();
         _mainCamera = Camera.main;
     }

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Upgrade : MonoBehaviour
 {
@@ -30,9 +26,9 @@ public class Upgrade : MonoBehaviour
         // UpgradeCostManager.ResetAllCosts();
         // TowerDataManager.ResetAllData();
         // PlayerDataManager.ResetMaxTowerCount();
-        // PlayerDataManager.GiveMaxDiamond();
         // PlayerDataManager.ResetDiamondAmount();
         // PlayerDataManager.ResetMaxTowerCount();
+        // PlayerDataManager.GiveMaxDiamond();
         CheckTextDiamondValues();
     }
 
@@ -456,6 +452,7 @@ public class Upgrade : MonoBehaviour
     /// <param name="upgradeIndex"></param>
     private void ApplyForExistingTowers(Tower.ElementType element, int upgradeIndex)
     {
+        
         foreach (var tower in TowerPlacementController.CurrentTowers)
         {
             var towerElement = tower.GetComponent<Tower>().Element;
