@@ -15,16 +15,6 @@ public class SceneLoader : MonoBehaviour
         // StartCoroutine(LoadLevel());
     }
     
-    // /// <summary>
-    // /// Loads next level
-    // /// </summary>
-    // /// <returns></returns>
-    // private IEnumerator LoadLevel()
-    // {
-    //     _gameSession.SaveDiamondAmount();
-    //     yield return new WaitForSeconds(delayTimeInSeconds);
-    //     SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCountInBuildSettings);
-    // }
     /// <summary>
     /// Gets current scene index
     /// </summary>
@@ -33,6 +23,7 @@ public class SceneLoader : MonoBehaviour
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
+    
     /// <summary>
     /// Loads a scene
     /// </summary>
