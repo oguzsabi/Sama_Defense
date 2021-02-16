@@ -2267,6 +2267,94 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331533155, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 331533155, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EarthTowerButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 582040928, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 582040928, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WaterTowerButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 986234546, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 986234546, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WoodTowerButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117525657, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 2117525657, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FireTowerButtonClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117525660, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 2117525660, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 2117525660, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2117525660, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NotSelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 173080535150684812, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 173080535150684812, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 173080535150684812, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 173080535150684812, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NotSelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641250843042938554, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 2641250843042938554, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 2641250843042938554, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 2641250843042938554, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NotSelectingTower
+      objectReference: {fileID: 0}
     - target: {fileID: 8287119155752340448, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2381,6 +2469,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190338234784431490, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 9190338234784431490, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 470962414264806429}
+    - target: {fileID: 9190338234784431490, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectingTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 9190338234784431490, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NotSelectingTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1ba7056c2d3ad47bfc32bcb6a7d0fe, type: 3}
@@ -30560,11 +30668,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 341088778}
-    - target: {fileID: 3588730686387312527, guid: 8c558a57670c8cb4b8ff017903f73fbe,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToMainMenu
-      objectReference: {fileID: 0}
     - target: {fileID: 3588730687283275456, guid: 8c558a57670c8cb4b8ff017903f73fbe,
         type: 3}
       propertyPath: m_Name
@@ -30851,6 +30954,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47f50d747840a45448613708f3b938a8, type: 3}
+--- !u!114 &470962414264806429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 470962415392866959, guid: 47f50d747840a45448613708f3b938a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 470962414264806428}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6581804782f5f24499f6273726378a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &668863345323989820
 PrefabInstance:
   m_ObjectHideFlags: 0
