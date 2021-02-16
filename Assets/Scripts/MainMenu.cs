@@ -19,6 +19,11 @@ public class MainMenu : MonoBehaviour
         SceneLoader.LoadScene("Levels");
     }
 
+    public void GoToUpgradesMenu()
+    {
+        SceneLoader.LoadScene("Upgrades");
+    }
+
     public void QuitGame()
     {
         Application.Quit();

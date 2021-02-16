@@ -27,17 +27,13 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-        PlayerDataManager.GiveMaxDiamond();
         if (_isDemoLevel)
         {
             PlayerDataManager.GiveMaxDiamond();
             PlayerDataManager.GiveMaxTowerCount();
             ChangeCoinAmountBy(1000);
         }
-        
-        // PlayerDataManager.ResetDiamondAmount();
-        // PlayerDataManager.ResetMaxTowerCount();
-        
+
         _diamondAmountText.text = PlayerDataManager.GetDiamondAmount().ToString();
         _levelNumberText.text = (SceneLoader.GetCurrentSceneIndex() + LEVEL_NUMBER_OFFSET).ToString();
         _towerCountText.text = 0 + "/" + PlayerDataManager.GetMaximumTowerCount();

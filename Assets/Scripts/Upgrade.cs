@@ -30,6 +30,9 @@ public class Upgrade : MonoBehaviour
         // UpgradeCostManager.ResetAllCosts();
         // TowerDataManager.ResetAllData();
         // PlayerDataManager.ResetMaxTowerCount();
+        // PlayerDataManager.GiveMaxDiamond();
+        // PlayerDataManager.ResetDiamondAmount();
+        // PlayerDataManager.ResetMaxTowerCount();
         CheckTextDiamondValues();
     }
 
