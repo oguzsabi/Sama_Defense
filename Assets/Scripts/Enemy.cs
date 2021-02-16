@@ -67,7 +67,10 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            ApplyElementEffect(projectileType);
+            if (Random.Range(1, 100) < 90)
+            {
+                ApplyElementEffect(projectileType);
+            }
         }
     }
     
