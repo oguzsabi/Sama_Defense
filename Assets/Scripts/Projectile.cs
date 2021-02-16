@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
 {
     public enum ElementType { Fire, Water, Earth, Wood }
     
-    [SerializeField] private float projectileSpeed = 5f;
+    [SerializeField] private float projectileSpeed = 30f;
     [SerializeField] public int accuracy;
     [SerializeField] private ElementType element;
     [SerializeField] private TextMeshPro missText;

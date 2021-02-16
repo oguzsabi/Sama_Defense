@@ -31,7 +31,6 @@ public class Tower : MonoBehaviour
         _isReady = false;
         isPlaceable = true;
     }
-
     
     private void Update()
     {
