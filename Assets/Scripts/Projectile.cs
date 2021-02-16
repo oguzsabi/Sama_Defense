@@ -22,7 +22,6 @@ public class Projectile : MonoBehaviour
     private Camera _mainCamera;
     private const float FORCE_MULTIPLIER = 50f;
     private string _projectileType;
-    
 
     private void Start()
     {
@@ -92,7 +91,7 @@ public class Projectile : MonoBehaviour
     /// <param name="enemy"></param>
     private void RollForHit(Enemy enemy)
     {
-        var successfulHit = Random.Range(1, 100) < accuracy;
+        var successfulHit = Random.Range(1, 100) <= accuracy;
 
         if (!successfulHit)
         {
@@ -102,6 +101,7 @@ public class Projectile : MonoBehaviour
 
         var actualDamage = CalculateActualDamage(enemy);
         enemy.GetHit(actualDamage, this.Element);
+        missText.fontSize = 0;
         transform.localScale = new Vector3(4, 4, 4);
         Destroy(gameObject, 0.1f);
     }
