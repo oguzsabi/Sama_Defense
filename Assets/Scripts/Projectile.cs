@@ -102,7 +102,8 @@ public class Projectile : MonoBehaviour
 
         var actualDamage = CalculateActualDamage(enemy);
         enemy.GetHit(actualDamage, this.Element);
-        Destroy(gameObject);
+        transform.localScale = new Vector3(4, 4, 4);
+        Destroy(gameObject, 0.1f);
     }
     
     /// <summary>
