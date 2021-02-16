@@ -11,13 +11,14 @@ public class Tower : MonoBehaviour
     [SerializeField] private ElementType element;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileStart;
+    [SerializeField] private SphereCollider _towerRange;
     
-    public float fireRate = 0.35f;
+    public float fireRate = 0.375f;
     public float damage = 25;
     public bool isPlaceable;
     public GameObject adjacencyDetector;
     public GameObject rangeIndicator;
-
+    
     private bool _shootAvailable = true;
     private readonly List<GameObject> _targets = new List<GameObject>();
     private GameObject _currentTarget;
@@ -153,8 +154,56 @@ public class Tower : MonoBehaviour
     /// </summary>
     public void MakeTowerReady()
     {
+        GetTowerData();
         _isReady = true;
     }
-    
+
+    private void GetTowerData()
+    {
+        switch (element)
+        {
+            case ElementType.Fire:
+                damage = TowerDataManager.GetFireDamage();
+                _towerRange.radius = TowerDataManager.GetFireRange();
+                fireRate = TowerDataManager.GetFireSpeed();
+                
+                // projectile accuracy is set in the projectile script for the consistency of the values
+                // projectile.GetComponent<Projectile>().accuracy = TowerDataManager.GetFireAccuracy();
+                // range visual is set in the tower placement controller script for accurate visual while placing a tower
+                // rangeIndicator.GetComponent<Projector>().orthographicSize = TowerDataManager.GetFireRangeVisual();
+                break;
+            case ElementType.Water:
+                damage = TowerDataManager.GetWaterDamage();
+                _towerRange.radius = TowerDataManager.GetWaterRange();
+                fireRate = TowerDataManager.GetWaterSpeed();
+                
+                // projectile accuracy is set in the projectile script for the consistency of the values
+                // projectile.GetComponent<Projectile>().accuracy = TowerDataManager.GetWaterAccuracy();
+                // range visual is set in the tower placement controller script for accurate visual while placing a tower
+                // rangeIndicator.GetComponent<Projector>().orthographicSize = TowerDataManager.GetWaterRangeVisual();
+                break;
+            case ElementType.Earth:
+                damage = TowerDataManager.GetEarthDamage();
+                _towerRange.radius = TowerDataManager.GetEarthRange();
+                fireRate = TowerDataManager.GetEarthSpeed();
+                
+                // projectile accuracy is set in the projectile script for the consistency of the values
+                // projectile.GetComponent<Projectile>().accuracy = TowerDataManager.GetEarthAccuracy();
+                // range visual is set in the tower placement controller script for accurate visual while placing a tower
+                // rangeIndicator.GetComponent<Projector>().orthographicSize = TowerDataManager.GetEarthRangeVisual();
+                break;
+            case ElementType.Wood:
+                damage = TowerDataManager.GetWoodDamage();
+                _towerRange.radius = TowerDataManager.GetWoodRange();
+                fireRate = TowerDataManager.GetWoodSpeed();
+                
+                // projectile accuracy is set in the projectile script for the consistency of the values
+                // projectile.GetComponent<Projectile>().accuracy = TowerDataManager.GetWoodAccuracy();
+                // range visual is set in the tower placement controller script for accurate visual while placing a tower
+                // rangeIndicator.GetComponent<Projector>().orthographicSize = TowerDataManager.GetWoodRangeVisual();
+                break;
+        }
+    }
+
     public ElementType Element => element;
 }

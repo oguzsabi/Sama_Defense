@@ -182,9 +182,35 @@ public class TowerPlacementController : MonoBehaviour
         if (_newTower) Destroy(_newTower);
         
         _newTower = Instantiate(towerPrefab);
+        GetTowerRangeVisual(_newTower.GetComponent<Tower>());
+        
         var newTowerPosition = _newTower.transform.position;
         _newTower.transform.position =
             new Vector3(newTowerPosition.x, newTowerPosition.y, newTowerPosition.z);
+    }
+
+    private void GetTowerRangeVisual(Tower towerComponent)
+    {
+        var elementType = towerComponent.Element;
+        switch (elementType)
+        {
+            case Tower.ElementType.Fire:
+                towerComponent.rangeIndicator.GetComponent<Projector>().orthographicSize =
+                    TowerDataManager.GetFireRangeVisual();
+                break;
+            case Tower.ElementType.Water:
+                towerComponent.rangeIndicator.GetComponent<Projector>().orthographicSize =
+                    TowerDataManager.GetWaterRangeVisual();
+                break;
+            case Tower.ElementType.Earth:
+                towerComponent.rangeIndicator.GetComponent<Projector>().orthographicSize =
+                    TowerDataManager.GetEarthRangeVisual();
+                break;
+            case Tower.ElementType.Wood:
+                towerComponent.rangeIndicator.GetComponent<Projector>().orthographicSize =
+                    TowerDataManager.GetWoodRangeVisual();
+                break;
+        }
     }
 
     public static List<GameObject> CurrentTowers => _currentTowers;

@@ -27,7 +27,7 @@ public class GameSession : MonoBehaviour
 
     private void Start()
     {
-        // PlayerDataManager.GiveMaxDiamond();
+        PlayerDataManager.GiveMaxDiamond();
         if (_isDemoLevel)
         {
             PlayerDataManager.GiveMaxDiamond();

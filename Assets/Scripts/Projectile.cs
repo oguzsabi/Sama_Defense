@@ -26,6 +26,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        GetAccuracyData();
         _mainCamera = Camera.main;
     }
     
@@ -44,6 +45,25 @@ public class Projectile : MonoBehaviour
         {
             MoveToLastKnownPosition();
             _targetLost = true;
+        }
+    }
+
+    private void GetAccuracyData()
+    {
+        switch (element)
+        {
+            case ElementType.Fire:
+                accuracy = TowerDataManager.GetFireAccuracy();
+                break;
+            case ElementType.Water:
+                accuracy = TowerDataManager.GetWaterAccuracy();
+                break;
+            case ElementType.Earth:
+                accuracy = TowerDataManager.GetEarthAccuracy();
+                break;
+            case ElementType.Wood:
+                accuracy = TowerDataManager.GetWoodAccuracy();
+                break;
         }
     }
 
