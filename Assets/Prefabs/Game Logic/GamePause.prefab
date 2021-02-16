@@ -3198,6 +3198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   feedbackText: {fileID: 4757855637191037408}
+  towerCountCostText: {fileID: 1242873738064818882}
   waterTower: {fileID: 187918, guid: 8a4692c9d136b7b428e4cee1aa615c01, type: 3}
   fireTower: {fileID: 187918, guid: 8ce14f79e1adc0f46aeff2eb5928fd14, type: 3}
   earthTower: {fileID: 187918, guid: deaf4b93bf3c5fd4abe61ff1e1b291b5, type: 3}
@@ -3826,7 +3827,7 @@ GameObject:
   - component: {fileID: 1242873738064818882}
   - component: {fileID: 6553651067811299641}
   m_Layer: 5
-  m_Name: FireDamageUpgradeButton
+  m_Name: TowerCountIncreaseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

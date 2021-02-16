@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class Upgrade : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI feedbackText;
+    [SerializeField] private TextMeshProUGUI towerCountCostText;
 
     [SerializeField] private GameObject waterTower;
     [SerializeField] private GameObject fireTower;
@@ -26,8 +27,9 @@ public class Upgrade : MonoBehaviour
 
     private void Awake()
     {
-        UpgradeCostManager.ResetAllCosts();
-        TowerDataManager.ResetAllData();
+        // UpgradeCostManager.ResetAllCosts();
+        // TowerDataManager.ResetAllData();
+        // PlayerDataManager.ResetMaxTowerCount();
         CheckTextDiamondValues();
     }
 
@@ -58,6 +60,8 @@ public class Upgrade : MonoBehaviour
         upgradeTexts[13].text = "Wood Tower ↑ +5\n(" + UpgradeCostManager.GetWoodCosts()[1] + " Diamonds)";
         upgradeTexts[14].text = "Wood Tower ↑ +5\n(" + UpgradeCostManager.GetWoodCosts()[2] + " Diamonds)";
         upgradeTexts[15].text = "Wood Tower ↑ +5\n(" + UpgradeCostManager.GetWoodCosts()[3] + " Diamonds)";
+        
+        towerCountCostText.text = "+1 Max. Tower Count\n(" + UpgradeCostManager.GetMaxTowerCost() +" Diamonds)";
     }
     
     /// <summary>
@@ -68,16 +72,7 @@ public class Upgrade : MonoBehaviour
     {
         tower.GetComponent<Tower>().damage += 5;
     }
-    
-    /// <summary>
-    /// Increases the accuracy value of projectile by 10
-    /// </summary>
-    /// <param name="projectile"></param>
-    private void IncreaseProjectileAccuracyForExistingTowers(GameObject projectile)
-    {
-        projectile.GetComponent<Projectile>().accuracy += 1;
-    }
-    
+
     /// <summary>
     /// Gets the range collider of tower
     /// </summary>
@@ -411,9 +406,12 @@ public class Upgrade : MonoBehaviour
     /// </summary>
     public void IncrementMaximumTowerCount()
     {
-        if (!CheckForEnoughDiamonds(20)) return;
+        var cost = UpgradeCostManager.GetMaxTowerCost();
+        if (!CheckForEnoughDiamonds(cost)) return;
         
-        _gameSession.ChangeDiamondAmountBy(-20);
+        UpgradeCostManager.IncreaseAndSaveTowerCountCost();
+        towerCountCostText.text = "+1 Max. Tower Count\n(" + UpgradeCostManager.GetMaxTowerCost() +" Diamonds)";
+        _gameSession.ChangeDiamondAmountBy(-cost);
         PlayerDataManager.IncrementMaximumTowerCount();
         _gameSession.ChangeMaxTowerCount();
         DisplayMessage("Successful purchase", Color.green);
@@ -430,11 +428,9 @@ public class Upgrade : MonoBehaviour
         {
             return true;
         }
-        else
-        {
-            DisplayMessage("Insufficient amount of diamonds", Color.red);
-            return false;
-        }
+
+        DisplayMessage("Insufficient amount of diamonds", Color.red);
+        return false;
     }
     
     /// <summary>

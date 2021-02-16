@@ -5,6 +5,7 @@ using UnityEngine;
 public class UpgradeCostManager : MonoBehaviour
 {
     private const int costIncreaseAmount = 5;
+    private const int towerCountCostIncreaseAmount = 20;
 
     private const string FIRE_DAMAGE_KEY = "fire_damage_cost";
     private const string FIRE_ACCURACY_KEY = "fire_accuracy_cost";
@@ -26,7 +27,7 @@ public class UpgradeCostManager : MonoBehaviour
     private const string WOOD_RANGE_KEY = "wood_range_cost";
     private const string WOOD_SPEED_KEY = "wood_speed_cost";
 
-    private const string TOWER_COUNT_KEY = "tower_count";
+    private const string TOWER_COUNT_KEY = "tower_count_cost";
 
     
     public static void IncreaseAndSaveDamageCost(Tower.ElementType elementType)
@@ -129,6 +130,12 @@ public class UpgradeCostManager : MonoBehaviour
         }
     }
 
+    public static void IncreaseAndSaveTowerCountCost()
+    {
+        var oldCost = PlayerPrefs.GetInt(TOWER_COUNT_KEY, 20);
+        PlayerPrefs.SetInt(TOWER_COUNT_KEY, oldCost + towerCountCostIncreaseAmount);
+    }
+
     public static int[] GetFireCosts()
     {
         return new[]
@@ -165,6 +172,11 @@ public class UpgradeCostManager : MonoBehaviour
         };
     }
 
+    public static int GetMaxTowerCost()
+    {
+        return PlayerPrefs.GetInt(TOWER_COUNT_KEY, 5);
+    }
+
     public static void ResetAllCosts()
     {
         PlayerPrefs.SetInt(FIRE_DAMAGE_KEY, 5);
@@ -186,5 +198,7 @@ public class UpgradeCostManager : MonoBehaviour
         PlayerPrefs.SetInt(WATER_SPEED_KEY, 5);
         PlayerPrefs.SetInt(EARTH_SPEED_KEY, 5);
         PlayerPrefs.SetInt(WOOD_SPEED_KEY, 5);
+        
+        PlayerPrefs.SetInt(TOWER_COUNT_KEY, 20);
     }
 }

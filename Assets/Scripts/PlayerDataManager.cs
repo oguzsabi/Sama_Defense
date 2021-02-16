@@ -94,10 +94,7 @@ public class PlayerDataManager : MonoBehaviour
     /// </summary>
     public static void SetDefaultMaxTowerCount()
     {
-        if (PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY) < 5)
-        {
-            PlayerPrefs.SetInt(MAX_TOWER_COUNT_KEY, 5);
-        }
+        PlayerPrefs.GetInt(MAX_TOWER_COUNT_KEY, 5);
     }
 
     public static void GiveMaxDiamond()
