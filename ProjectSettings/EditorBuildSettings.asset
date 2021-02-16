@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Upgrades.unity
     guid: eb32166ae6f49d34d83cb613cc72b4f7
   - enabled: 1
-    path: Assets/Scenes/Settings.unity
-    guid: 31aa9c532ceec5740ba5994bd3087f5c
-  - enabled: 1
     path: Assets/Scenes/Death.unity
     guid: f9628c88080bad542a98f03935830e45
   - enabled: 1
